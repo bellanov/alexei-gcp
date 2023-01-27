@@ -9,6 +9,8 @@ terraform {
 
 provider "google" {
   # Configuration options
+  project     = "my-project-id"
+  region      = "us-central1"
 }
 
 resource "google_storage_bucket" "auto-expire" {
