@@ -17,6 +17,6 @@ provider "google" {
 
 locals {
   region = "us-east1"
-  project = "project"
+  project = "development-1-1674398818"
   zone = "us-east1-b"
 }
