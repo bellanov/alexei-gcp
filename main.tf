@@ -8,15 +8,15 @@ terraform {
 }
 
 provider "google" {
-  # Configuration options
-  project     = "my-project-id"
-  region      = "us-central1"
+  project     = local.project
+  region  = local.region
+  zone    = local.zone
+  credentials = var.gcp-creds
 }
 
-resource "google_storage_bucket" "auto-expire" {
-  name          = "no-public-access-bucket"
-  location      = "US"
-  force_destroy = true
 
-  public_access_prevention = "enforced"
+locals {
+  region = "us-east1"
+  project = "project"
+  zone = "us-east1-b"
 }
