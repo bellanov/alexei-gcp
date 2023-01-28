@@ -1,7 +1,8 @@
 
 resource "random_string" "code" {
-  length           = 4
-  special          = false
+  length  = 4
+  lower   = true
+  special = false
 }
 
 resource "google_storage_bucket" "log_bucket" {
