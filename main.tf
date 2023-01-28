@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
       version = "4.50.0"
     }
   }
@@ -9,18 +9,18 @@ terraform {
 
 provider "google" {
   project     = local.project
-  region  = local.region
-  zone    = local.zone
+  region      = local.region
+  zone        = local.zone
   credentials = var.gcp-creds
 }
 
 module "storage" {
   source = "./modules/storage"
-  
+
 }
 
 locals {
-  region = "us-east1"
+  region  = "us-east1"
   project = "development-1-1674398818"
-  zone = "us-east1-b"
+  zone    = "us-east1-b"
 }
