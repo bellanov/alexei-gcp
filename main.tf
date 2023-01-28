@@ -16,7 +16,7 @@ provider "google" {
 
 module "storage" {
   source = "./modules/storage"
-
+  project = local.project
 }
 
 locals {
