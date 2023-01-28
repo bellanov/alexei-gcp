@@ -12,7 +12,7 @@ For instance, a prospective environment could be called **tf_deploy_bellanov** t
 
 ## Semantic Versioning (X.Y.Z)
 
-Products should aptly be versioned so changes are properly tracked as they traverse development environments.
+Projects should aptly be versioned so changes are properly tracked as they traverse development environments.
 
 Example Workflow:
 
