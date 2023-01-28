@@ -2,8 +2,6 @@
 
 Alexei Google Cloud Platform port. Alexei is an attempt to simplify DevOps...**forever**.
 
-# Design Patterns
-
 ## Terraform
 
 Initially, the Terraform will be completely comprised *within* the project **root**. It will be split up into multiple *environments* as **modules** are developed to deploy within those environments.
@@ -12,10 +10,10 @@ For instance, a prospective environment could be called **tf_deploy_bellanov** t
 
 ## Semantic Versioning (X.Y.Z)
 
-Products should aptly be versioned so changes are properly tracked as they traverse development environments.
+Projects should aptly be ***versioned*** so changes are properly tracked as they *traverse* development environments.
 
 Example Workflow:
 
 1. A feature undergoes development in the dev "environment" and assigned a **version** (i.e., 0.1.0).
 1. After iterating the feature in dev, and a candidate (i.e., 0.1.15) for release is ready, it is **promoted** to the qa environment for testing; Otherwise, it is **demoted** back to dev for further fixes.
-1. Upon meeting testing and code coverage requirements, the feature is then promoted to **prod** (production) and is ready for consumption by customers.
+1. Upon meeting **testing** and **code coverage** requirements, the feature is then promoted to **prod** (production) and is ready for consumption by customers.
