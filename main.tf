@@ -14,6 +14,10 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
+module "storage" {
+  source = "./modules/storage"
+  
+}
 
 locals {
   region = "us-east1"
