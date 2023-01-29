@@ -15,31 +15,24 @@ provider "google" {
 }
 
 module "storage" {
-  source = "./modules/storage"
-  project = local.project
+  source   = "./modules/storage"
+  for_each = local.manifest
+  project  = local.project
+  location = local.location
 }
 
 locals {
-  region  = "us-east1"
-  project = "development-1-1674398818"
-  zone    = "us-east1-b"
+  # Global Properties
+  region   = "us-east1"
+  project  = "development-1-1674398818"
+  zone     = "us-east1-b"
+  location = "US"
 
+  # Properties per Environment
   manifest = {
-    "dev": {
-      "region": "us-east1",
-      "zones": ["us-east1-a", "us-east1-b"]
-    },
-    "staging": {
-      "region": "",
-      "zones": []
-    },
-    "ibhm": {
-      "region": "",
-      "zones": []
-    },
-    "ibhm_staging": {
-      "region": "",
-      "zones": []
-    }
+    "dev" : {},
+    "staging" : {},
+    "ibhm" : {},
+    "ibhm_staging" : {}
   }
 }
