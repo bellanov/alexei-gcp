@@ -1,7 +1,7 @@
 
 resource "random_string" "code" {
   length  = 4
-  upper = false
+  upper   = false
   special = false
 }
 
