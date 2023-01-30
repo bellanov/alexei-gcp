@@ -17,3 +17,12 @@ Example Workflow:
 1. A feature undergoes development in the dev "environment" and assigned a **version** (i.e., 0.1.0).
 1. After iterating the feature in dev, and a candidate (i.e., 0.1.15) for release is ready, it is **promoted** to the qa environment for testing; Otherwise, it is **demoted** back to dev for further fixes.
 1. Upon meeting **testing** and **code coverage** requirements, the feature is then promoted to **prod** (production) and is ready for consumption by customers.
+
+## Secret Variable Shuffle
+
+Overview on how to create a new **secret variable** and **integrate** it with Terraform Cloud.
+
+1. Create the variable within the project and assign it a blank *default value*.
+1. Create a corresponding variable in Terraform Cloud. For instance, using a *Workspace Variable* or creating a *Variable Set*.
+1. Assign the variable to the project via the **Workspace** / **Variable Set** methods.
+1. Plan & Apply!!!
