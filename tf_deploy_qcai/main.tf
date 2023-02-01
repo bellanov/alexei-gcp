@@ -15,7 +15,7 @@ provider "google" {
 }
 
 module "storage" {
-  source   = "./modules/storage"
+  source   = "../modules/storage"
   for_each = local.manifest
   project  = local.project
   location = local.location
