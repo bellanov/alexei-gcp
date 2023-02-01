@@ -17,7 +17,7 @@ provider "google" {
 # Prepend the customer / organization as a prefix to modules, as to avoid clashing in Terraform state.
 # This allows any customer / organization seamlessly pull in from the same set of root modules.
 # If an environment gets too annoying, simply make it its own root module!!!
-module "ibhm_storage" {
+module "storage" {
   source   = "../modules/storage"
   for_each = local.manifest
   project  = local.project
