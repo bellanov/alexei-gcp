@@ -1,7 +1,7 @@
 
 output "storage" {
   description = "Storage Infrastructure."
-  value       = module.storage
+  value       = module.ibhm_storage
 }
 
 output "manifest" {
