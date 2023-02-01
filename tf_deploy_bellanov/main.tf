@@ -22,8 +22,8 @@ module "storage" {
 }
 
 locals {
-  # Global Properties
   region   = "us-east1"
+  # Organization isolation by project / account
   project  = "development-1-1674398818"
   zone     = "us-east1-b"
   location = "US"
@@ -32,7 +32,6 @@ locals {
   manifest = {
     "dev" : {},
     "staging" : {},
-    "ibhm" : {},
-    "ibhm_staging" : {}
+    "prod" : {}
   }
 }
