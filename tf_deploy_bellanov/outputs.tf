@@ -1,7 +1,7 @@
 
 output "storage" {
   description = "Storage Infrastructure."
-  value       = module.storage
+  value       = module.bella_storage
 }
 
 output "manifest" {
