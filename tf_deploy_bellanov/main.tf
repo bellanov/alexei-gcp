@@ -26,7 +26,7 @@ module "bella_storage" {
 
 locals {
   region   = "us-east1"
-  # Customer ennvironment isolation achieved by GCP project / AWS account
+  # Customer environment isolation achieved by GCP project / AWS account
   organization = "bella"
   project  = "development-1-1674398818"
   zone     = "us-east1-b"
