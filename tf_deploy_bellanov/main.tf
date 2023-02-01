@@ -14,16 +14,20 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
-module "storage" {
-  source   = "./modules/storage"
+# Prepend the customer / organization as a prefix to modules, as to avoid clashing in Terraform state.
+# This allows any customer / organization seamlessly pull in from the same set of root modules.
+# If an environment gets too annoying, simply make it its own root module!!!
+module "bella_storage" {
+  source   = "../modules/storage"
   for_each = local.manifest
   project  = local.project
   location = local.location
 }
 
 locals {
-  # Global Properties
   region   = "us-east1"
+  # Customer ennvironment isolation achieved by GCP project / AWS account
+  organization = "bella"
   project  = "development-1-1674398818"
   zone     = "us-east1-b"
   location = "US"
@@ -32,7 +36,6 @@ locals {
   manifest = {
     "dev" : {},
     "staging" : {},
-    "ibhm" : {},
-    "ibhm_staging" : {}
+    "prod" : {}
   }
 }
