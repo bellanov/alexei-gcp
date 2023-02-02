@@ -16,8 +16,8 @@ provider "google" {
 
 module "project" {
   source = "../modules/project"
-  customer = local.customer
-  customer_name = local.customer_name  
+  project = local.project
+  project_name = local.project_name
   org_id = local.org_id
 }
 
@@ -31,7 +31,8 @@ module "storage" {
 locals {
   region   = "us-east1"
   customer = "bella"
-  customer_name = "Bellanov LLC"
+  project = "${customer}-1674398818"
+  project_name = "Bellanov LLC"
   org_id = "105637539410"
   zone     = "us-east1-b"
   location = "US"
