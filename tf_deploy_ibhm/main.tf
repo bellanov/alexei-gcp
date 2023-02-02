@@ -19,6 +19,7 @@ module "project" {
   project = local.project
   project_name = local.project_name
   org_id = local.org_id
+  apis = local.apis
 }
 
 module "storage" {
@@ -36,6 +37,7 @@ locals {
   org_id = "105637539410"
   zone     = "us-east1-b"
   location = "US"
+  apis = ["cloudresourcemanager"]
 
   manifest = {
     "dev" : {},
