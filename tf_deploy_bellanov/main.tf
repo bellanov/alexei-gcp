@@ -31,7 +31,7 @@ module "storage" {
 locals {
   region   = "us-east1"
   customer = "bella"
-  project = "${customer}-1674398818"
+  project = "${local.customer}-1674398818"
   project_name = "Bellanov LLC"
   org_id = "105637539410"
   zone     = "us-east1-b"
