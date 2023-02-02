@@ -14,14 +14,6 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
-module "project" {
-  source = "../modules/project"
-  project = local.project
-  project_name = local.project_name
-  org_id = local.org_id
-  apis = local.apis
-}
-
 module "storage" {
   source   = "../modules/storage"
   for_each = local.manifest
