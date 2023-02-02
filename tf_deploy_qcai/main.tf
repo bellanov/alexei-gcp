@@ -23,7 +23,6 @@ module "storage" {
 
 locals {
   region   = "us-east1"
-  customer = "qcai"
   project = "${local.customer}-1674398818"
   project_name = "QuantCloud AI"
   org_id = "105637539410"

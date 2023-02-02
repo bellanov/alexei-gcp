@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Create project folder to house environment (Dev, QA, Prod).
-PROJECT_ID='development-1'
+# Create project folder to house a Customer Environment.
+PROJECT_ID='development'
 ORGANIZATION_ID='105637539410'
 TIMESTAMP=$(date +%s)
 

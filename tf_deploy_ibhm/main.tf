@@ -23,7 +23,6 @@ module "storage" {
 
 locals {
   region   = "us-east1"
-  customer = "ibhm"
   project = "${local.customer}-1674398818"
   project_name = "Integrated MGMT"
   org_id = "105637539410"
