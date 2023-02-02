@@ -37,6 +37,8 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
+  apis = ["cloudresourcemanager"]
+
   manifest = {
     "dev" : {},
     "staging" : {},
