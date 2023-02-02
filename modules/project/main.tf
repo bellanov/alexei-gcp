@@ -6,7 +6,7 @@ resource "google_project" "gcp_project" {
 }
 
 resource "google_project_service" "project_service" {
-  count = length(var.user_names)
+  count = length(var.apis)
   project = var.project
   service = "${var.apis[count.index]}.googleapis.com"
 
