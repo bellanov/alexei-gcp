@@ -37,7 +37,7 @@ locals {
   org_id = "105637539410"
   zone     = "us-east1-b"
   location = "US"
-  apis = ["cloudresourcemanager"]
+  apis = []
 
   manifest = {
     "dev" : {},
