@@ -14,7 +14,6 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
-# Buckets, Artifact Registries, etc.
 module "storage" {
   source   = "../modules/storage"
   for_each = local.manifest
@@ -29,7 +28,6 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
-  # Properties per Environment
   manifest = {
     "dev" : {},
     "staging" : {},
