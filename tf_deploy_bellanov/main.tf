@@ -19,6 +19,7 @@ module "project" {
   project = local.project
   project_name = local.project_name
   org_id = local.org_id
+  apis = local.apis
 }
 
 module "storage" {
