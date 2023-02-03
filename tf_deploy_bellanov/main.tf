@@ -16,7 +16,7 @@ provider "google" {
 
 module "apis" {
   source = "../modules/apis"
-  count = length(local.apis)
+  count = length(local.services)
   project = local.project
   service = local.services[count.index]
   
