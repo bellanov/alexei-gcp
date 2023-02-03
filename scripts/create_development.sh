@@ -8,6 +8,15 @@ TIMESTAMP=$(date +%s)
 echo "Creating project..."
 echo "PROJECT ID: $PROJECT_ID"
 
+# Create development area
 gcloud projects create ${PROJECT_ID}-${TIMESTAMP} \
     --organization=${ORGANIZATION_ID} \
     --name=${PROJECT_ID}
+
+# TODO: Enable any other necessary APIs here
+
+# Cloud Build
+# Cloud Resource Manager
+# Identity & Access Management
+
+# TODO: Create Users (terraform, cloudbuild) and Roles
