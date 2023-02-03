@@ -14,6 +14,14 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
+module "apis" {
+  source = "../modules/apis"
+  count = length(local.apis)
+  project = local.project
+  service = var.apis[count.index]
+  
+}
+
 module "storage" {
   source   = "../modules/storage"
   for_each = local.manifest
@@ -21,11 +29,14 @@ module "storage" {
   location = local.location
 }
 
+
+
 locals {
   region   = "us-east1"
   project = "development-1675315269"
   zone     = "us-east1-b"
   location = "US"
+  apis = ["cloudbuild"]
 
   manifest = {
     "dev" : {},
