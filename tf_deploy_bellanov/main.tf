@@ -18,7 +18,7 @@ module "apis" {
   source = "../modules/apis"
   count = length(local.apis)
   project = local.project
-  service = var.apis[count.index]
+  service = local.services[count.index]
   
 }
 
@@ -36,7 +36,7 @@ locals {
   project = "development-1675315269"
   zone     = "us-east1-b"
   location = "US"
-  apis = ["cloudbuild"]
+  services = ["cloudbuild"]
 
   manifest = {
     "dev" : {},
