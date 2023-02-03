@@ -36,7 +36,7 @@ locals {
   project = "development-1675315269"
   zone     = "us-east1-b"
   location = "US"
-  services = ["cloudbuild", "cloudresourcemanager"]
+  services = ["cloudbuild"]
 
   manifest = {
     "dev" : {},
