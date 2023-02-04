@@ -21,8 +21,6 @@ module "storage" {
   location = local.location
 }
 
-
-
 locals {
   region   = "us-east1"
   project = "development-1675315269"
