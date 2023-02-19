@@ -24,7 +24,7 @@ module "logs" {
 }
 
 module "releases" {
-  source   = "../modules/logs"
+  source   = "../modules/releases"
   for_each = local.manifest
   project  = each.value.project
   location = local.location
