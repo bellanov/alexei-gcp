@@ -19,25 +19,37 @@ module "logs" {
   source   = "../modules/logs"
   for_each = local.manifest
   project  = each.value.project
-  location = local.location
+  location = each.value.location
   environment = each.key
+}
+
+module "releases" {
+  source   = "../modules/releases"
+  project  = local.project
+  location = local.releases.location
 }
 
 locals {
   region   = "us-east1"
   project = "development-1675315269"
   zone     = "us-east1-b"
-  location = "US"
+
+  releases = {
+    "location": "US"
+  }
 
   manifest = {
     "dev" : {
       "project": "development-1675315269",
+      "location": "US"
     },
     "qa" : {
       "project": "development-1675315269",
+      "location": "US"
     },
     "prod" : {
       "project": "development-1675315269",
+      "location": "US"
     }
   }
 }
