@@ -25,7 +25,7 @@ module "logs" {
 
 module "releases" {
   source   = "../modules/releases"
-  project  = each.value.project
+  project  = local.project
   location = local.releases.location
 }
 
