@@ -20,6 +20,7 @@ module "logs" {
   for_each = local.manifest
   project  = local.project
   location = local.location
+  environment = each.key
 }
 
 locals {
