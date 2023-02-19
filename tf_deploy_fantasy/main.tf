@@ -1,4 +1,4 @@
-// Bellanov L.L.C.
+// FantasyAce
 terraform {
   required_providers {
     google = {
@@ -18,7 +18,7 @@ provider "google" {
 module "logs" {
   source   = "../modules/logs"
   for_each = local.manifest
-  project  = each.value.project
+  project  = local.project
   location = local.location
 }
 
@@ -29,14 +29,8 @@ locals {
   location = "US"
 
   manifest = {
-    "dev" : {
-      "project": "development-1675315269",
-    },
-    "staging" : {
-      "project": "development-1675315269",
-    },
-    "prod" : {
-      "project": "development-1675315269",
-    }
+    "dev" : {},
+    "qa" : {},
+    "prod" : {}
   }
 }

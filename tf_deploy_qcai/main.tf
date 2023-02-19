@@ -1,3 +1,4 @@
+// QuantCloud.AI
 terraform {
   required_providers {
     google = {
@@ -29,7 +30,7 @@ locals {
 
   manifest = {
     "dev" : {},
-    "staging" : {},
+    "qa" : {},
     "prod" : {}
   }
 }
