@@ -1,4 +1,4 @@
-// QuantCloud.AI
+// FantasyAce
 terraform {
   required_providers {
     google = {
