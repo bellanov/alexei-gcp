@@ -17,7 +17,7 @@ provider "google" {
 module "logs" {
   source   = "../modules/logs"
   for_each = local.manifest
-  project  = local.project
+  project  = each.value.project
   location = local.location
 }
 
@@ -28,8 +28,14 @@ locals {
   location = "US"
 
   manifest = {
-    "dev" : {},
-    "staging" : {},
-    "prod" : {}
+    "dev" : {
+      "project": "development-1675315269",
+    },
+    "staging" : {
+      "project": "development-1675315269",
+    },
+    "prod" : {
+      "project": "development-1675315269",
+    }
   }
 }
