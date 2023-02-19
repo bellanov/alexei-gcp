@@ -25,16 +25,18 @@ module "logs" {
 
 module "releases" {
   source   = "../modules/releases"
-  for_each = local.manifest
   project  = each.value.project
-  location = local.location
+  location = local.releases.location
 }
 
 locals {
   region   = "us-east1"
   project = "development-1675315269"
   zone     = "us-east1-b"
-  location = "US"
+
+  releases = {
+    "location": "US"
+  }
 
   manifest = {
     "dev" : {
