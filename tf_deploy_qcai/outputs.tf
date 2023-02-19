@@ -1,7 +1,7 @@
 
-output "storage" {
-  description = "Storage Infrastructure."
-  value       = module.storage
+output "logs" {
+  description = "Logs."
+  value       = module.logs
 }
 
 output "manifest" {
