@@ -30,7 +30,7 @@ locals {
 
   manifest = {
     "dev" : {},
-    "staging" : {},
+    "qa" : {},
     "prod" : {}
   }
 }
