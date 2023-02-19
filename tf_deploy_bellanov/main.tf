@@ -40,15 +40,15 @@ locals {
 
   manifest = {
     "dev" : {
-      "project": "development-1675315269",
+      "project": local.project,
       "location": "US"
     },
     "qa" : {
-      "project": "development-1675315269",
+      "project": local.project,
       "location": "US"
     },
     "prod" : {
-      "project": "development-1675315269",
+      "project": local.project,
       "location": "US"
     }
   }
