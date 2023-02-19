@@ -33,7 +33,7 @@ locals {
     "dev" : {
       "project": "development-1675315269",
     },
-    "staging" : {
+    "qa" : {
       "project": "development-1675315269",
     },
     "prod" : {
