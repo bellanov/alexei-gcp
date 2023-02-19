@@ -18,6 +18,7 @@ module "logs" {
   source   = "../modules/logs"
   for_each = local.manifest
   project  = each.value.project
+  environment = each.key
   location = local.location
 }
 
