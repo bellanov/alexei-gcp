@@ -15,7 +15,7 @@ gcloud projects create ${PROJECT_ID}-${TIMESTAMP} \
 
 # TODO: Enable any other necessary APIs here
 
-# Cloud Build
+# Cloud Build Triggers
 # Cloud Resource Manager
 # Identity & Access Management
 
