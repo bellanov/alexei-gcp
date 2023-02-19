@@ -14,8 +14,8 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
-module "storage" {
-  source   = "../modules/storage"
+module "logs" {
+  source   = "../modules/logs"
   for_each = local.manifest
   project  = local.project
   location = local.location
