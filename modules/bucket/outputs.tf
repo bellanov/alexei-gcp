@@ -1,5 +1,5 @@
 
-output "logs" {
-  description = "Logs Bucket."
-  value       = google_storage_bucket.logs.id
+output "bucket" {
+  description = "Storage Bucket."
+  value       = google_storage_bucket.bucket.id
 }
