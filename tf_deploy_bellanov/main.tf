@@ -23,6 +23,13 @@ module "logs" {
   environment = each.key
 }
 
+module "releases" {
+  source   = "../modules/logs"
+  for_each = local.manifest
+  project  = each.value.project
+  location = local.location
+}
+
 locals {
   region   = "us-east1"
   project = "development-1675315269"
