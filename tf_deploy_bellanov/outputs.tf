@@ -11,5 +11,5 @@ output "manifest" {
 
 output "releases" {
   description = "Releases."
-  value       = module.logs
+  value       = module.releases
 }
