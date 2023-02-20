@@ -33,23 +33,24 @@ locals {
   region   = "us-east1"
   project = "development-1675315269"
   zone     = "us-east1-b"
+  location = "US"
 
   releases = {
-    "location": "US"
+    "location": local.location
   }
 
   manifest = {
     "dev" : {
       "project": local.project,
-      "location": "US"
+      "location": local.location
     },
     "qa" : {
       "project": local.project,
-      "location": "US"
+      "location": local.location
     },
     "prod" : {
       "project": local.project,
-      "location": "US"
+      "location": local.location
     }
   }
 }
