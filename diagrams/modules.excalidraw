@@ -1,0 +1,46 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {
+      "id": "vNc2oq_4sAh9M8DPAFmZd",
+      "type": "text",
+      "x": 533,
+      "y": 258,
+      "width": 332,
+      "height": 69,
+      "angle": 0,
+      "strokeColor": "#000000",
+      "backgroundColor": "transparent",
+      "fillStyle": "hachure",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "roundness": null,
+      "seed": 1627822471,
+      "version": 109,
+      "versionNonce": 2089228423,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1676855366856,
+      "link": null,
+      "locked": false,
+      "text": "Alexei (GCP)\n\nAlexei port to Google Cloud Platform.",
+      "fontSize": 20,
+      "fontFamily": 2,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 64,
+      "containerId": null,
+      "originalText": "Alexei (GCP)\n\nAlexei port to Google Cloud Platform."
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
