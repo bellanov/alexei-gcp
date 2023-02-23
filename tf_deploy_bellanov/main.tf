@@ -18,8 +18,15 @@ provider "google" {
 module "buckets" {
   source   = "../modules/bucket"
   for_each = local.manifest
+  project  = each.value.project
+  location = each.value.location
+  environment = each.key
+}
+
+module "releases" {
+  source   = "../modules/releases"
   project  = local.project
-  location = local.location
+  location = local.releases.location
 }
 
 locals {
@@ -28,8 +35,13 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
+  releases = {
+    "location": local.location
+  }
+
   manifest = {
     "dev" : {
+<<<<<<< HEAD
       "buckets": {
         "logs": {},
         "releases": {},
@@ -37,5 +49,18 @@ locals {
     },
     "qa" : {},
     "prod" : {}
+=======
+      "project": local.project,
+      "location": local.location
+    },
+    "qa" : {
+      "project": local.project,
+      "location": local.location
+    },
+    "prod" : {
+      "project": local.project,
+      "location": local.location
+    }
+>>>>>>> fa8e1d71bf4d72038a2e74a6bf64a908569cdaf9
   }
 }
