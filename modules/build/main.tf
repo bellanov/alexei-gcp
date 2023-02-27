@@ -10,3 +10,9 @@ resource "google_secret_manager_secret" "github_key" {
     }
   }
 }
+
+resource "google_secret_manager_secret_version" "webhook_trigger_secret_key_data" {
+  secret = google_secret_manager_secret.webhook_trigger_secret_key.id
+
+  secret_data = "secretkeygoeshere"
+}
