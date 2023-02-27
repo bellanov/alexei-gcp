@@ -27,11 +27,20 @@ module "releases" {
   location = local.releases.location
 }
 
+module "builds" {
+  source = "../modules/build"
+}
+
 locals {
   region   = "us-east1"
   project = "development-1675315269"
   zone     = "us-east1-b"
   location = "US"
+
+  github = {
+    "secret_id": "var.secret_id",
+    "secret_data": "var.secret_data"
+  }
 
   releases = {
     "location": local.location
