@@ -1,7 +1,7 @@
 
-output "logs" {
-  description = "Logs."
-  value       = module.logs
+output "buckets" {
+  description = "Storage Buckets."
+  value       = module.buckets
 }
 
 output "manifest" {

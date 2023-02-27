@@ -1,4 +1,4 @@
-// QuantCloud.AI
+// Bellanov L.L.C.
 terraform {
   required_providers {
     google = {
@@ -15,8 +15,8 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
-module "logs" {
-  source   = "../modules/logs"
+module "buckets" {
+  source   = "../modules/bucket"
   for_each = local.manifest
   project  = local.project
   location = local.location
@@ -30,7 +30,12 @@ locals {
   location = "US"
 
   manifest = {
-    "dev" : {},
+    "dev" : {
+      "buckets": {
+        "logs": {},
+        "releases": {},
+      }
+    },
     "qa" : {},
     "prod" : {}
   }
