@@ -48,7 +48,7 @@ locals {
     "location": local.location
   }
 
-  service_apis = ["secretmanager"]
+  services = ["secretmanager"]
 
   manifest = {
     "dev" : {},
