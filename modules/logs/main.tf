@@ -6,7 +6,7 @@ resource "random_string" "code" {
 }
 
 resource "google_storage_bucket" "logs" {
-  name          = "${var.environment}-logs-${random_string.code.result}"
+  name          = "logs-${random_string.code.result}"
   project       = var.project
   location      = "US"
   force_destroy = true
