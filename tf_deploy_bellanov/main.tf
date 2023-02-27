@@ -41,7 +41,7 @@ locals {
 
   github = {
     "secret_id": "github-build-trigger",
-    "secret_data": "secretkeygoeshere"
+    "secret_data": var.github_creds
   }
 
   releases = {
