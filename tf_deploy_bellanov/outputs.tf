@@ -13,3 +13,8 @@ output "releases" {
   description = "Releases."
   value       = module.releases
 }
+
+output "builds" {
+  description = "Builds."
+  value       = module.builds
+}
