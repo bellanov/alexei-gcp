@@ -8,7 +8,7 @@ resource "random_string" "code" {
 resource "google_storage_bucket" "logs" {
   name          = "${var.environment}-logs-${random_string.code.result}"
   project       = var.project
-  location      = "US"
+  location      = var.location
   force_destroy = true
 
   public_access_prevention = "enforced"
