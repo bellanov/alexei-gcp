@@ -21,11 +21,21 @@ module "logs" {
   location = local.location
 }
 
+module "releases" {
+  source   = "../modules/releases"
+  project  = local.project
+  location = local.releases.location
+}
+
 locals {
   region   = "us-east1"
   project = "development-1675315269"
   zone     = "us-east1-b"
   location = "US"
+
+  releases = {
+    "location": local.location
+  }
 
   manifest = {
     "dev" : {},
