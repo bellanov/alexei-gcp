@@ -33,6 +33,10 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
+  releases = {
+    "location": local.location
+  }
+
   manifest = {
     "dev" : {},
     "qa" : {},
