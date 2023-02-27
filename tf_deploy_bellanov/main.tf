@@ -41,15 +41,6 @@ locals {
 
   manifest = {
     "dev" : {
-<<<<<<< HEAD
-      "buckets": {
-        "logs": {},
-        "releases": {},
-      }
-    },
-    "qa" : {},
-    "prod" : {}
-=======
       "project": local.project,
       "location": local.location
     },
@@ -61,6 +52,5 @@ locals {
       "project": local.project,
       "location": local.location
     }
->>>>>>> fa8e1d71bf4d72038a2e74a6bf64a908569cdaf9
   }
 }
