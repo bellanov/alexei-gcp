@@ -37,8 +37,9 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
-  builds = {
-
+  github = {
+    "secret_id": "var.secret_id",
+    "secret_data": "var.secret_data"
   }
 
   releases = {
