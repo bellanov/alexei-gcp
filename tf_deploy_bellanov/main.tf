@@ -29,6 +29,8 @@ module "releases" {
 
 module "builds" {
   source = "../modules/build"
+  secret_id = local.github.secret_id
+  secret_data = local.github.secret_data
 }
 
 locals {
@@ -38,8 +40,8 @@ locals {
   location = "US"
 
   github = {
-    "secret_id": "var.secret_id",
-    "secret_data": "var.secret_data"
+    "secret_id": "github-build-trigger",
+    "secret_data": "secretkeygoeshere"
   }
 
   releases = {
