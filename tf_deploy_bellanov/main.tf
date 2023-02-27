@@ -48,6 +48,8 @@ locals {
     "location": local.location
   }
 
+  service_apis = ["secretmanager"]
+
   manifest = {
     "dev" : {},
     "qa" : {},
