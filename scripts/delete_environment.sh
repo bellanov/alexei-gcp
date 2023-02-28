@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Create project folder to house a Customer Environment.
-PROJECT_ID='bellanov-1677540553'
+PROJECT_ID='helldivers-1677549790'
 
 echo "Deleting project..."
 echo "PROJECT ID: $PROJECT_ID"
