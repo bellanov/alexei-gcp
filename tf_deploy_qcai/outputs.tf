@@ -1,15 +1,10 @@
 
-output "logs" {
-  description = "Logs."
-  value       = module.logs
+output "storage" {
+  description = "Storage Module."
+  value       = module.storage
 }
 
-output "manifest" {
-  description = "Environment Manifest."
-  value       = local.manifest
-}
-
-output "releases" {
-  description = "Releases."
-  value       = module.releases
+output "builds" {
+  description = "Builds Module."
+  value       = module.builds
 }
