@@ -15,16 +15,10 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
-module "logs" {
-  source   = "../modules/logs"
+module "storage" {
+  source   = "../modules/storage"
   project  = local.project
   location = local.location
-}
-
-module "releases" {
-  source   = "../modules/releases"
-  project  = local.project
-  location = local.releases.location
 }
 
 locals {
