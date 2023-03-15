@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Create project folder to house a Customer Environment.
-CUSTOMER_ID='helldivers'
+# Back up a Customer Environment.
+PROJECT_ID='bella'
 ORGANIZATION_ID='105637539410'
 TIMESTAMP=$(date +%s)
 
