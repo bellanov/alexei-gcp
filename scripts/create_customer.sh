@@ -1,18 +1,22 @@
 #!/bin/bash
 #
-# Create project folder to house a Customer Environment.
-CUSTOMER_ID='helldivers'
+# Create a project folder to house a customer environment.
+CUSTOMER_ID='putr'
 ORGANIZATION_ID='105637539410'
 TIMESTAMP=$(date +%s)
 
 echo "Creating project..."
 echo "PROJECT ID: $CUSTOMER_ID"
 
-# Create development area
 gcloud projects create ${CUSTOMER_ID}-${TIMESTAMP} \
     --organization=${ORGANIZATION_ID} \
     --name=${CUSTOMER_ID}
 
+echo "Linking billing account..."
+# gcloud billing projects link my-project --billing-account 0X0X0X-0X0X0X-0X0X0X
+
+
+echo "Enabling APIs..."
 # TODO: Enable any other necessary APIs here
 
 # Cloud Build Triggers
@@ -20,3 +24,5 @@ gcloud projects create ${CUSTOMER_ID}-${TIMESTAMP} \
 # Identity & Access Management
 
 # TODO: Create Users (terraform, cloudbuild) and Roles
+
+# TODO: Take the damn SHELL course and learn how this stuff is supposed to actually work
