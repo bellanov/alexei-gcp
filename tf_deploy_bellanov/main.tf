@@ -28,8 +28,9 @@ module "builds" {
 }
 
 locals {
-  region   = "us-east1"
+
   project = "development-1675315269"
+  region   = "us-east1"
   zone     = "us-east1-b"
   location = "US"
 
@@ -38,15 +39,12 @@ locals {
     "secret_data": var.github_creds
   }
 
-  releases = {
-    "location": local.location
-  }
-
   manifest = {
     "dev" : {},
     "qa" : {},
     "prod" : {}
   }
+
 }
   
   
