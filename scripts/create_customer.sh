@@ -13,10 +13,12 @@ gcloud projects create ${CUSTOMER_ID}-${TIMESTAMP} \
     --name=${CUSTOMER_ID}
 
 echo "Linking billing account..."
+echo "BILLING ACCOUNT: $CUSTOMER_ID"
+
 # gcloud billing projects link my-project --billing-account 0X0X0X-0X0X0X-0X0X0X
 
-
 echo "Enabling APIs..."
+echo "Service APIs: $CUSTOMER_ID"
 # TODO: Enable any other necessary APIs here
 
 # Cloud Build Triggers
@@ -24,5 +26,3 @@ echo "Enabling APIs..."
 # Identity & Access Management
 
 # TODO: Create Users (terraform, cloudbuild) and Roles
-
-# TODO: Take the damn SHELL course and learn how this stuff is supposed to actually work
