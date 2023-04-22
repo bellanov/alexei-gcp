@@ -6,30 +6,26 @@ TIMESTAMP="$(date +%s)"
 PROJECT_ID="${CUSTOMER_ID}-${TIMESTAMP}"
 ORGANIZATION_ID="105637539410"
 BILLING_ACCOUNT="0181BD-E8A62D-6B2069"
-ENABLE_APIS="Cloud Build Triggers,Cloud Resource Manager,Identity & Access Management,Secret Manager API"
+SERVICE_APIS="Cloud Build API, Cloud Resource Manager, Identity & Access Management, Secret Manager API"
+APIS="cloudbuild.googleapis.com cloudresourcemanager.googleapis.com iam.googleapis.com secretmanager.googleapis.com"
 
 echo "Executing script: $0"
 echo "Creating customer environment: $CUSTOMER_ID"
 
 echo "Creating project: $PROJECT_ID"
-
 gcloud projects create ${PROJECT_ID} \
     --organization=${ORGANIZATION_ID} \
     --name=${CUSTOMER_ID}
 
 echo "Linking billing account: $BILLING_ACCOUNT"
-
 gcloud alpha billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT
 
-echo "Enabling APIs: $ENABLE_APIS"
-# echo "Service APIs: $CUSTOMER_ID"
-# TODO: Enable any other necessary APIs here
+echo "Service APIs: $SERVICE_APIS"
+for API in $APIS
+do
+    echo "Enabling API: $API"
+    gcloud services enable $API
+done
 
-# Cloud Build Triggers
-# Cloud Resource Manager
-# Identity & Access Management
-# Secret Manager API
-
-# TODO: Create Users (terraform, cloudbuild) and Roles
-
-# gcloud iam service-accounts create some-account-name --display-name="My Service Account"
+# gcloud iam service-accounts create cloud-build --display-name="Cloud Build User"
+# gcloud iam service-accounts create terraform --display-name="Terraform User"
