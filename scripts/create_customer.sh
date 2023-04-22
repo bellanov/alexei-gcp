@@ -8,7 +8,7 @@ ORGANIZATION_ID="105637539410"
 BILLING_ACCOUNT="0181BD-E8A62D-6B2069"
 SERVICE_APIS="Cloud Build API, Cloud Resource Manager, Identity & Access Management, Secret Manager API"
 APIS="cloudbuild.googleapis.com cloudresourcemanager.googleapis.com iam.googleapis.com secretmanager.googleapis.com"
-SERVICE_ACCOUNTS="Cloud Build User, Terraform User"
+SERVICE_ACCOUNTS="cloud-build terraform"
 
 echo "Executing script: $0"
 echo "Creating customer environment: $CUSTOMER_ID"
@@ -29,6 +29,11 @@ do
     gcloud services enable $API
 done
 
-echo "Creating service accounts: $SERVICE_ACCOUNTS"
-gcloud iam service-accounts create cloud-build
-gcloud iam service-accounts create terraform
+echo "Service Accounts: $SERVICE_ACCOUNTS"
+for SERVICE_ACCOUNT in $SERVICE_ACCOUNTS
+do
+    echo "Creating service accounts & keys: ${SERVICE_ACCOUNT}.json"
+    gcloud iam service-accounts create ${SERVICE_ACCOUNT}
+    gcloud iam service-accounts keys create ${SERVICE_ACCOUNT} \
+        --iam-account=${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com
+done
