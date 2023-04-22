@@ -1,9 +1,11 @@
 #!/bin/bash
 #
-# Delete a customer environment.
-PROJECT_ID='fantasy-1678866290'
 
-echo "Deleting project..."
-echo "PROJECT ID: $PROJECT_ID"
+# Delete customer environment(s) and disable their billing.
 
-gcloud projects delete $PROJECT_ID --quiet
+for PROJECT in $@
+do
+    echo "Deleting project: $PROJECT"
+    gcloud projects delete $PROJECT --quiet
+    gcloud alpha billing projects unlink $PROJECT
+done

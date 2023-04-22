@@ -1,28 +1,35 @@
 #!/bin/bash
 #
 # Create a project folder to house a customer environment.
-CUSTOMER_ID='putr'
-ORGANIZATION_ID='105637539410'
-TIMESTAMP=$(date +%s)
 
-echo "Creating project..."
-echo "PROJECT ID: $CUSTOMER_ID"
+CUSTOMER_ID=$1
+TIMESTAMP="$(date +%s)"
+PROJECT_ID="${CUSTOMER_ID}-${TIMESTAMP}"
+ORGANIZATION_ID="105637539410"
+BILLING_ACCOUNT="0181BD-E8A62D-6B2069"
+SERVICE_APIS="Cloud Build API, Cloud Resource Manager, Identity & Access Management, Secret Manager API"
+APIS="cloudbuild.googleapis.com cloudresourcemanager.googleapis.com iam.googleapis.com secretmanager.googleapis.com"
+SERVICE_ACCOUNTS="Cloud Build User, Terraform User"
 
-gcloud projects create ${CUSTOMER_ID}-${TIMESTAMP} \
+echo "Executing script: $0"
+echo "Creating customer environment: $CUSTOMER_ID"
+
+echo "Creating project: $PROJECT_ID"
+gcloud projects create ${PROJECT_ID} \
     --organization=${ORGANIZATION_ID} \
     --name=${CUSTOMER_ID}
+gcloud config set project $PROJECT_ID
 
-echo "Linking billing account..."
-echo "BILLING ACCOUNT: $CUSTOMER_ID"
+echo "Linking billing account: $BILLING_ACCOUNT"
+gcloud alpha billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT
 
-# gcloud billing projects link my-project --billing-account 0X0X0X-0X0X0X-0X0X0X
+echo "Service APIs: $SERVICE_APIS"
+for API in $APIS
+do
+    echo "Enabling API: $API"
+    gcloud services enable $API
+done
 
-echo "Enabling APIs..."
-echo "Service APIs: $CUSTOMER_ID"
-# TODO: Enable any other necessary APIs here
-
-# Cloud Build Triggers
-# Cloud Resource Manager
-# Identity & Access Management
-
-# TODO: Create Users (terraform, cloudbuild) and Roles
+echo "Creating service accounts: $SERVICE_ACCOUNTS"
+gcloud iam service-accounts create cloud-build
+gcloud iam service-accounts create terraform
