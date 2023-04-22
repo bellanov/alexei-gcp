@@ -19,7 +19,7 @@ gcloud projects create ${PROJECT_ID} \
 
 echo "Linking billing account: $BILLING_ACCOUNT"
 
-gcloud billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT
+gcloud alpha billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT
 
 echo "Enabling APIs: $ENABLE_APIS"
 # echo "Service APIs: $CUSTOMER_ID"

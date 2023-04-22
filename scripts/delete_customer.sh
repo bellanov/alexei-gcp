@@ -1,9 +1,9 @@
 #!/bin/bash
 #
-# Delete a customer environment.
-PROJECT_ID='fantasy-1678866290'
+# Delete customer environment(s).
 
-echo "Deleting project..."
-echo "PROJECT ID: $PROJECT_ID"
-
-gcloud projects delete $PROJECT_ID --quiet
+for PROJECT in $@
+do
+    echo "Deleting project: $PROJECT"
+    gcloud projects delete $PROJECT --quiet
+done
