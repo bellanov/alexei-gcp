@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Create a project folder to house a customer environment.
+
 CUSTOMER_ID=$1
 TIMESTAMP="$(date +%s)"
 PROJECT_ID="${CUSTOMER_ID}-${TIMESTAMP}"
