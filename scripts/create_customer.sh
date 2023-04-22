@@ -17,6 +17,7 @@ echo "Creating project: $PROJECT_ID"
 gcloud projects create ${PROJECT_ID} \
     --organization=${ORGANIZATION_ID} \
     --name=${CUSTOMER_ID}
+gcloud config set project $PROJECT_ID
 
 echo "Linking billing account: $BILLING_ACCOUNT"
 gcloud alpha billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT
@@ -29,5 +30,5 @@ do
 done
 
 echo "Creating service accounts: $SERVICE_ACCOUNTS"
-gcloud iam service-accounts create cloud-build --display-name="Cloud Build User"
-gcloud iam service-accounts create terraform --display-name="Terraform User"
+gcloud iam service-accounts create cloud-build
+gcloud iam service-accounts create terraform
