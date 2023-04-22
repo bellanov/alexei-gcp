@@ -20,7 +20,7 @@ gcloud projects create ${PROJECT_ID} \
 gcloud config set project $PROJECT_ID
 
 echo "Linking billing account: $BILLING_ACCOUNT"
-gcloud alpha billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT
+gcloud beta billing projects link $PROJECT_ID --billing-account $BILLING_ACCOUNT
 
 echo "Service APIs: $SERVICE_APIS"
 for API in $APIS
