@@ -12,7 +12,7 @@ provider "google" {
   project     = local.project
   region      = local.region
   zone        = local.zone
-  credentials = var.gcp-creds
+  credentials = var.gcp_creds
 }
 
 module "storage" {
@@ -22,7 +22,13 @@ module "storage" {
 }
 
 # module "build" {
-#   source   = "../modules/storage"
+#   source   = "../modules/build"
+#   project  = local.project
+#   location = local.location
+# }
+
+# module "backup" {
+#   source   = "../modules/backup"
 #   project  = local.project
 #   location = local.location
 # }
@@ -39,8 +45,7 @@ locals {
   }
 
   builds = {
-    "build-cloud-function": {},
-    "build-cloud-run-service": {},
+    "build-cloud-function": {}
   }
 
   environments = {
