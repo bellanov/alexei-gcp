@@ -32,8 +32,18 @@ done
 echo "Service Accounts: $SERVICE_ACCOUNTS"
 for SERVICE_ACCOUNT in $SERVICE_ACCOUNTS
 do
-    echo "Creating service accounts & keys: ${SERVICE_ACCOUNT}.json"
+    echo "Creating service accounts & keys: ${SERVICE_ACCOUNT}-${PROJECT_ID}.key"
     gcloud iam service-accounts create ${SERVICE_ACCOUNT}
     gcloud iam service-accounts keys create ${SERVICE_ACCOUNT} \
         --iam-account=${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com
 done
+
+echo "Assigning User Role(s): Cloud Build User"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member=serviceAccount:cloud-build@${PROJECT_ID}.iam.gserviceaccount.com \
+    --role=roles/cloudbuild.builds.editor
+
+echo "Assigning User Role(s): Terraform User"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member=serviceAccount:terraform@${PROJECT_ID}.iam.gserviceaccount.com \
+    --role=roles/storage.admin

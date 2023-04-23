@@ -15,12 +15,10 @@ provider "google" {
   credentials = var.gcp-creds
 }
 
-module "logs" {
-  source   = "../modules/logs"
-  for_each = local.manifest
+module "storage" {
+  source   = "../modules/storage"
   project  = local.project
   location = local.location
-  environment = each.key
 }
 
 locals {
@@ -29,7 +27,17 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
-  manifest = {
+  github = {
+    "secret_id": "github-build-trigger",
+    "secret_data": "var.github_creds"
+  }
+
+  builds = {
+    "build-cloud-function": {},
+    "build-cloud-run-service": {},
+  }
+
+  environments = {
     "dev" : {},
     "qa" : {},
     "prod" : {}

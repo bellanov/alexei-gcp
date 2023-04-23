@@ -1,4 +1,4 @@
-// Bellanov L.L.C.
+// FantasyAce
 terraform {
   required_providers {
     google = {
@@ -21,30 +21,31 @@ module "storage" {
   location = local.location
 }
 
-module "builds" {
-  source = "../modules/build"
-  secret_id = local.github.secret_id
-  secret_data = local.github.secret_data
-}
+# module "build" {
+#   source   = "../modules/storage"
+#   project  = local.project
+#   location = local.location
+# }
 
 locals {
-
-  project = "development-1675315269"
   region   = "us-east1"
+  project = "bellanov-1675315269"
   zone     = "us-east1-b"
   location = "US"
 
   github = {
     "secret_id": "github-build-trigger",
-    "secret_data": var.github_creds
+    "secret_data": "var.github_creds"
   }
 
-  manifest = {
+  builds = {
+    "build-cloud-function": {},
+    "build-cloud-run-service": {},
+  }
+
+  environments = {
     "dev" : {},
     "qa" : {},
     "prod" : {}
   }
-
 }
-  
-  
