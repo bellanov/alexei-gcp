@@ -12,7 +12,7 @@ provider "google" {
   project     = local.project
   region      = local.region
   zone        = local.zone
-  credentials = var.gcp-creds
+  credentials = var.gcp_creds
 }
 
 module "storage" {
