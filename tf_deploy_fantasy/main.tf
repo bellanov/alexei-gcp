@@ -23,7 +23,7 @@ module "storage" {
 
 locals {
   region   = "us-east1"
-  project = "fantasyace-1682389690"
+  project = "fantasyace-1682390017"
   zone     = "us-east1-b"
   location = "US"
 
