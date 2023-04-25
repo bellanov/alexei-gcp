@@ -1,4 +1,4 @@
-// FantasyAce
+// Bellanov L.L.C.
 terraform {
   required_providers {
     google = {
@@ -45,12 +45,22 @@ locals {
   }
 
   builds = {
-    "build-cloud-function": {}
+    "go-cloud-function": {},
+    "python-cloud-function": {},
   }
 
   environments = {
-    "dev" : {},
-    "qa" : {},
-    "prod" : {}
+    # Development
+    "dev" : {
+      "cloud_functions": {}
+    },
+    # Quality Assurance
+    "qa" : {
+      "cloud_functions": {}
+    },
+    # Production
+    "prod" : {
+      "cloud_functions": {}
+    }
   }
 }

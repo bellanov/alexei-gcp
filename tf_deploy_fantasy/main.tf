@@ -23,7 +23,7 @@ module "storage" {
 
 locals {
   region   = "us-east1"
-  project = "development-1675315269"
+  project = "fantasy-1675315269"
   zone     = "us-east1-b"
   location = "US"
 
@@ -32,14 +32,14 @@ locals {
     "secret_data": "var.github_creds"
   }
 
-  builds = {
-    "build-cloud-function": {},
-    "build-cloud-run-service": {},
-  }
+  builds = {}
 
   environments = {
+    # Development
     "dev" : {},
+    # Quality Assurance
     "qa" : {},
+    # Production
     "prod" : {}
   }
 }
