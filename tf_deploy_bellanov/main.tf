@@ -35,7 +35,7 @@ module "storage" {
 
 locals {
   region   = "us-east1"
-  project = "bellanov-1675315269"
+  project = "bellanov-1682389262"
   zone     = "us-east1-b"
   location = "US"
 
