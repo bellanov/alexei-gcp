@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# Delete customer environment(s).
+
+# Delete customer environment(s) and disable their billing.
 
 for PROJECT in $@
 do
