@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Create a project folder to house a customer environment.
+# Create a GCP project to house a customer environment.
 CUSTOMER_ID=$1
 TIMESTAMP="$(date +%s)"
 PROJECT_ID="${CUSTOMER_ID}-${TIMESTAMP}"
@@ -34,7 +34,7 @@ for SERVICE_ACCOUNT in $SERVICE_ACCOUNTS
 do
     echo "Creating service accounts & keys: ${SERVICE_ACCOUNT}-${PROJECT_ID}.key"
     gcloud iam service-accounts create ${SERVICE_ACCOUNT}
-    gcloud iam service-accounts keys create ${SERVICE_ACCOUNT} \
+    gcloud iam service-accounts keys create ${SERVICE_ACCOUNT}-${PROJECT_ID}.key \
         --iam-account=${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com
 done
 
