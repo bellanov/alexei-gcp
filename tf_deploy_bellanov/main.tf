@@ -12,7 +12,7 @@ provider "google" {
   project     = local.project
   region      = local.region
   zone        = local.zone
-  credentials = var.gcp-creds
+  credentials = var.gcp_creds
 }
 
 module "storage" {
@@ -21,30 +21,46 @@ module "storage" {
   location = local.location
 }
 
-module "builds" {
-  source = "../modules/build"
-  secret_id = local.github.secret_id
-  secret_data = local.github.secret_data
-}
+# module "build" {
+#   source   = "../modules/build"
+#   project  = local.project
+#   location = local.location
+# }
+
+# module "backup" {
+#   source   = "../modules/backup"
+#   project  = local.project
+#   location = local.location
+# }
 
 locals {
-
-  project = "development-1675315269"
   region   = "us-east1"
+  project = "bellanov-1675315269"
   zone     = "us-east1-b"
   location = "US"
 
   github = {
     "secret_id": "github-build-trigger",
-    "secret_data": var.github_creds
+    "secret_data": "var.github_creds"
   }
 
-  manifest = {
-    "dev" : {},
-    "qa" : {},
-    "prod" : {}
+  builds = {
+    "go-cloud-function": {},
+    "python-cloud-function": {},
   }
 
+  environments = {
+    # Development
+    "dev" : {
+      "cloud_functions": {}
+    },
+    # Quality Assurance
+    "qa" : {
+      "cloud_functions": {}
+    },
+    # Production
+    "prod" : {
+      "cloud_functions": {}
+    }
+  }
 }
-  
-  

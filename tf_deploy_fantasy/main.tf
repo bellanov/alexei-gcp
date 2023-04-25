@@ -12,26 +12,34 @@ provider "google" {
   project     = local.project
   region      = local.region
   zone        = local.zone
-  credentials = var.gcp-creds
+  credentials = var.gcp_creds
 }
 
-module "logs" {
-  source   = "../modules/logs"
-  for_each = local.manifest
+module "storage" {
+  source   = "../modules/storage"
   project  = local.project
   location = local.location
-  environment = each.key
 }
 
 locals {
   region   = "us-east1"
-  project = "development-1675315269"
+  project = "fantasy-1675315269"
   zone     = "us-east1-b"
   location = "US"
 
-  manifest = {
+  github = {
+    "secret_id": "github-build-trigger",
+    "secret_data": "var.github_creds"
+  }
+
+  builds = {}
+
+  environments = {
+    # Development
     "dev" : {},
+    # Quality Assurance
     "qa" : {},
+    # Production
     "prod" : {}
   }
 }
