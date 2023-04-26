@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-# Delete customer environment(s) and disable their billing.
+# Delete a GCP Project and disable its billing.
 
 for PROJECT in $@
 do

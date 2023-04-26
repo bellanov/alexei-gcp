@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Create a GCP project to house a customer environment.
+# Create a GCP Project to house a customer environment.
 CUSTOMER_ID=$1
 TIMESTAMP="$(date +%s)"
 PROJECT_ID="${CUSTOMER_ID}-${TIMESTAMP}"
