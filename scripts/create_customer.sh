@@ -38,14 +38,21 @@ do
         --iam-account=${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com
 done
 
-TERRAFORM_ROLES="roles/cloudbuild.builds.editor"
+ROLES="roles/cloudbuild.builds.editor"
 echo "Assigning User Role(s): Cloud Build User"
-gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+for ROLE in $ROLES
+do
+    gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:cloud-build@${PROJECT_ID}.iam.gserviceaccount.com \
-    --role=roles/cloudbuild.builds.editor
+    --role=${ROLE}
+done
 
-TERRAFORM_ROLES="roles/storage.admin"
+
+ROLES="roles/storage.admin"
 echo "Assigning User Role(s): Terraform User"
-gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+for ROLE in $ROLES
+do
+    gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member=serviceAccount:terraform@${PROJECT_ID}.iam.gserviceaccount.com \
-    --role=roles/storage.admin
+    --role=${ROLE}
+done
