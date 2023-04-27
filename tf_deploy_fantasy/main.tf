@@ -27,6 +27,11 @@ module "security" {
   secret_data = local.github.secret_data
 }
 
+module "build" {
+  source   = "../modules/build"
+  project_id = local.project
+}
+
 locals {
   region   = "us-east1"
   project = "fantasyace-1682390017"
