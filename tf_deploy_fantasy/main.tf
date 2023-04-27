@@ -21,6 +21,12 @@ module "storage" {
   location = local.location
 }
 
+module "security" {
+  source   = "../modules/security"
+  secret_id = local.github.secret_id
+  secret_data = local.github.secret_data
+}
+
 locals {
   region   = "us-east1"
   project = "fantasyace-1682390017"
