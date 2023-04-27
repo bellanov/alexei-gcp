@@ -21,6 +21,12 @@ module "storage" {
   location = local.location
 }
 
+module "security" {
+  source   = "../modules/security"
+  secret_id = local.github.secret_id
+  secret_data = local.github.secret_data
+}
+
 locals {
   region   = "us-east1"
   project = "fantasyace-1682390017"
@@ -29,7 +35,7 @@ locals {
 
   github = {
     "secret_id": "github-build-trigger",
-    "secret_data": "var.github_creds"
+    "secret_data": var.github_creds
   }
 
   builds = {}

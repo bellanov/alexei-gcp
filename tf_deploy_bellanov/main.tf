@@ -27,12 +27,6 @@ module "security" {
   secret_data = local.github.secret_data
 }
 
-# module "backup" {
-#   source   = "../modules/backup"
-#   project  = local.project
-#   location = local.location
-# }
-
 locals {
   region   = "us-east1"
   project = "bellanov-1682390142"
