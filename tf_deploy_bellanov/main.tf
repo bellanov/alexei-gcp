@@ -21,11 +21,12 @@ module "storage" {
   location = local.location
 }
 
-# module "build" {
-#   source   = "../modules/build"
-#   project  = local.project
-#   location = local.location
-# }
+module "build" {
+  source   = "../modules/build"
+  for_each  = local.builds
+  secret_id = local.github.secret_id
+  secret_data = local.github.secret_data
+}
 
 # module "backup" {
 #   source   = "../modules/backup"
@@ -41,7 +42,7 @@ locals {
 
   github = {
     "secret_id": "github-build-trigger",
-    "secret_data": "var.github_creds"
+    "secret_data": var.github_creds
   }
 
   builds = {
