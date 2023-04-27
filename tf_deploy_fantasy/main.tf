@@ -38,7 +38,9 @@ locals {
     "secret_data": var.github_creds
   }
 
-  builds = {}
+  builds = {
+    "fantasy-signals": {}
+  }
 
   environments = {
     # Development
