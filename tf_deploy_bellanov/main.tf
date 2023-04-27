@@ -21,12 +21,12 @@ module "storage" {
   location = local.location
 }
 
-# module "build" {
-#   source   = "../modules/build"
-#   for_each  = local.builds
-#   project  = local.project
-#   location = local.location
-# }
+module "build" {
+  source   = "../modules/build"
+  for_each  = local.builds
+  project  = local.project
+  location = local.location
+}
 
 # module "backup" {
 #   source   = "../modules/backup"

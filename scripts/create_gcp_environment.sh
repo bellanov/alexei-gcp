@@ -38,7 +38,7 @@ do
         --iam-account=${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com
 done
 
-ROLES="roles/cloudbuild.builds.editor"
+ROLES="roles/cloudbuild.builds.editor roles/secretmanager.secretAccessor"
 echo "Assigning User Role(s): Cloud Build User"
 for ROLE in $ROLES
 do
@@ -46,7 +46,6 @@ do
     --member=serviceAccount:cloud-build@${PROJECT_ID}.iam.gserviceaccount.com \
     --role=${ROLE}
 done
-
 
 ROLES="roles/storage.admin"
 echo "Assigning User Role(s): Terraform User"
