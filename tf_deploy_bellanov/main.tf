@@ -21,9 +21,8 @@ module "storage" {
   location = local.location
 }
 
-module "build" {
-  source   = "../modules/build"
-  for_each  = local.builds
+module "security" {
+  source   = "../modules/security"
   secret_id = local.github.secret_id
   secret_data = local.github.secret_data
 }
