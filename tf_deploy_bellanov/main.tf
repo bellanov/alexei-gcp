@@ -26,6 +26,8 @@ module "build" {
   for_each  = local.builds
   project  = local.project
   location = local.location
+  secret_id = local.github.secret_id
+  secret_data = local.github.secret_data
 }
 
 # module "backup" {
@@ -42,7 +44,7 @@ locals {
 
   github = {
     "secret_id": "github-build-trigger",
-    "secret_data": "var.github_creds"
+    "secret_data": var.github_creds
   }
 
   builds = {
