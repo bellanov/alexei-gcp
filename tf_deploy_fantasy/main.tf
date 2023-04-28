@@ -62,7 +62,7 @@ locals {
   builds = {
     "fantasy-signals" : {
       "path" : "cloudbuild.yaml",
-      "uri" : "https://hashicorp/terraform-provider-google-beta",
+      "uri" : "https://github.com/bellanov/fantasy-signals.git",
       "revision" : "refs/heads/main"
     }
   }
