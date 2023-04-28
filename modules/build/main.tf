@@ -9,15 +9,15 @@ resource "google_cloudbuild_trigger" "build" {
   }
 
   source_to_build {
-    uri       = "https://hashicorp/terraform-provider-google-beta"
-    ref       = "refs/heads/main"
+    uri       = var.uri
+    ref       = var.revision
     repo_type = "GITHUB"
   }
 
   git_file_source {
-    path      = "cloudbuild.yaml"
-    uri       = "https://hashicorp/terraform-provider-google-beta"
-    revision  = "refs/heads/main"
+    path      = var.path
+    uri       = var.uri
+    revision  = var.revision
     repo_type = "GITHUB"
   }
 }

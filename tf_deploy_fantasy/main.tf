@@ -33,8 +33,11 @@ module "build" {
 
   github_key      = module.security.github_key
   name            = each.key
+  path            = each.value.path
   project_id      = local.project
-  service_account = local.service_accounts["build"]
+  revision        = each.value.revisions
+  service_account = local.service_accounts.build
+  uri             = each.value.revisions
 
   depends_on = [
     module.security
@@ -57,7 +60,11 @@ locals {
   }
 
   builds = {
-    "fantasy-signals" : {}
+    "fantasy-signals" : {
+      "path" : "cloudbuild.yaml",
+      "uri" : "https://hashicorp/terraform-provider-google-beta",
+      "revision": "refs/heads/main"
+    }
   }
 
   environments = {
