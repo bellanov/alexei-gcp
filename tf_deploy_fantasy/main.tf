@@ -61,7 +61,12 @@ locals {
 
   builds = {
     "fantasy-signals" : {
-      "path" : "cloudbuild.yaml",
+      "path" : "build.yaml",
+      "uri" : "https://github.com/bellanov/fantasy-signals.git",
+      "revision" : "refs/heads/main"
+    },
+    "fantasy-signals-tests" : {
+      "path" : "test.yaml",
       "uri" : "https://github.com/bellanov/fantasy-signals.git",
       "revision" : "refs/heads/main"
     }
