@@ -52,7 +52,7 @@ locals {
   }
 
   github = {
-    "secret_id" : "github-build-trigger",
+    "secret_id" : "github-credentials",
     "secret_data" : var.github_creds
   }
 
