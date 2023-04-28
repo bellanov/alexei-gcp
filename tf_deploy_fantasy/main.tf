@@ -22,29 +22,49 @@ module "storage" {
 }
 
 module "security" {
-  source   = "../modules/security"
-  secret_id = local.github.secret_id
+  source      = "../modules/security"
+  secret_id   = local.github.secret_id
   secret_data = local.github.secret_data
 }
 
 module "build" {
   source   = "../modules/build"
-  project_id = local.project
+  for_each = local.builds
+
+  github_key      = module.security.github_key
+  name            = each.key
+  path            = each.value.path
+  project_id      = local.project
+  revision        = each.value.revision
+  service_account = local.service_accounts.build
+  uri             = each.value.uri
+
+  depends_on = [
+    module.security
+  ]
 }
 
 locals {
   region   = "us-east1"
-  project = "fantasyace-1682390017"
+  project  = "fantasyace-1682390017"
   zone     = "us-east1-b"
   location = "US"
 
+  service_accounts = {
+    "build" : "cloud-build"
+  }
+
   github = {
-    "secret_id": "github-build-trigger",
-    "secret_data": var.github_creds
+    "secret_id" : "github-credentials",
+    "secret_data" : var.github_creds
   }
 
   builds = {
-    "fantasy-signals": {}
+    "fantasy-signals" : {
+      "path" : "cloudbuild.yaml",
+      "uri" : "https://github.com/bellanov/fantasy-signals.git",
+      "revision" : "refs/heads/main"
+    }
   }
 
   environments = {

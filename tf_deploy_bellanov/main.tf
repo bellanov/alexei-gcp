@@ -22,39 +22,39 @@ module "storage" {
 }
 
 module "security" {
-  source   = "../modules/security"
-  secret_id = local.github.secret_id
+  source      = "../modules/security"
+  secret_id   = local.github.secret_id
   secret_data = local.github.secret_data
 }
 
 locals {
   region   = "us-east1"
-  project = "bellanov-1682390142"
+  project  = "bellanov-1682390142"
   zone     = "us-east1-b"
   location = "US"
 
   github = {
-    "secret_id": "github-build-trigger",
-    "secret_data": var.github_creds
+    "secret_id" : "github-credentials",
+    "secret_data" : var.github_creds
   }
 
   builds = {
-    "go-cloud-function": {},
-    "python-cloud-function": {},
+    "go-cloud-function" : {},
+    "python-cloud-function" : {},
   }
 
   environments = {
     # Development
     "dev" : {
-      "cloud_functions": {}
+      "cloud_functions" : {}
     },
     # Quality Assurance
     "qa" : {
-      "cloud_functions": {}
+      "cloud_functions" : {}
     },
     # Production
     "prod" : {
-      "cloud_functions": {}
+      "cloud_functions" : {}
     }
   }
 }
