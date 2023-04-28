@@ -2,7 +2,7 @@
 resource "google_cloudbuild_trigger" "build" {
   name            = var.name
   description     = "Cloud Build x GitHub."
-  service_account = "serviceAccount:${var.service_account}@${var.project_id}.iam.gserviceaccount.com"
+  service_account = "${var.service_account}@${var.project_id}.iam.gserviceaccount.com"
 
   webhook_config {
     secret = var.github_key
@@ -19,5 +19,9 @@ resource "google_cloudbuild_trigger" "build" {
     uri       = var.uri
     revision  = var.revision
     repo_type = "GITHUB"
+  }
+
+  trigger_template {
+    tag_name = "*.*"
   }
 }
