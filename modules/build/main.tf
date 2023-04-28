@@ -20,4 +20,8 @@ resource "google_cloudbuild_trigger" "build" {
     revision  = var.revision
     repo_type = "GITHUB"
   }
+
+  trigger_template {
+    tag_name = "*.*"
+  }
 }
