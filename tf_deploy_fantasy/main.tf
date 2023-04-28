@@ -30,6 +30,10 @@ module "security" {
 module "build" {
   source   = "../modules/build"
   project_id = local.project
+
+  depends_on = [
+    module.security
+  ]
 }
 
 locals {
