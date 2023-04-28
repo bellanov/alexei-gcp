@@ -1,10 +1,10 @@
 
-resource "google_cloudbuild_trigger" "webhook-config-trigger" {
-  name        = "${var.name}-trigger"
-  description = "Cloud Build x GitHub."
+resource "google_cloudbuild_trigger" "build" {
+  name            = "${var.name}-trigger"
+  description     = "Cloud Build x GitHub."
   service_account = "projects/${var.project_id}/serviceAccounts/${var.service_account}"
 
- webhook_config {
+  webhook_config {
     secret = var.github_key
   }
 

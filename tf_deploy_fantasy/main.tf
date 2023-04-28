@@ -22,17 +22,19 @@ module "storage" {
 }
 
 module "security" {
-  source   = "../modules/security"
-  secret_id = local.github.secret_id
+  source      = "../modules/security"
+  secret_id   = local.github.secret_id
   secret_data = local.github.secret_data
 }
 
 module "build" {
   source   = "../modules/build"
-  project_id = local.project
-  github_key = module.security.github_key
-  service_account = "cloud-build"
-  name = "webhook"
+  for_each = local.builds
+
+  github_key      = module.security.github_key
+  name            = each.key
+  project_id      = local.project
+  service_account = local.service_accounts["build"]
 
   depends_on = [
     module.security
@@ -41,17 +43,21 @@ module "build" {
 
 locals {
   region   = "us-east1"
-  project = "fantasyace-1682390017"
+  project  = "fantasyace-1682390017"
   zone     = "us-east1-b"
   location = "US"
 
+  service_accounts = {
+    "build" : "cloud-build"
+  }
+
   github = {
-    "secret_id": "github-build-trigger",
-    "secret_data": var.github_creds
+    "secret_id" : "github-build-trigger",
+    "secret_data" : var.github_creds
   }
 
   builds = {
-    "fantasy-signals": {}
+    "fantasy-signals" : {}
   }
 
   environments = {
