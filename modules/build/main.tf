@@ -1,6 +1,7 @@
 
 resource "google_cloudbuild_trigger" "build" {
   name            = var.name
+  project         = var.project
   description     = "Cloud Build x GitHub."
   service_account = "${var.service_account}@${var.project_id}.iam.gserviceaccount.com"
 
