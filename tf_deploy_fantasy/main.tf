@@ -37,7 +37,7 @@ module "build" {
   project_id      = local.project
   revision        = each.value.revision
   service_account = local.service_accounts.build
-  uri             = each.value.revision
+  uri             = each.value.uri
 
   depends_on = [
     module.security
@@ -63,7 +63,7 @@ locals {
     "fantasy-signals" : {
       "path" : "cloudbuild.yaml",
       "uri" : "https://hashicorp/terraform-provider-google-beta",
-      "revision": "refs/heads/main"
+      "revision" : "refs/heads/main"
     }
   }
 
