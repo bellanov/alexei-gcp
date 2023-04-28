@@ -32,6 +32,7 @@ module "build" {
   project_id = local.project
   github_key = module.security.github_key
   service_account = "cloud-build"
+  name = "webhook"
 
   depends_on = [
     module.security

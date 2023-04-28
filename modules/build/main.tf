@@ -1,7 +1,7 @@
 
 resource "google_cloudbuild_trigger" "webhook-config-trigger" {
-  name        = "webhook-trigger"
-  description = "acceptance test example webhook build trigger"
+  name        = "${var.name}-trigger"
+  description = "Cloud Build x GitHub."
   service_account = "projects/${var.project_id}/serviceAccounts/${var.service_account}"
 
  webhook_config {
