@@ -30,6 +30,7 @@ module "security" {
 module "build" {
   source   = "../modules/build"
   project_id = local.project
+  github_key = module.security.github_key
 
   depends_on = [
     module.security

@@ -5,7 +5,7 @@ resource "google_cloudbuild_trigger" "webhook-config-trigger" {
   service_account = "projects/${var.project_id}/serviceAccounts/cloud-build"
 
  webhook_config {
-    secret = "google_secret_manager_secret_version.webhook_trigger_secret_key_data.id"
+    secret = var.github_key
   }
 
   source_to_build {
