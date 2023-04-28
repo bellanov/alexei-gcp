@@ -35,9 +35,9 @@ module "build" {
   name            = each.key
   path            = each.value.path
   project_id      = local.project
-  revision        = each.value.revisions
+  revision        = each.value.revision
   service_account = local.service_accounts.build
-  uri             = each.value.revisions
+  uri             = each.value.revision
 
   depends_on = [
     module.security
