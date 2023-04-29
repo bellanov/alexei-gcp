@@ -51,7 +51,7 @@ locals {
   location = "US"
 
   service_accounts = {
-    "build" : "cloud-build"
+    "terraform" : "terraform"
   }
 
   github = {
