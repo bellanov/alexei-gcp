@@ -36,7 +36,7 @@ module "build" {
   path            = each.value.path
   project_id      = local.project
   revision        = each.value.revision
-  service_account = local.service_accounts.build
+  service_account = local.service_accounts.terraform
   uri             = each.value.uri
 
   depends_on = [
@@ -51,7 +51,7 @@ locals {
   location = "US"
 
   service_accounts = {
-    "build" : "cloud-build"
+    "terraform" : "terraform"
   }
 
   github = {
