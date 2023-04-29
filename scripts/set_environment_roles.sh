@@ -6,7 +6,7 @@ PROJECT_ID=$1
 echo "Executing script: $0"
 echo "Refreshing project roles: $PROJECT_ID"
 
-EXISTING_ROLES="roles/cloudbuild.builds.editor roles/secretmanager.secretAccessor"
+EXISTING_ROLES="roles/cloudbuild.builds.editor roles/logging.logWriter roles/secretmanager.secretAccessor"
 
 echo "Removing Existing User Role(s): Cloud Build User"
 for ROLE in $EXISTING_ROLES
@@ -16,7 +16,7 @@ do
     --role=${ROLE}
 done
 
-ASSIGN_ROLES="roles/cloudbuild.builds.editor roles/secretmanager.secretAccessor"
+ASSIGN_ROLES="roles/cloudbuild.builds.editor roles/logging.logWriter roles/secretmanager.secretAccessor"
 
 echo "Assigning User Role(s): Cloud Build User"
 for ROLE in $ASSIGN_ROLES
