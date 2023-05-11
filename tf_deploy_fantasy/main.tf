@@ -21,6 +21,12 @@ module "storage" {
   location = local.location
 }
 
+module "application" {
+  source   = "../modules/application"
+  project  = local.project
+  location = local.location
+}
+
 locals {
   region   = "us-east1"
   project  = "fantasyace-1682390017"
