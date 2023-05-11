@@ -21,11 +21,10 @@ module "storage" {
   location = local.location
 }
 
-module "application" {
-  source   = "../modules/application"
-  # project  = local.project
-  # location = local.location
+module "signal" {
+  source   = "../modules/signal"
   release_bucket = module.storage.releases
+
   depends_on = [ 
     module.storage
   ]
