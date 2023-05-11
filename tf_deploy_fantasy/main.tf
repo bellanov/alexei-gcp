@@ -25,6 +25,7 @@ module "application" {
   source   = "../modules/application"
   # project  = local.project
   # location = local.location
+  release_bucket = module.storage.releases
   depends_on = [ 
     module.storage
   ]
