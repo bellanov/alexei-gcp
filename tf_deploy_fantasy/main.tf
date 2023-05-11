@@ -23,11 +23,11 @@ module "storage" {
 
 module "signal" {
   source   = "../modules/signal"
-  for_each = local.signals
-  
+  for_each = local.environments
+
   release_bucket = module.storage.releases
 
-  depends_on = [ 
+  depends_on = [
     module.storage
   ]
 }
@@ -38,20 +38,22 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
-  signals = {
-    "AVERAGE": {},
-    "ABOVE_AVERAGE": {},
-    "BELOW_AVERAGE": {},
-    "COLD_STREAK": {},
-    "HOT_STREAK": {},
-    "PERSONAL_RECORD": {},
-    "SLIPPERY_WHEN_WET": {},
-    "TEMPLATE": {},
-  }
-
   environments = {
     # Development
-    "dev" : {},
+    "dev" : {
+      "signals" : {
+        "AVERAGE" : {},
+        "ABOVE_AVERAGE" : {},
+        "BALL_DROPPER" : {},
+        "BEEN_A_WHILE" : {},
+        "BELOW_AVERAGE" : {},
+        "COLD_STREAK" : {},
+        "HOT_STREAK" : {},
+        "PERSONAL_RECORD" : {},
+        "SLIPPERY_WHEN_WET" : {},
+        "TEMPLATE" : {},
+      }
+    },
     # Quality Assurance
     "qa" : {},
     # Production
