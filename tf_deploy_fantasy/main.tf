@@ -23,6 +23,8 @@ module "storage" {
 
 module "signal" {
   source   = "../modules/signal"
+  for_each = local.signals
+  
   release_bucket = module.storage.releases
 
   depends_on = [ 
@@ -35,6 +37,17 @@ locals {
   project  = "fantasyace-1682390017"
   zone     = "us-east1-b"
   location = "US"
+
+  signals = {
+    "AVERAGE": {},
+    "ABOVE_AVERAGE": {},
+    "BELOW_AVERAGE": {},
+    "COLD_STREAK": {},
+    "HOT_STREAK": {},
+    "PERSONAL_RECORD": {},
+    "SLIPPERY_WHEN_WET": {},
+    "TEMPLATE": {},
+  }
 
   environments = {
     # Development
