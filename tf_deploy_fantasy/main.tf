@@ -55,8 +55,12 @@ locals {
       }
     },
     # Quality Assurance
-    "qa" : {},
+    "qa" : {
+      "signals" : {}
+    },
     # Production
-    "prod" : {}
+    "prod" : {
+      "signals" : {}
+    }
   }
 }

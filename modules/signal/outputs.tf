@@ -1,5 +1,5 @@
 
-output "archive_name" {
+output "archive" {
   description = "Cloud Function Archive (*.zip)."
   value       = google_storage_bucket_object.archive.name
 }
