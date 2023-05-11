@@ -25,6 +25,9 @@ module "application" {
   source   = "../modules/application"
   # project  = local.project
   # location = local.location
+  depends_on = [ 
+    module.storage
+  ]
 }
 
 locals {
