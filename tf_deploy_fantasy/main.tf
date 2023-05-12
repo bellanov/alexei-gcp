@@ -25,7 +25,7 @@ module "application" {
   source   = "../modules/application"
   for_each = local.environments
 
-  signals = each.value.signals
+  cloud_functions = each.value.cloud_functions
   release_bucket = module.storage.releases
 
   depends_on = [
@@ -42,7 +42,7 @@ locals {
   environments = {
     # Development
     "dev" : {
-      "signals" : {
+      "cloud_functions" : {
         "AVERAGE" : {},
         "ABOVE_AVERAGE" : {},
         "BALL_DROPPER" : {},
@@ -57,11 +57,11 @@ locals {
     },
     # Quality Assurance
     "qa" : {
-      "signals" : {}
+      "cloud_functions" : {}
     },
     # Production
     "prod" : {
-      "signals" : {}
+      "cloud_functions" : {}
     }
   }
 }
