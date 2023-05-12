@@ -25,9 +25,9 @@ module "application" {
   source   = "../modules/application"
   for_each = local.environments
 
-  cloud_functions = each.value.cloud_functions
+  cloud_functions         = each.value.cloud_functions
   cloud_functions_version = local.cloud_functions_version
-  release_bucket = module.storage.releases
+  release_bucket          = module.storage.releases
 
   depends_on = [
     module.storage
