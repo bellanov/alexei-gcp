@@ -3,11 +3,11 @@
 
 # Enable Service APIs in a GCP Project.
 
-PROJECT=$1
+PROJECT_ID=$1
 API=$2
 
 echo "Executing script: $0"
 echo "GCP project: $PROJECT_ID"
 echo "API: $API"
 
-gcloud services enable $API --project $PROJECT
+gcloud services enable $API --project $PROJECT_ID
