@@ -26,7 +26,7 @@ do
     --role=${ROLE}
 done
 
-EXISTING_ROLES="roles/storage.admin roles/secretmanager.admin"
+EXISTING_ROLES="roles/cloudfunctions.developer roles/storage.admin roles/secretmanager.admin"
 
 echo "Removing Existing Role(s): Terraform User"
 for ROLE in $EXISTING_ROLES
@@ -36,7 +36,7 @@ do
     --role=${ROLE}
 done
 
-ASSIGN_ROLES="roles/storage.admin roles/secretmanager.admin"
+ASSIGN_ROLES="roles/cloudfunctions.developer roles/storage.admin roles/secretmanager.admin"
 
 echo "Assigning User Role(s): Terraform User"
 for ROLE in $ASSIGN_ROLES
