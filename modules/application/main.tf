@@ -8,8 +8,8 @@ resource "google_storage_bucket_object" "archive" {
 
 resource "google_cloudfunctions_function" "function" {
   for_each = var.cloud_functions
-  name        = "${each.key}_${var.cloud_functions_version}"
-  description = "My function"
+  name        = each.key
+  description = "${each.key}_${var.cloud_functions_version} Cloud Function"
   runtime     = "nodejs16"
 
   available_memory_mb   = 128
