@@ -26,7 +26,8 @@ module "application" {
   for_each = local.environments
 
   cloud_functions         = each.value.cloud_functions
-  cloud_functions_version = local.cloud_functions_version
+  cloud_functions_path    = local.cloud_functions["path"]
+  cloud_functions_version = local.cloud_functions["version"]
   release_bucket          = module.storage.releases
 
   depends_on = [
@@ -40,8 +41,10 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
-  cloud_functions_version = "0.1.0"
-
+  cloud_functions = {
+    "version" : "0.1.0",
+    "path" : "./signals/go/"
+  }
   environments = {
     # Development
     "dev" : {
