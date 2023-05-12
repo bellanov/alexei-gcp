@@ -26,6 +26,7 @@ module "application" {
   for_each = local.environments
 
   cloud_functions = each.value.cloud_functions
+  cloud_functions_version = local.cloud_functions_version
   release_bucket = module.storage.releases
 
   depends_on = [
@@ -38,6 +39,8 @@ locals {
   project  = "fantasyace-1682390017"
   zone     = "us-east1-b"
   location = "US"
+
+  cloud_functions_version = "0.1.0"
 
   environments = {
     # Development
