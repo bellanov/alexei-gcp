@@ -1,10 +1,10 @@
 
 output "name" {
   description = "Cloud Function Name."
-  value       = google_cloudfunctions_function.function[*].name
+  value = [ for function in google_cloudfunctions_function.function: function.name]
 }
 
 output "runtime" {
   description = "Cloud Function Runtime."
-  value       = google_cloudfunctions_function.function[*].runtime
+  value = [ for function in google_cloudfunctions_function.function: function.runtime]
 }
