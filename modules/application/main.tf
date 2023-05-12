@@ -19,3 +19,12 @@ resource "google_cloudfunctions_function" "function" {
   entry_point           = "helloGET"
 }
 
+resource "google_cloudfunctions_function_iam_member" "invoker" {
+  for_each       = var.cloud_functions
+  project        = google_cloudfunctions_function.function[each.key].project
+  region         = google_cloudfunctions_function.function[each.key].region
+  cloud_function = google_cloudfunctions_function.function[each.key].name
+
+  role   = "roles/cloudfunctions.invoker"
+  member = "allUsers"
+}
