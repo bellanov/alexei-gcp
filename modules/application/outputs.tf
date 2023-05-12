@@ -1,5 +1,5 @@
 
 output "cloud_functions" {
   description = "Cloud Functions."
-  value = { for function in google_cloudfunctions_function.function: function.name => function.runtime }
+  value = [ for function in google_cloudfunctions_function.function: function.name ]
 }
