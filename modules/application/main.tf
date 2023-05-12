@@ -3,7 +3,7 @@ resource "google_storage_bucket_object" "archive" {
   for_each = var.cloud_functions
   name     = "${each.key}_${var.cloud_functions_version}.zip"
   bucket   = var.release_bucket
-  source   = "./path/to/zip/file/which/contains/code"
+  source   = var.cloud_functions_source
 }
 
 resource "google_cloudfunctions_function" "function" {
