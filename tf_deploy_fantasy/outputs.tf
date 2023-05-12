@@ -4,7 +4,7 @@ output "storage" {
   value       = module.storage
 }
 
-output "signal" {
-  description = "Signal Module."
-  value       = module.signal
+output "application" {
+  description = "Application Module."
+  value       = module.application
 }
