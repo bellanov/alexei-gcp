@@ -21,10 +21,11 @@ module "storage" {
   location = local.location
 }
 
-module "signal" {
-  source   = "../modules/signal"
+module "application" {
+  source   = "../modules/application"
   for_each = local.environments
 
+  signals = each.value.signals
   release_bucket = module.storage.releases
 
   depends_on = [
