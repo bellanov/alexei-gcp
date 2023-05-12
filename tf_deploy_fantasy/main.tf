@@ -26,7 +26,7 @@ module "application" {
   for_each = local.environments
 
   cloud_functions         = each.value.cloud_functions
-  cloud_functions_path    = local.cloud_functions["path"]
+  cloud_functions_source  = local.cloud_functions["source"]
   cloud_functions_version = local.cloud_functions["version"]
   release_bucket          = module.storage.releases
 
@@ -43,7 +43,7 @@ locals {
 
   cloud_functions = {
     "version" : "0.1.0",
-    "path" : "./signals/go/"
+    "source" : "./signals/go/"
   }
   environments = {
     # Development
