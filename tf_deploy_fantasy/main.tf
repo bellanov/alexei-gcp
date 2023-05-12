@@ -43,7 +43,7 @@ locals {
   cloud_functions_config = {
     "runtime" : "go120",
     "source" : "signals/go",
-    "version" : "0.1.0"
+    "version" : "0.3.1"
   }
   environments = {
     # Development
