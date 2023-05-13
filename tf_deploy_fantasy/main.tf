@@ -27,6 +27,7 @@ module "application" {
 
   cloud_functions         = each.value.cloud_functions
   release_bucket          = module.storage.releases
+  service_account         =
 
   depends_on = [
     module.storage
@@ -42,6 +43,7 @@ locals {
   cloud_functions_config = {
     "runtime" : "go120",
     "source" : "signals/go",
+    "service_account" : "service_account_email@blah.com",
   }
   environments = {
     # Development
@@ -49,51 +51,61 @@ locals {
       "cloud_functions" : {
         "AVERAGE" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "ABOVE_AVERAGE" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "BALL_DROPPER" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "BEEN_A_WHILE" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "BELOW_AVERAGE" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "COLD_STREAK" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "HOT_STREAK" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "PERSONAL_RECORD" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "SLIPPERY_WHEN_WET" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "TEMPLATE" : {
           "runtime" : local.cloud_functions_config.runtime,
+          "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
