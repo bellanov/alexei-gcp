@@ -10,7 +10,7 @@ resource "google_cloudfunctions_function" "function" {
   source_archive_bucket = var.release_bucket
   source_archive_object = "${each.value.source}/${each.key}_${each.value.version}.zip"
   trigger_http          = true
-  entry_point           = "HelloWorld"
+  entry_point           = each.value.entry_point
 }
 
 resource "google_cloudfunctions_function_iam_member" "invoker" {

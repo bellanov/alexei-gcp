@@ -40,6 +40,7 @@ locals {
   location = "US"
 
   cloud_functions_config = {
+    "entry_point" : "HelloWorld",
     "runtime" : "go120",
     "source" : "signals/go",
     "service_account" : "service_account_email@blah.com",
@@ -49,60 +50,70 @@ locals {
     "dev" : {
       "cloud_functions" : {
         "AVERAGE" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "ABOVE_AVERAGE" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "BALL_DROPPER" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "BEEN_A_WHILE" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "BELOW_AVERAGE" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "COLD_STREAK" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "HOT_STREAK" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "PERSONAL_RECORD" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "SLIPPERY_WHEN_WET" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
           "version" : "0.3.2"
         },
         "TEMPLATE" : {
+          "entry_point" : local.cloud_functions_config.entry_point,
           "runtime" : local.cloud_functions_config.runtime,
           "service_account" : local.cloud_functions_config.service_account,
           "source" : local.cloud_functions_config.source,
