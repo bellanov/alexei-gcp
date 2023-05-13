@@ -2,12 +2,13 @@
 resource "google_cloudfunctions_function" "function" {
   for_each    = var.cloud_functions
   name        = each.key
-  description = "${each.key}_${var.cloud_functions_config.version}"
-  runtime     = var.cloud_functions_config.runtime
+  description = "${each.key}_${each.value.version}"
+  runtime     = each.value.runtime
+  service_account_email = var.service_account
 
   available_memory_mb   = 128
   source_archive_bucket = var.release_bucket
-  source_archive_object = "${var.cloud_functions_config.source}/${each.key}_${var.cloud_functions_config.version}.zip"
+  source_archive_object = "${each.value.source}/${each.key}_${each.value.version}.zip"
   trigger_http          = true
   entry_point           = "HelloWorld"
 }
