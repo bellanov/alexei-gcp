@@ -27,7 +27,6 @@ module "application" {
 
   cloud_functions         = each.value.cloud_functions
   release_bucket          = module.storage.releases
-  service_account         =
 
   depends_on = [
     module.storage
