@@ -43,7 +43,7 @@ locals {
     "entry_point" : "HelloWorld",
     "runtime" : "go120",
     "source" : "signals/go",
-    "service_account" : "cloud-function@${local.project}.iam.gserviceaccount.com",
+    "service_account" : "terraform@${local.project}.iam.gserviceaccount.com",
   }
   environments = {
     # Development
