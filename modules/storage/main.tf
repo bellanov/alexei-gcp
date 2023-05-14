@@ -25,7 +25,7 @@ resource "google_storage_bucket" "releases" {
 
 resource "google_artifact_registry_repository" "registry" {
   location      = "us-central1"
-  repository_id = "docker"
+  repository_id = "docker-releases"
   description   = "Docker Container Releases."
   format        = "DOCKER"
 }
