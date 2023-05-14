@@ -10,6 +10,6 @@ output "releases" {
 }
 
 output "artifact_registry" {
-  description = "Releases Bucket."
+  description = "Artifact Registry."
   value       = google_artifact_registry_repository.registry.repository_id
 }
