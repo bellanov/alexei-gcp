@@ -22,3 +22,10 @@ resource "google_storage_bucket" "releases" {
 
   public_access_prevention = "enforced"
 }
+
+resource "google_artifact_registry_repository" "registry" {
+  location      = "us-central1"
+  repository_id = "docker-releases"
+  description   = "Docker Container Releases."
+  format        = "DOCKER"
+}
