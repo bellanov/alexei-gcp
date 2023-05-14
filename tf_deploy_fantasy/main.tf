@@ -43,7 +43,7 @@ locals {
     "entry_point" : "HelloWorld",
     "runtime" : "go120",
     "source" : "signals/go",
-    "service_account" : "service_account_email@blah.com",
+    "service_account" : "cloud-function@${local.project}.iam.gserviceaccount.com",
   }
   environments = {
     # Development
