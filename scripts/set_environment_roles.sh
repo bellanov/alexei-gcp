@@ -45,3 +45,13 @@ do
     --member=serviceAccount:terraform@${PROJECT_ID}.iam.gserviceaccount.com \
     --role=${ROLE}
 done
+
+gcloud iam service-accounts add-iam-policy-binding \
+    terraform@${PROJECT_ID}.iam.gserviceaccount.com \
+    --member serviceAccount:${PROJECT_ID}@appspot.gserviceaccount.com \
+    --role roles/iam.serviceAccountUser --project $PROJECT_ID
+
+# gcloud iam service-accounts add-iam-policy-binding \
+#     ${PROJECT_ID}@appspot.gserviceaccount.com \
+#     --member serviceAccount:terraform@${PROJECT_ID}.iam.gserviceaccount.com \
+#     --role roles/iam.serviceAccountUser --project $PROJECT_ID
