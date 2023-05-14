@@ -4,7 +4,7 @@ resource "google_cloudfunctions_function" "function" {
   name        = each.key
   description = "${each.key}_${each.value.version}"
   runtime     = each.value.runtime
-  service_account_email = each.value.service_account
+  # service_account_email = each.value.service_account
 
   available_memory_mb   = 128
   source_archive_bucket = var.release_bucket
