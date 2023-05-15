@@ -21,6 +21,10 @@ module "storage" {
   location = local.location
 }
 
+module "security" {
+  source   = "../modules/security"
+}
+
 module "application" {
   source   = "../modules/application"
   for_each = local.environments
@@ -37,6 +41,15 @@ locals {
   project  = "fantasyace-1682390017"
   zone     = "us-east1-b"
   location = "US"
+
+  security = {
+    "service_accounts": {
+      "renderer": {
+        "account_id"   : "renderer-identity"
+        "display_name" : "Service identity of the Renderer (Backend) service."
+      }
+    }
+  }
 
   environments = {
     # Development
