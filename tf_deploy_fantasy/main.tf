@@ -38,12 +38,6 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
-  cloud_functions_config = {
-    "entry_point" : "HelloWorld",
-    "runtime" : "go120",
-    "source" : "signals/go",
-    "service_account" : "terraform@${local.project}.iam.gserviceaccount.com",
-  }
   environments = {
     # Development
     "dev" : {
