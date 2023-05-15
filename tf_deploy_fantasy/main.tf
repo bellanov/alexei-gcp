@@ -23,6 +23,7 @@ module "storage" {
 
 module "security" {
   source   = "../modules/security"
+  service_accounts = local.security.service_accounts
 }
 
 module "application" {
