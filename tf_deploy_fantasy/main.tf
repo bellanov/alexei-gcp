@@ -44,14 +44,7 @@ locals {
   location = "US"
 
   security = {
-    "service_accounts": {
-      "renderer": {
-        "display_name" : "Service identity of the Renderer (Backend) service."
-      },
-      "editor": {
-        "display_name" : "Service identity of the Editor (Frontend) service."
-      }
-    }
+    "service_accounts": {}
   }
 
   environments = {
