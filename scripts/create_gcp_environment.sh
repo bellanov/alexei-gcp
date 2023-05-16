@@ -47,7 +47,7 @@ do
     --role=${ROLE}
 done
 
-ROLES="roles/iam.serviceAccountAdmin roles/artifactregistry.admin roles/storage.admin roles/secretmanager.admin"
+ROLES="roles/artifactregistry.admin roles/storage.admin roles/secretmanager.admin roles/iam.serviceAccountAdmin"
 echo "Assigning User Role(s): Terraform User"
 for ROLE in $ROLES
 do
