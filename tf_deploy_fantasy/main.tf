@@ -48,6 +48,10 @@ locals {
       "renderer": {
         "account_id"   : "renderer-identity"
         "display_name" : "Service identity of the Renderer (Backend) service."
+      },
+      "editor": {
+        "account_id"   : "editor-identity"
+        "display_name" : "Service identity of the Renderer (Backend) service."
       }
     }
   }
