@@ -23,6 +23,7 @@ module "storage" {
 
 module "security" {
   source   = "../modules/security"
+  service_accounts = local.security.service_accounts
 }
 
 module "application" {
@@ -45,8 +46,10 @@ locals {
   security = {
     "service_accounts": {
       "renderer": {
-        "account_id"   : "renderer-identity"
         "display_name" : "Service identity of the Renderer (Backend) service."
+      },
+      "editor": {
+        "display_name" : "Service identity of the Editor (Frontend) service."
       }
     }
   }
