@@ -39,7 +39,7 @@ module "application" {
 
 locals {
   region   = "us-east1"
-  project  = "fantasyace-1682390017"
+  project  = "quantcloud-1684208465"
   zone     = "us-east1-b"
   location = "US"
 
