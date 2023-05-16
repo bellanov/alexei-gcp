@@ -6,8 +6,8 @@ TIMESTAMP="$(date +%s)"
 PROJECT_ID="${CUSTOMER_ID}-${TIMESTAMP}"
 ORGANIZATION_ID="105637539410"
 BILLING_ACCOUNT="0181BD-E8A62D-6B2069"
-SERVICE_APIS="Cloud Build API, Cloud Resource Manager, Identity & Access Management, Secret Manager API"
-APIS="cloudbuild.googleapis.com cloudresourcemanager.googleapis.com iam.googleapis.com secretmanager.googleapis.com"
+SERVICE_APIS="Artifact Registry, Cloud Build API, Cloud Resource Manager, Identity & Access Management, Secret Manager API"
+APIS="artifactregistry.googleapis.com cloudbuild.googleapis.com cloudresourcemanager.googleapis.com iam.googleapis.com secretmanager.googleapis.com"
 SERVICE_ACCOUNTS="cloud-build terraform"
 
 echo "Executing script: $0"
@@ -38,7 +38,7 @@ do
         --iam-account=${SERVICE_ACCOUNT}@${PROJECT_ID}.iam.gserviceaccount.com
 done
 
-ROLES="roles/cloudbuild.builds.editor"
+ROLES="roles/artifactregistry.writer roles/cloudbuild.builds.editor roles/logging.logWriter roles/storage.admin roles/secretmanager.secretAccessor"
 echo "Assigning User Role(s): Cloud Build User"
 for ROLE in $ROLES
 do
@@ -47,7 +47,7 @@ do
     --role=${ROLE}
 done
 
-ROLES="roles/storage.admin"
+ROLES="roles/iam.serviceAccountAdmin roles/artifactregistry.admin roles/storage.admin roles/secretmanager.admin"
 echo "Assigning User Role(s): Terraform User"
 for ROLE in $ROLES
 do
