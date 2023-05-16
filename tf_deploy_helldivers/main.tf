@@ -1,4 +1,4 @@
-// FantasyAce
+// HELLDIVERS
 terraform {
   required_providers {
     google = {
