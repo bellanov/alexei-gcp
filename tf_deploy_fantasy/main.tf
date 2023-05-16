@@ -46,12 +46,10 @@ locals {
   security = {
     "service_accounts": {
       "renderer": {
-        "account_id"   : "renderer-identity"
         "display_name" : "Service identity of the Renderer (Backend) service."
       },
       "editor": {
-        "account_id"   : "editor-identity"
-        "display_name" : "Service identity of the Renderer (Backend) service."
+        "display_name" : "Service identity of the Editor (Frontend) service."
       }
     }
   }
