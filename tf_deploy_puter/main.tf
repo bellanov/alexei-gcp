@@ -22,7 +22,7 @@ module "storage" {
 }
 
 module "security" {
-  source   = "../modules/security"
+  source           = "../modules/security"
   service_accounts = local.security.service_accounts
 }
 
@@ -30,7 +30,7 @@ module "application" {
   source   = "../modules/application"
   for_each = local.environments
 
-  release_bucket          = module.storage.releases
+  release_bucket = module.storage.releases
 
   depends_on = [
     module.storage
@@ -44,7 +44,7 @@ locals {
   location = "US"
 
   security = {
-    "service_accounts": {}
+    "service_accounts" : {}
   }
 
   environments = {
