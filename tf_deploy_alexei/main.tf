@@ -51,10 +51,7 @@ locals {
   environments = {
     # Development
     "dev" : {
-      "cloud_run_services" : {
-        "editor": {},
-        "renderer": {}
-      },
+      "cloud_run_services" : {},
     },
     # Quality Assurance
     "qa" : {
