@@ -69,7 +69,7 @@ locals {
           "service_account": "ayoayo@dog.com"
         },
         "renderer": {
-          "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-renderer",
+          "image": "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-renderer",
           "location": local.cloud_run_services.location,
           "service_account": "yoayoa@god.com"
         }
