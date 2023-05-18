@@ -1,8 +1,8 @@
 
 resource "google_cloud_run_service" "svc" {
   for_each = var.cloud_run_services
-  name     = "renderer"
-  location = "us-central1"
+  name     = each.key
+  location = each.value.location
   template {
     spec {
       containers {

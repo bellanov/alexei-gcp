@@ -55,16 +55,22 @@ locals {
     }
   }
 
+  cloud_run_services = {
+    location: "us-central1"
+  }
+
   environments = {
     # Development
     "dev" : {
       "cloud_run_services" : {
         "editor": {
           "image": "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-editor",
+          "location": local.cloud_run_services.location,
           "service_account": "ayoayo@dog.com"
         },
         "renderer": {
           "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-renderer",
+          "location": local.cloud_run_services.location,
           "service_account": "yoayoa@god.com"
         }
       }
