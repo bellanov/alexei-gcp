@@ -66,12 +66,12 @@ locals {
         "editor": {
           "image": "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-editor",
           "location": local.cloud_run_services.location,
-          "service_account": "ayoayo@dog.com"
+          "service_account": "editor-identity@bellanov-1682390142.iam.gserviceaccount.com"
         },
         "renderer": {
           "image": "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-renderer",
           "location": local.cloud_run_services.location,
-          "service_account": "yoayoa@god.com"
+          "service_account": "renderer-identity@bellanov-1682390142.iam.gserviceaccount.com"
         }
       }
     },
