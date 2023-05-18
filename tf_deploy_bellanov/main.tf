@@ -59,8 +59,14 @@ locals {
     # Development
     "dev" : {
       "cloud_run_services" : {
-        "editor": {},
-        "renderer": {}
+        "editor": {
+          "image": "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-editor",
+          "service_account": "ayoayo@dog.com"
+        },
+        "renderer": {
+          "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-renderer",
+          "service_account": "yoayoa@god.com"
+        }
       }
     },
     # Quality Assurance

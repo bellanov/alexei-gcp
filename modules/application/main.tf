@@ -6,11 +6,9 @@ resource "google_cloud_run_service" "svc" {
   template {
     spec {
       containers {
-        # Replace with the URL of your Secure Services > Renderer image.
-        #   gcr.io/<PROJECT_ID>/renderer
-        image = "us-central1-docker.pkg.dev/fantasyace-1682390017/docker-releases/poc-renderer"
+        image = each.value.image
       }
-      service_account_name = "ayoayo@topdog.com"
+      service_account_name = each.value.service_account
     }
   }
   traffic {
