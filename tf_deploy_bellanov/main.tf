@@ -24,6 +24,8 @@ module "storage" {
 module "security" {
   source           = "../modules/security"
   service_accounts = local.security.service_accounts
+  terraform_identity = "foobar@foobar.com"
+
 }
 
 module "application" {
@@ -32,7 +34,6 @@ module "application" {
 
   cloud_run_services = each.value.cloud_run_services
   release_bucket = module.storage.releases
-  terraform_identity = "foobar@foobar.com"
 
   depends_on = [
     module.storage
