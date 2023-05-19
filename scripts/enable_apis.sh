@@ -4,8 +4,8 @@
 # Enable Service APIs in a GCP Project.
 
 PROJECT_ID=$1
-PROJECTS="bellanov-1682390142 fantasyace-1682390017"
-APIS="artifactregistry.googleapis.com cloudbuild.googleapis.com cloudresourcemanager.googleapis.com iam.googleapis.com secretmanager.googleapis.com"
+PROJECTS="alexei-1684209060 bellanov-1682390142 fantasyace-1682390017 helldivers-1684208845 puter-1684209240 quantcloud-1684208465"
+APIS="artifactregistry.googleapis.com cloudbuild.googleapis.com cloudresourcemanager.googleapis.com iam.googleapis.com run.googleapis.com secretmanager.googleapis.com"
 
 echo "Executing script: $0"
 echo "GCP project: $PROJECT_ID"
