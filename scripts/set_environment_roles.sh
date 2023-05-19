@@ -27,7 +27,7 @@ do
     --role=${ROLE}
 done
 
-EXISTING_ROLES="roles/artifactregistry.admin roles/storage.admin roles/secretmanager.admin roles/iam.serviceAccountAdmin"
+EXISTING_ROLES="roles/artifactregistry.admin roles/run.admin roles/storage.admin roles/secretmanager.admin roles/iam.serviceAccountAdmin"
 
 echo "Removing Existing Role(s): Terraform User"
 for ROLE in $EXISTING_ROLES
@@ -37,7 +37,7 @@ do
     --role=${ROLE}
 done
 
-ASSIGN_ROLES="roles/artifactregistry.admin roles/storage.admin roles/secretmanager.admin roles/iam.serviceAccountAdmin"
+ASSIGN_ROLES="roles/artifactregistry.admin roles/run.admin roles/storage.admin roles/secretmanager.admin roles/iam.serviceAccountAdmin"
 
 echo "Assigning User Role(s): Terraform User"
 for ROLE in $ASSIGN_ROLES

@@ -24,6 +24,7 @@ module "storage" {
 module "security" {
   source   = "../modules/security"
   service_accounts = local.security.service_accounts
+  terraform_identity = local.security.terraform_identity
 }
 
 module "application" {
@@ -45,7 +46,8 @@ locals {
   location = "US"
 
   security = {
-    "service_accounts": {}
+    "service_accounts": {},
+    "terraform_identity": "terraform@${local.project}.iam.gserviceaccount.com"
   }
 
   environments = {
