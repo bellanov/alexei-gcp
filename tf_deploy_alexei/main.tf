@@ -31,6 +31,7 @@ module "application" {
   for_each = local.environments
 
   release_bucket = module.storage.releases
+  cloud_run_services = each.value.cloud_run_services
 
   depends_on = [
     module.storage
@@ -50,11 +51,11 @@ locals {
   environments = {
     # Development
     "dev" : {
-      "cloud_run_services" : {}
+      "cloud_run_services" : {},
     },
     # Quality Assurance
     "qa" : {
-      "cloud_run_services" : {}
+      "cloud_run_services" : {},
     },
     # Production
     "prod" : {

@@ -30,6 +30,7 @@ module "application" {
   source   = "../modules/application"
   for_each = local.environments
 
+  cloud_run_services = each.value.cloud_run_services
   release_bucket = module.storage.releases
 
   depends_on = [

@@ -30,6 +30,7 @@ module "application" {
   source   = "../modules/application"
   for_each = local.environments
 
+  cloud_run_services = each.value.cloud_run_services
   release_bucket = module.storage.releases
 
   depends_on = [
@@ -54,10 +55,25 @@ locals {
     }
   }
 
+  cloud_run_services = {
+    location: "us-central1"
+  }
+
   environments = {
     # Development
     "dev" : {
-      "cloud_run_services" : {}
+      "cloud_run_services" : {
+        "editor": {
+          "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor",
+          "location": local.cloud_run_services.location,
+          "service_account": "editor-identity@${local.project}.iam.gserviceaccount.com"
+        },
+        "renderer": {
+          "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer",
+          "location": local.cloud_run_services.location,
+          "service_account": "renderer-identity@${local.project}.iam.gserviceaccount.com"
+        }
+      }
     },
     # Quality Assurance
     "qa" : {
