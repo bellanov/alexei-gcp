@@ -10,7 +10,7 @@ data "google_iam_policy" "terraform" {
     role = "roles/iam.serviceAccountUser"
 
     members = [
-      var.terraform_identity,
+      "serviceAccount:${var.terraform_identity}",
     ]
   }
 }

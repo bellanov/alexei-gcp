@@ -24,7 +24,7 @@ module "storage" {
 module "security" {
   source           = "../modules/security"
   service_accounts = local.security.service_accounts
-  terraform_identity = "foobar@foobar.com"
+  terraform_identity = local.security.terraform_identity
 
 }
 
@@ -54,7 +54,8 @@ locals {
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service."
       }
-    }
+    },
+    "terraform_identity": "terraform@${local.project}.iam.gserviceaccount.com"
   }
 
   cloud_run_services = {
