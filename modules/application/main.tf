@@ -8,6 +8,7 @@ resource "google_cloud_run_service" "svc" {
       containers {
         image = each.value.image
       }
+
       service_account_name = each.value.service_account
     }
   }
