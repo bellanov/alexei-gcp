@@ -45,9 +45,11 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
+  builds = {}
+
   security = {
     "service_accounts" : {
-      "cloud-build" : {
+      "cloudbuild" : {
         "display_name" : "Cloud Build User.",
         "service_account": "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com"
       },
