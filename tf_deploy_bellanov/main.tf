@@ -49,10 +49,13 @@ locals {
   security = {
     "service_accounts" : {
       "renderer" : {
-        "display_name" : "Service identity of the Renderer (Backend) service."
+        "display_name" : "Service identity of the Renderer (Backend) service.",
+        "service_account": "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
       },
       "editor" : {
-        "display_name" : "Service identity of the Editor (Frontend) service."
+        "display_name" : "Service identity of the Editor (Frontend) service.",
+        "service_account": "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
+
       }
     },
     "terraform_identity": "terraform@${local.project}.iam.gserviceaccount.com"
@@ -69,12 +72,10 @@ locals {
         "editor": {
           "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor",
           "location": local.cloud_run_services.location,
-          "service_account": "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
         },
         "renderer": {
           "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer",
-          "location": local.cloud_run_services.location,
-          "service_account": "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
+          "location": local.cloud_run_services.location
         }
       }
     },
