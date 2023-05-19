@@ -17,6 +17,6 @@ data "google_iam_policy" "terraform" {
 
 resource "google_service_account_iam_policy" "terraform_iam" {
   for_each           = var.service_accounts
-  service_account_id = "${each.key}-identity"
+  service_account_id = each.value.service_account
   policy_data        = data.google_iam_policy.terraform.policy_data
 }
