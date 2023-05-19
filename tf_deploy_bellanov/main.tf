@@ -47,6 +47,10 @@ locals {
 
   security = {
     "service_accounts" : {
+      "cloud-build" : {
+        "display_name" : "Cloud Build User.",
+        "service_account": "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com"
+      },
       "renderer" : {
         "display_name" : "Service identity of the Renderer (Backend) service.",
         "service_account": "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
@@ -54,7 +58,6 @@ locals {
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service.",
         "service_account": "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
-
       }
     },
     "terraform_identity": "terraform@${local.project}.iam.gserviceaccount.com"
