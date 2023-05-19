@@ -72,10 +72,13 @@ locals {
         "editor": {
           "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor",
           "location": local.cloud_run_services.location,
+          "service_account": "renderer-identity@${local.project}.iam.gserviceaccount.com"
+          
         },
         "renderer": {
           "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer",
-          "location": local.cloud_run_services.location
+          "location": local.cloud_run_services.location,
+          "service_account": "renderer-identity@${local.project}.iam.gserviceaccount.com"
         }
       }
     },
