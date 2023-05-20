@@ -45,8 +45,6 @@ locals {
   zone     = "us-east1-b"
   location = "US"
 
-  builds = {}
-
   security = {
     "service_accounts" : {
       "cloudbuild" : {
@@ -66,7 +64,9 @@ locals {
   }
 
   cloud_run_services = {
-    location: "us-central1"
+    "editor" : "editor-identity@${local.project}.iam.gserviceaccount.com",
+    "location": "us-central1",
+    "renderer": "renderer-identity@${local.project}.iam.gserviceaccount.com"
   }
 
   environments = {
@@ -76,13 +76,13 @@ locals {
         "editor": {          
           "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
           "location": local.cloud_run_services.location,
-          "service_account": "editor-identity@${local.project}.iam.gserviceaccount.com"
+          "service_account": local.cloud_run_services.editor
           
         },
         "renderer": {
           "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
           "location": local.cloud_run_services.location,
-          "service_account": "renderer-identity@${local.project}.iam.gserviceaccount.com"
+          "service_account": local.cloud_run_services.renderer
         }
       }
     },
