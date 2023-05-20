@@ -73,17 +73,13 @@ locals {
     # Development
     "dev" : {
       "cloud_run_services" : {
-        "editor": {
-          "env": {
-            "EDITOR_UPSTREAM_RENDER_URL": "http://path/to/renderer/url"
-          },
+        "editor": {          
           "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
           "location": local.cloud_run_services.location,
           "service_account": "editor-identity@${local.project}.iam.gserviceaccount.com"
           
         },
         "renderer": {
-          "env": {},
           "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
           "location": local.cloud_run_services.location,
           "service_account": "renderer-identity@${local.project}.iam.gserviceaccount.com"

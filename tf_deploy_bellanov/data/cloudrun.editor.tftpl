@@ -1,0 +1,16 @@
+
+template {
+  spec {
+    containers {
+
+      image = ${image}
+
+      env {
+        name = "EDITOR_UPSTREAM_RENDER_URL"
+        value = ${render_url}
+      }
+    }
+
+    service_account_name = ${service_account}
+  }
+}
