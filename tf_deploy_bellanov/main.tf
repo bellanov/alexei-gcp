@@ -30,14 +30,14 @@ module "security" {
 
 
 resource "google_cloud_run_service" "editor_svc" {
-  for_each = toset(var.environments)
-  name     = var.name
-  location = var.location
+  for_each = local.environments
+  name     = each.value.name
+  location = each.value.location
   template {
     spec {
       containers {
 
-        image = "${each.key}:v1.2.3"
+        image = each.value.image
 
         env {
           name  = "PORT"
@@ -118,19 +118,12 @@ locals {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
           "location" : local.cloud_run_config.location,
-          "service_account" : local.cloud_run_config.editor_identity,
-          "env" : {
-            "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
-            "PORT" : "8080"
-          }
+          "service_account" : local.cloud_run_config.editor_identity
         },
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
           "location" : local.cloud_run_config.location,
-          "service_account" : local.cloud_run_config.renderer_identity,
-          "env" : {
-            "PORT" : "8080"
-          }
+          "service_account" : local.cloud_run_config.renderer_identity
         }
       }
     },
