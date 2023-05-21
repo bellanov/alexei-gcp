@@ -56,33 +56,38 @@ locals {
   environments = {
     # Development
     "dev" : {
-      "editor" : {
-        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
-      },
-      "renderer" : {
-        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
+      "cloud_run_services" : {
+        "editor" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
+        },
+        "renderer" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
+        }
       }
     },
     # Quality Assurance
     "qa" : {
-      "editor" : {
-        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
-      },
-      "renderer" : {
-        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
+      "cloud_run_services" : {
+        "editor" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
+        },
+        "renderer" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
+        }
       }
     },
     # Production
     "prod" : {
-      "editor" : {
-        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
-      },
-      "renderer" : {
-        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
+      "cloud_run_services" : {
+        "editor" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
+        },
+        "renderer" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
+        }
       }
     }
   }
-
 }
 
 // poc-editor
@@ -94,7 +99,7 @@ resource "google_cloud_run_service" "editor" {
     spec {
       containers {
 
-        image = each.value.editor.image
+        image = each.value.cloud_run_services.editor.image
 
         env {
           name  = "PORT"
@@ -126,7 +131,7 @@ resource "google_cloud_run_service" "renderer" {
     spec {
       containers {
 
-        image = each.value.renderer.image
+        image = each.value.cloud_run_services.renderer.image
 
         env {
           name  = "PORT"
