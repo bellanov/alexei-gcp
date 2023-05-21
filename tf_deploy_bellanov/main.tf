@@ -27,63 +27,6 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-resource "google_cloud_run_service" "editor" {
-  for_each = local.environments
-  name     = "editor-svc-${each.key}"
-  location = local.cloud_run_config.location
-  template {
-    spec {
-      containers {
-
-        image = each.value.editor.image
-
-        env {
-          name  = "PORT"
-          value = "8080"
-        }
-
-        env {
-          name  = "EDITOR_UPSTREAM_RENDER_URL"
-          value = "/why/not/just/do/this/to/begin/with"
-        }
-
-      }
-
-      service_account_name = local.cloud_run_config.renderer_identity
-    }
-  }
-  traffic {
-    percent         = 100
-    latest_revision = true
-  }
-}
-
-resource "google_cloud_run_service" "renderer" {
-  for_each = local.environments
-  name     = "renderer-svc-${each.key}"
-  location = local.cloud_run_config.location
-  template {
-    spec {
-      containers {
-
-        image = each.value.renderer.image
-
-        env {
-          name  = "PORT"
-          value = "8080"
-        }
-
-      }
-
-      service_account_name = local.cloud_run_config.renderer_identity
-    }
-  }
-  traffic {
-    percent         = 100
-    latest_revision = true
-  }
-}
-
 locals {
   region   = "us-east1"
   project  = "bellanov-1682390142"
@@ -130,4 +73,63 @@ locals {
     }
   }
 
+}
+
+// poc-editor
+resource "google_cloud_run_service" "editor" {
+  for_each = local.environments
+  name     = "editor-svc-${each.key}"
+  location = local.cloud_run_config.location
+  template {
+    spec {
+      containers {
+
+        image = each.value.editor.image
+
+        env {
+          name  = "PORT"
+          value = "8080"
+        }
+
+        env {
+          name  = "EDITOR_UPSTREAM_RENDER_URL"
+          value = "/why/not/just/do/this/to/begin/with"
+        }
+
+      }
+
+      service_account_name = local.cloud_run_config.renderer_identity
+    }
+  }
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
+
+// poc-renderer
+resource "google_cloud_run_service" "renderer" {
+  for_each = local.environments
+  name     = "renderer-svc-${each.key}"
+  location = local.cloud_run_config.location
+  template {
+    spec {
+      containers {
+
+        image = each.value.renderer.image
+
+        env {
+          name  = "PORT"
+          value = "8080"
+        }
+
+      }
+
+      service_account_name = local.cloud_run_config.renderer_identity
+    }
+  }
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
 }
