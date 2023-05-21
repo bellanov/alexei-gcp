@@ -77,32 +77,13 @@ locals {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
           "location" : local.cloud_run_services.location,
           "service_account" : local.cloud_run_services.editor_identity,
-          "template" : templatefile(
-            "${path.module}/data/cloudrun_service.tftpl",
-            {
-              image           = "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-              service_account = local.cloud_run_services.editor_identity,
-              env = {
-                PORT = 8080
-              }
-            }
-          )
+          "env" : {}
         },
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
           "location" : local.cloud_run_services.location,
           "service_account" : local.cloud_run_services.renderer_identity,
-          "template" : templatefile(
-            "${path.module}/data/cloudrun_service.tftpl",
-            {
-              image           = "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-              service_account = local.cloud_run_services.renderer_identity,
-              env = {
-                PORT                       = 8080,
-                EDITOR_UPSTREAM_RENDER_URL = "/put/these/configurations/in/data/files"
-              }
-            }
-          )
+          "env" : {}
         }
       }
     },
