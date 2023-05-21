@@ -30,7 +30,7 @@ module "security" {
 resource "google_cloud_run_service" "editor_svc" {
   for_each = local.environments
   name     = "renderer-svc-${each.key}"
-  location = each.value.location
+  location = local.cloud_run_config.location
   template {
     spec {
       containers {
