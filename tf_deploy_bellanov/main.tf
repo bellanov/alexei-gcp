@@ -1,4 +1,7 @@
 // Bellanov L.L.C.
+
+# Providers
+#================================================
 terraform {
   required_providers {
     google = {
@@ -15,6 +18,9 @@ provider "google" {
   credentials = var.gcp_creds
 }
 
+# Modules - All things reusable, global, etc.
+#================================================
+
 module "storage" {
   source   = "../modules/storage"
   project  = local.project
@@ -26,6 +32,9 @@ module "security" {
   service_accounts   = local.security.service_accounts
   terraform_identity = local.security.terraform_identity
 }
+
+# Locals - constrain configuration values
+#================================================
 
 locals {
   region   = "us-east1"
@@ -95,10 +104,10 @@ resource "google_cloud_run_service" "editor" {
   for_each = local.environments
   name     = "editor-svc-${each.key}"
   location = local.cloud_run_config.location
+
   template {
     spec {
       containers {
-
         image = each.value.cloud_run_services.editor.image
 
         env {
@@ -112,10 +121,10 @@ resource "google_cloud_run_service" "editor" {
         }
 
       }
-
       service_account_name = local.cloud_run_config.editor_identity
     }
   }
+  
   traffic {
     percent         = 100
     latest_revision = true
@@ -127,10 +136,10 @@ resource "google_cloud_run_service" "renderer" {
   for_each = local.environments
   name     = "renderer-svc-${each.key}"
   location = local.cloud_run_config.location
+
   template {
     spec {
       containers {
-
         image = each.value.cloud_run_services.renderer.image
 
         env {
@@ -143,6 +152,7 @@ resource "google_cloud_run_service" "renderer" {
       service_account_name = local.cloud_run_config.renderer_identity
     }
   }
+
   traffic {
     percent         = 100
     latest_revision = true
