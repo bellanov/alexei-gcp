@@ -99,7 +99,7 @@ locals {
   }
 }
 
-# Resources - Deploy things to cloud
+# Resources - Deploy organization infrastructure
 #================================================
 
 // poc-editor
@@ -115,7 +115,7 @@ resource "google_cloud_run_service" "editor" {
 
         env {
           name  = "EDITOR_UPSTREAM_RENDER_URL"
-          value = "/why/not/just/do/this/to/begin/with"
+          value = each.value.cloud_run_services.editor.image
         }
 
       }
@@ -127,6 +127,11 @@ resource "google_cloud_run_service" "editor" {
     percent         = 100
     latest_revision = true
   }
+
+  depends_on = [
+    google_cloud_run_service.renderer,
+    module.security
+  ]
 }
 
 // poc-renderer
@@ -148,4 +153,8 @@ resource "google_cloud_run_service" "renderer" {
     percent         = 100
     latest_revision = true
   }
+
+  depends_on = [
+    module.security
+  ]
 }
