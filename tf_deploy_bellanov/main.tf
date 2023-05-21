@@ -27,7 +27,7 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-resource "google_cloud_run_service" "editor_svc" {
+resource "google_cloud_run_service" "editor" {
   for_each = local.environments
   name     = "editor-svc-${each.key}"
   location = local.cloud_run_config.location
@@ -58,7 +58,7 @@ resource "google_cloud_run_service" "editor_svc" {
   }
 }
 
-resource "google_cloud_run_service" "renderer_svc" {
+resource "google_cloud_run_service" "renderer" {
   for_each = local.environments
   name     = "renderer-svc-${each.key}"
   location = local.cloud_run_config.location
