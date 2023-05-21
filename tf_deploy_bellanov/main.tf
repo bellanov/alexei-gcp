@@ -27,8 +27,6 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-
-
 resource "google_cloud_run_service" "editor_svc" {
   for_each = local.environments
   name     = each.value.name
@@ -59,6 +57,7 @@ resource "google_cloud_run_service" "editor_svc" {
     latest_revision = true
   }
 }
+
 resource "google_cloud_run_service" "renderer_svc" {
   for_each = local.environments
   name     = var.name
