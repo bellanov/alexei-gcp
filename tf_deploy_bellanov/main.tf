@@ -27,17 +27,17 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-module "application" {
-  source   = "../modules/application"
-  for_each = local.environments
+# module "cloud_run_services" {
+#   source   = "../modules/cloud_run_service"
+#   for_each = local.cloud_run_services
 
-  cloud_run_services = each.value.cloud_run_services
-  release_bucket     = module.storage.releases
+#   cloud_run_services = each.value.cloud_run_services
+#   release_bucket     = module.storage.releases
 
-  depends_on = [
-    module.storage
-  ]
-}
+#   depends_on = [
+#     module.storage
+#   ]
+# }
 
 locals {
   region   = "us-east1"
@@ -63,56 +63,63 @@ locals {
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
   }
 
-  cloud_run_services = {
+  cloud_run_config = {
     "editor_identity" : "editor-identity@${local.project}.iam.gserviceaccount.com",
     "location" : "us-central1",
     "renderer_identity" : "renderer-identity@${local.project}.iam.gserviceaccount.com"
   }
 
-  environments = {
-    # Development
-    "dev" : {
-      "cloud_run_services" : {
-        "editor" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-          "location" : local.cloud_run_services.location,
-          "service_account" : local.cloud_run_services.editor_identity,
-          "template" : templatefile(
-            "${path.module}/data/cloudrun_service.tftpl",
-            {
-              image           = "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-              service_account = local.cloud_run_services.editor_identity,
-              env = {
-                PORT = 8080
-              }
-            }
-          )
-        },
-        "renderer" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-          "location" : local.cloud_run_services.location,
-          "service_account" : local.cloud_run_services.renderer_identity,
-          "template" : templatefile(
-            "${path.module}/data/cloudrun_service.tftpl",
-            {
-              image           = "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-              service_account = local.cloud_run_services.renderer_identity,
-              env = {
-                PORT                       = 8080,
-                EDITOR_UPSTREAM_RENDER_URL = "/put/these/configurations/in/data/files"
-              }
-            }
-          )
-        }
+  cloud_run_services = {
+    "editor-dev" : {
+      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
+      "location" : local.cloud_run_config.location,
+      "service_account" : local.cloud_run_config.editor_identity,
+      "env" : {
+        "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
+        "PORT" : "8080"
       }
     },
-    # Quality Assurance
-    "qa" : {
-      "cloud_run_services" : {}
+    "editor-qa" : {
+      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
+      "location" : local.cloud_run_config.location,
+      "service_account" : local.cloud_run_config.editor_identity,
+      "env" : {
+        "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
+        "PORT" : "8080"
+      }
     },
-    # Production
-    "prod" : {
-      "cloud_run_services" : {}
+    "editor-prod" : {
+      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
+      "location" : local.cloud_run_config.location,
+      "service_account" : local.cloud_run_config.editor_identity,
+      "env" : {
+        "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
+        "PORT" : "8080"
+      }
+    },
+    "renderer-dev" : {
+      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+      "location" : local.cloud_run_config.location,
+      "service_account" : local.cloud_run_config.renderer_identity,
+      "env" : {
+        "PORT" : "8080"
+      }
+    },"renderer-qa" : {
+      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+      "location" : local.cloud_run_config.location,
+      "service_account" : local.cloud_run_config.renderer_identity,
+      "env" : {
+        "PORT" : "8080"
+      }
+    },
+    "renderer-prod" : {
+      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+      "location" : local.cloud_run_config.location,
+      "service_account" : local.cloud_run_config.renderer_identity,
+      "env" : {
+        "PORT" : "8080"
+      }
     }
   }
+
 }
