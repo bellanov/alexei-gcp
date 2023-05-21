@@ -49,7 +49,7 @@ resource "google_cloud_run_service" "editor_svc" {
 
       }
 
-      service_account_name = each.value.cloud_run_services.editor.service_account
+      service_account_name = local.cloud_run_config.renderer_identity
     }
   }
   traffic {
@@ -60,8 +60,8 @@ resource "google_cloud_run_service" "editor_svc" {
 
 resource "google_cloud_run_service" "renderer_svc" {
   for_each = local.environments
-  name     = var.name
-  location = var.location
+  name     = each.value.cloud_run_services.renderer.name
+  location = each.value.cloud_run_services.renderer.location
   template {
     spec {
       containers {
@@ -75,7 +75,7 @@ resource "google_cloud_run_service" "renderer_svc" {
 
       }
 
-      service_account_name = each.value.cloud_run_services.renderer.service_account
+      service_account_name = local.cloud_run_config.renderer_identity
     }
   }
   traffic {
