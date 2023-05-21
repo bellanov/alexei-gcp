@@ -81,7 +81,7 @@ locals {
     "renderer_identity" : "renderer-identity@${local.project}.iam.gserviceaccount.com"
   }
 
-  "cloud_run_services" : {
+  cloud_run_services = {
     "editor-dev" : {
       "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
       "location" : local.cloud_run_config.location,
