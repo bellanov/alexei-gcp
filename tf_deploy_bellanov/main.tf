@@ -31,8 +31,8 @@ module "cloud_run_services" {
   source   = "../modules/cloud_run_service"
   for_each = local.cloud_run_services
 
+  name = each.key
   env = each.value.env
-  name = each.value.name
   image = each.value.image
   location = each.value.location
   service_account = each.value.service_account
