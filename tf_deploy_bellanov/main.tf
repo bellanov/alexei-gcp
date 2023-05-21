@@ -78,8 +78,12 @@ locals {
       "location" : local.cloud_run_config.location,
       "service_account" : local.cloud_run_config.editor_identity,
       "env" : {
-        "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
-        "PORT" : "8080"
+        "EDITOR_UPSTREAM_RENDER_URL" : {
+          "value": "/put/these/configurations/in/data/files"
+        },
+        "PORT" : {
+          "value": "8080"
+        }
       }
     },
     "editor-qa" : {
@@ -87,8 +91,12 @@ locals {
       "location" : local.cloud_run_config.location,
       "service_account" : local.cloud_run_config.editor_identity,
       "env" : {
-        "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
-        "PORT" : "8080"
+        "EDITOR_UPSTREAM_RENDER_URL" : {
+          "value": "/put/these/configurations/in/data/files"
+        },
+        "PORT" : {
+          "value": "8080"
+        }
       }
     },
     "editor-prod" : {
@@ -96,8 +104,12 @@ locals {
       "location" : local.cloud_run_config.location,
       "service_account" : local.cloud_run_config.editor_identity,
       "env" : {
-        "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
-        "PORT" : "8080"
+        "EDITOR_UPSTREAM_RENDER_URL" : {
+          "value": "/put/these/configurations/in/data/files"
+        },
+        "PORT" : {
+          "value": "8080"
+        }
       }
     },
     "renderer-dev" : {
@@ -105,14 +117,18 @@ locals {
       "location" : local.cloud_run_config.location,
       "service_account" : local.cloud_run_config.renderer_identity,
       "env" : {
-        "PORT" : "8080"
+        "PORT" : {
+          "value": "8080"
+        }
       }
     },"renderer-qa" : {
       "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
       "location" : local.cloud_run_config.location,
       "service_account" : local.cloud_run_config.renderer_identity,
       "env" : {
-        "PORT" : "8080"
+        "PORT" : {
+          "value": "8080"
+        }
       }
     },
     "renderer-prod" : {
@@ -120,7 +136,9 @@ locals {
       "location" : local.cloud_run_config.location,
       "service_account" : local.cloud_run_config.renderer_identity,
       "env" : {
-        "PORT" : "8080"
+        "PORT" : {
+          "value": "8080"
+        }
       }
     }
   }
