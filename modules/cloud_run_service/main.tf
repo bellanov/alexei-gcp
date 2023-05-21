@@ -8,13 +8,17 @@ resource "google_cloud_run_service" "svc" {
 
         image = var.image
 
-        dynamic "env" {
-          for_each = var.env
-          content {
-            name = "each.key"
-            value = "each.value.value"
-          }
+        env {
+          name = "each.key"
+          value = "each.value.value"
         }
+        # dynamic "env" {
+        #   for_each = var.env
+        #   content {
+        #     name = "each.key"
+        #     value = "each.value.value"
+        #   }
+        # }
       }
 
       service_account_name = var.service_account
