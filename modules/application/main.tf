@@ -13,7 +13,7 @@ resource "google_cloud_run_service" "svc" {
           for_each = each.value.env
           content {
             name = each.key
-            value = each.value
+            value = each.value.value
           }
         }
       }
