@@ -80,8 +80,8 @@ locals {
           "template" : templatefile(
             "${path.module}/data/cloudrun_service.tftpl",
             {
-              image           = local.environments.dev.editor.image,
-              service_account = local.environments.dev.editor.service_account,
+              image           = "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
+              service_account = local.cloud_run_services.editor_identity,
               env = {
                 PORT = 8080
               }
@@ -95,8 +95,8 @@ locals {
           "template" : templatefile(
             "${path.module}/data/cloudrun_service.tftpl",
             {
-              image           = local.environments.dev.renderer.image,
-              service_account = local.environments.dev.renderer.service_account,
+              image           = "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+              service_account = local.cloud_run_services.renderer_identity,
               env = {
                 PORT                       = 8080,
                 EDITOR_UPSTREAM_RENDER_URL = "/put/these/configurations/in/data/files"
