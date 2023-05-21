@@ -1,6 +1,8 @@
 // Bellanov L.L.C.
 
-# Providers
+# Provider
+# 
+# Things to simply keep up-to-date...so you don't f*ck yourself over later.
 #================================================
 terraform {
   required_providers {
@@ -18,7 +20,9 @@ provider "google" {
   credentials = var.gcp_creds
 }
 
-# Modules - All things reusable, global, etc.
+# Modules
+#
+# Any possibility of reusing "resource {}" blocks is attempted here.
 #================================================
 
 module "storage" {
@@ -33,7 +37,9 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-# Locals - Constrain resource and module configuration values 
+# Locals
+#
+# Area to constrain / harness various configurations to modules / resources 
 #================================================
 
 locals {
@@ -97,7 +103,9 @@ locals {
   }
 }
 
-# Resources - Deploy organization infrastructure
+# Resources
+#
+# Deploy things that were too annoying to put in a module.
 #================================================
 
 // poc-editor
