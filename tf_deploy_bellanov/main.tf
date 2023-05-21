@@ -57,9 +57,7 @@ locals {
   }
 
   cloud_run_config = {
-    "editor_identity" : "editor-identity@${local.project}.iam.gserviceaccount.com",
-    "location" : "us-central1",
-    "renderer_identity" : "renderer-identity@${local.project}.iam.gserviceaccount.com"
+    "location" : "us-central1"
   }
 
   environments = {
@@ -129,8 +127,8 @@ resource "google_cloud_run_service" "editor" {
   }
 
   depends_on = [
-    google_cloud_run_service.renderer,
-    module.security
+    module.security,
+    google_cloud_run_service.renderer
   ]
 }
 
