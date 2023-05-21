@@ -27,18 +27,6 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-module "application" {
-  source   = "../modules/application"
-  for_each = local.environments
-
-  cloud_run_services = each.value.cloud_run_services
-  release_bucket = module.storage.releases
-
-  depends_on = [
-    module.storage
-  ]
-}
-
 locals {
   region   = "us-east1"
   project  = "puter-1684209240"
