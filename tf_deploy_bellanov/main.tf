@@ -27,17 +27,17 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-# module "cloud_run_services" {
-#   source   = "../modules/cloud_run_service"
-#   for_each = local.cloud_run_services
+module "cloud_run_services" {
+  source   = "../modules/cloud_run_service"
+  for_each = local.cloud_run_services
 
-#   cloud_run_services = each.value.cloud_run_services
-#   release_bucket     = module.storage.releases
+  cloud_run_services = each.value.cloud_run_services
+  release_bucket     = module.storage.releases
 
-#   depends_on = [
-#     module.storage
-#   ]
-# }
+  depends_on = [
+    module.storage
+  ]
+}
 
 locals {
   region   = "us-east1"

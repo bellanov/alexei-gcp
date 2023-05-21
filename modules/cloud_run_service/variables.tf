@@ -1,3 +1,6 @@
 
-variable "cloud_run_services" {}
-variable "release_bucket" {}
+variable "env" {}
+variable "image" {}
+variable "name" {}
+variable "location" {}
+variable "service_account" {}
