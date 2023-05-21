@@ -33,7 +33,7 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-# Locals - constrain configuration values
+# Locals - Constrain resource and module configuration values 
 #================================================
 
 locals {
@@ -99,6 +99,9 @@ locals {
   }
 }
 
+# Resources - Deploy things to cloud
+#================================================
+
 // poc-editor
 resource "google_cloud_run_service" "editor" {
   for_each = local.environments
@@ -109,11 +112,6 @@ resource "google_cloud_run_service" "editor" {
     spec {
       containers {
         image = each.value.cloud_run_services.editor.image
-
-        env {
-          name  = "PORT"
-          value = "8080"
-        }
 
         env {
           name  = "EDITOR_UPSTREAM_RENDER_URL"
@@ -141,14 +139,7 @@ resource "google_cloud_run_service" "renderer" {
     spec {
       containers {
         image = each.value.cloud_run_services.renderer.image
-
-        env {
-          name  = "PORT"
-          value = "8080"
-        }
-
       }
-
       service_account_name = local.cloud_run_config.renderer_identity
     }
   }
