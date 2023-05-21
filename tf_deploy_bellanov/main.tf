@@ -27,18 +27,6 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-module "application" {
-  source   = "../modules/application"
-  for_each = local.environments
-
-  cloud_run_services = each.value.cloud_run_services
-  release_bucket     = module.storage.releases
-
-  depends_on = [
-    module.storage
-  ]
-}
-
 # module "cloud_run_services" {
 #   source   = "../modules/cloud_run_service"
 #   for_each = local.cloud_run_services
@@ -134,36 +122,4 @@ locals {
     }
   }
 
-  environments = {
-    # Development
-    "dev" : {
-      "cloud_run_services" : {
-        "editor" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-          "location" : local.cloud_run_services.location,
-          "service_account" : local.cloud_run_services.editor_identity,
-          "env" : {
-            "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
-            "PORT" : "8080"
-          }
-        },
-        "renderer" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-          "location" : local.cloud_run_services.location,
-          "service_account" : local.cloud_run_services.renderer_identity,
-          "env" : {
-            "PORT" : "8080"
-          }
-        }
-      }
-    },
-    # Quality Assurance
-    "qa" : {
-      "cloud_run_services" : {}
-    },
-    # Production
-    "prod" : {
-      "cloud_run_services" : {}
-    }
-  }
 }
