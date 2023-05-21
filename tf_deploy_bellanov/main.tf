@@ -34,6 +34,7 @@ module "cloud_run_services" {
   env = each.value.env
   name = each.value.name
   image = each.value.image
+  location = each.value.location
   service_account = each.value.service_account
 
   depends_on = [
