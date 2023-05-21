@@ -57,19 +57,29 @@ locals {
     # Development
     "dev" : {
       "editor" : {
-        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
+        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
       },
       "renderer" : {
-        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
       }
     },
     # Quality Assurance
     "qa" : {
-      "cloud_run_services" : {}
+      "editor" : {
+        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
+      },
+      "renderer" : {
+        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
+      }
     },
     # Production
     "prod" : {
-      "cloud_run_services" : {}
+      "editor" : {
+        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
+      },
+      "renderer" : {
+        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
+      }
     }
   }
 
