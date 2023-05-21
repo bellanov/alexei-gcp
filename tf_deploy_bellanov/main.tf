@@ -22,8 +22,8 @@ module "storage" {
 }
 
 module "security" {
-  source           = "../modules/security"
-  service_accounts = local.security.service_accounts
+  source             = "../modules/security"
+  service_accounts   = local.security.service_accounts
   terraform_identity = local.security.terraform_identity
 }
 
@@ -32,7 +32,7 @@ module "application" {
   for_each = local.environments
 
   cloud_run_services = each.value.cloud_run_services
-  release_bucket = module.storage.releases
+  release_bucket     = module.storage.releases
 
   depends_on = [
     module.storage
@@ -49,40 +49,60 @@ locals {
     "service_accounts" : {
       "cloudbuild" : {
         "display_name" : "Cloud Build User.",
-        "service_account": "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com"
+        "service_account" : "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com"
       },
       "renderer" : {
         "display_name" : "Service identity of the Renderer (Backend) service.",
-        "service_account": "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
+        "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
       },
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service.",
-        "service_account": "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
+        "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
       }
     },
-    "terraform_identity": "terraform@${local.project}.iam.gserviceaccount.com"
+    "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
   }
 
   cloud_run_services = {
-    "editor" : "editor-identity@${local.project}.iam.gserviceaccount.com",
-    "location": "us-central1",
-    "renderer": "renderer-identity@${local.project}.iam.gserviceaccount.com"
+    "editor_identity" : "editor-identity@${local.project}.iam.gserviceaccount.com",
+    "location" : "us-central1",
+    "renderer_identity" : "renderer-identity@${local.project}.iam.gserviceaccount.com"
   }
 
   environments = {
     # Development
     "dev" : {
       "cloud_run_services" : {
-        "editor": {          
-          "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-          "location": local.cloud_run_services.location,
-          "service_account": local.cloud_run_services.editor
-          
+        "editor" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
+          "location" : local.cloud_run_services.location,
+          "service_account" : local.cloud_run_services.editor_identity,
+          "template" : templatefile(
+            "${path.module}/data/cloudrun_service.tftpl",
+            {
+              image           = local.environments.dev.editor.image,
+              service_account = local.environments.dev.editor.service_account,
+              env = {
+                PORT = 8080
+              }
+            }
+          )
         },
-        "renderer": {
-          "image": "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-          "location": local.cloud_run_services.location,
-          "service_account": local.cloud_run_services.renderer
+        "renderer" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+          "location" : local.cloud_run_services.location,
+          "service_account" : local.cloud_run_services.renderer_identity,
+          "template" : templatefile(
+            "${path.module}/data/cloudrun_service.tftpl",
+            {
+              image           = local.environments.dev.renderer.image,
+              service_account = local.environments.dev.renderer.service_account,
+              env = {
+                PORT                       = 8080,
+                EDITOR_UPSTREAM_RENDER_URL = "/put/these/configurations/in/data/files"
+              }
+            }
+          )
         }
       }
     },
