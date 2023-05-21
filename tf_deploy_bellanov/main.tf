@@ -29,13 +29,13 @@ module "security" {
 
 resource "google_cloud_run_service" "editor_svc" {
   for_each = local.environments
-  name     = each.value.name
+  name     = "renderer-svc-${each.key}"
   location = each.value.location
   template {
     spec {
       containers {
 
-        image = each.value.image
+        image = "${each.key}:version"
 
         env {
           name  = "PORT"
@@ -60,13 +60,13 @@ resource "google_cloud_run_service" "editor_svc" {
 
 resource "google_cloud_run_service" "renderer_svc" {
   for_each = local.environments
-  name     = each.value.cloud_run_services.renderer.name
-  location = each.value.cloud_run_services.renderer.location
+  name     = "renderer-svc-${each.key}"
+  location = local.cloud_run_config.location
   template {
     spec {
       containers {
 
-        image = "${each.key}:v1.2.3"
+        image = "${each.key}:version"
 
         env {
           name  = "PORT"
