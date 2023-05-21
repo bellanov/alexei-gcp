@@ -3,12 +3,24 @@ resource "google_cloud_run_service" "svc" {
   for_each = var.cloud_run_services
   name     = each.key
   location = each.value.location
+  template {
+    spec {
+      containers {
 
-  dynamic "template" {
-    for_each = var.cloud_run_services
-    content = each.value.template
+        image = each.value.image
+
+        dynamic "env" {
+          for_each = each.value.env
+          content {
+            name = "EDITOR_UPSTREAM_RENDER_URL"
+            value = "/put/these/configurations/in/data/files"
+          }
+        }
+      }
+
+      service_account_name = each.value.service_account
+    }
   }
-
   traffic {
     percent         = 100
     latest_revision = true
