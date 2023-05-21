@@ -51,7 +51,7 @@ resource "google_cloud_run_service" "editor_svc" {
 
       }
 
-      service_account_name = var.service_account
+      service_account_name = each.value.cloud_run_services.editor.service_account
     }
   }
   traffic {
@@ -76,7 +76,7 @@ resource "google_cloud_run_service" "renderer_svc" {
 
       }
 
-      service_account_name = var.service_account
+      service_account_name = each.value.cloud_run_services.renderer.service_account
     }
   }
   traffic {

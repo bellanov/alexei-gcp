@@ -2,5 +2,5 @@
 
 output "service_accounts" {
   description = "Service Accounts."
-  value       = [ for sa in google_service_account.sa : sa.email ]
+  value       = [for sa in google_service_account.sa : sa.email]
 }
