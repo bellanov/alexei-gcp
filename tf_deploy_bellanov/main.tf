@@ -113,7 +113,7 @@ resource "google_cloud_run_service" "editor" {
 
       }
 
-      service_account_name = local.cloud_run_config.renderer_identity
+      service_account_name = local.cloud_run_config.editor_identity
     }
   }
   traffic {
