@@ -33,7 +33,7 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-# Locals - Constrain configuration values
+# Locals - Constrain resource and module configuration values 
 #================================================
 
 locals {
