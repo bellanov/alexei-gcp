@@ -119,7 +119,7 @@ resource "google_cloud_run_service" "editor" {
         }
 
       }
-      service_account_name = local.cloud_run_config.editor_identity
+      service_account_name = module.security.service_accounts["editor-identity"]
     }
   }
   
@@ -145,7 +145,7 @@ resource "google_cloud_run_service" "renderer" {
       containers {
         image = each.value.cloud_run_services.renderer.image
       }
-      service_account_name = local.cloud_run_config.renderer_identity
+      service_account_name = module.security.service_accounts["renderer-identity"]
     }
   }
 
