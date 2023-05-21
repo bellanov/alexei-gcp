@@ -109,7 +109,22 @@ locals {
         "PORT" : "8080"
       }
     },
-    "renderer" : {
+    "renderer-dev" : {
+      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+      "location" : local.cloud_run_config.location,
+      "service_account" : local.cloud_run_config.renderer_identity,
+      "env" : {
+        "PORT" : "8080"
+      }
+    },"renderer-qa" : {
+      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+      "location" : local.cloud_run_config.location,
+      "service_account" : local.cloud_run_config.renderer_identity,
+      "env" : {
+        "PORT" : "8080"
+      }
+    },
+    "renderer-prod" : {
       "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
       "location" : local.cloud_run_config.location,
       "service_account" : local.cloud_run_config.renderer_identity,
