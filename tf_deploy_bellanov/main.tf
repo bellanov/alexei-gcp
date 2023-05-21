@@ -1,6 +1,8 @@
 // Bellanov L.L.C.
 
-# Providers
+# Provider
+# 
+# Things to simply keep up-to-date...so you don't f*ck yourself over later.
 #================================================
 terraform {
   required_providers {
@@ -18,7 +20,9 @@ provider "google" {
   credentials = var.gcp_creds
 }
 
-# Modules - All things reusable, global, etc.
+# Modules
+#
+# Any possibility of reusing "resource {}" blocks is attempted here.
 #================================================
 
 module "storage" {
@@ -33,7 +37,9 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-# Locals - Constrain resource and module configuration values 
+# Locals
+#
+# Area to constrain / harness various configurations to modules / resources 
 #================================================
 
 locals {
@@ -57,9 +63,7 @@ locals {
   }
 
   cloud_run_config = {
-    "editor_identity" : "editor-identity@${local.project}.iam.gserviceaccount.com",
-    "location" : "us-central1",
-    "renderer_identity" : "renderer-identity@${local.project}.iam.gserviceaccount.com"
+    "location" : "us-central1"
   }
 
   environments = {
@@ -99,7 +103,9 @@ locals {
   }
 }
 
-# Resources - Deploy organization infrastructure
+# Resources
+#
+# Deploy things that were too annoying to put in a module.
 #================================================
 
 // poc-editor
@@ -119,18 +125,18 @@ resource "google_cloud_run_service" "editor" {
         }
 
       }
-      service_account_name = local.cloud_run_config.editor_identity
+      service_account_name = module.security.service_accounts["editor-identity"]
     }
   }
-  
+
   traffic {
     percent         = 100
     latest_revision = true
   }
 
   depends_on = [
-    google_cloud_run_service.renderer,
-    module.security
+    module.security,
+    google_cloud_run_service.renderer
   ]
 }
 
@@ -145,7 +151,7 @@ resource "google_cloud_run_service" "renderer" {
       containers {
         image = each.value.cloud_run_services.renderer.image
       }
-      service_account_name = local.cloud_run_config.renderer_identity
+      service_account_name = module.security.service_accounts["renderer-identity"]
     }
   }
 
