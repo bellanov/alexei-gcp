@@ -12,8 +12,8 @@ resource "google_cloud_run_service" "svc" {
         dynamic "env" {
           for_each = each.value.env
           content {
-            name = "EDITOR_UPSTREAM_RENDER_URL"
-            value = "/put/these/configurations/in/data/files"
+            name = each.key
+            value = each.value
           }
         }
       }
