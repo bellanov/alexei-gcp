@@ -120,7 +120,7 @@ resource "google_cloud_run_service" "editor" {
       service_account_name = module.security.service_accounts["editor-identity"]
     }
   }
-  
+
   traffic {
     percent         = 100
     latest_revision = true
