@@ -113,17 +113,11 @@ locals {
   environments = {
     # Development
     "dev" : {
-      "cloud_run_services" : {
-        "editor" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-          "location" : local.cloud_run_config.location,
-          "service_account" : local.cloud_run_config.editor_identity
-        },
-        "renderer" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-          "location" : local.cloud_run_config.location,
-          "service_account" : local.cloud_run_config.renderer_identity
-        }
+      "editor" : {
+        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
+      },
+      "renderer" : {
+        "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
       }
     },
     # Quality Assurance
