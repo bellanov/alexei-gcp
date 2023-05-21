@@ -15,7 +15,7 @@ resource "google_cloud_run_service" "svc" {
         dynamic "env" {
           for_each = var.env
           content {
-            name = "each.key"
+            name = each.key
             value = "each.value.value"
           }
         }
