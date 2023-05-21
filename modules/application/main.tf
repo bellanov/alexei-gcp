@@ -5,6 +5,7 @@ resource "google_cloud_run_service" "svc" {
   location = each.value.location
 
   dynamic "template" {
+    for_each = var.cloud_run_services
     content = each.value.template
   }
 
