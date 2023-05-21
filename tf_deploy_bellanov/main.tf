@@ -35,7 +35,7 @@ resource "google_cloud_run_service" "editor" {
     spec {
       containers {
 
-        image = "${each.key}:version"
+        image = each.value.editor.image
 
         env {
           name  = "PORT"
@@ -66,7 +66,7 @@ resource "google_cloud_run_service" "renderer" {
     spec {
       containers {
 
-        image = "${each.key}:version"
+        image = each.value.renderer.image
 
         env {
           name  = "PORT"
