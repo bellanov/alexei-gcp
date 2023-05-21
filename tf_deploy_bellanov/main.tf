@@ -1,6 +1,6 @@
 // Bellanov L.L.C.
 
-# Provider
+# Providers
 # 
 # Things to simply keep up-to-date...so you don't f*ck yourself over later.
 #================================================
@@ -39,7 +39,7 @@ module "security" {
 
 # Locals
 #
-# Area to constrain / harness various configurations to modules / resources 
+# Area to constrain / harness various configurations to modules / resources. 
 #================================================
 
 locals {
