@@ -27,19 +27,62 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
-module "cloud_run_services" {
-  source   = "../modules/cloud_run_service"
-  for_each = local.cloud_run_services
 
-  name = each.key
-  env = each.value.env
-  image = each.value.image
-  location = each.value.location
-  service_account = each.value.service_account
 
-  depends_on = [
-    module.storage
-  ]
+resource "google_cloud_run_service" "editor_svc" {
+  for_each = toset(var.environments)
+  name     = var.name
+  location = var.location
+  template {
+    spec {
+      containers {
+
+        image = "${each.key}:v1.2.3"
+
+        env {
+          name  = "PORT"
+          value = "8080"
+        }
+
+        env {
+          name  = "EDITOR_UPSTREAM_RENDER_URL"
+          value = "/why/not/just/do/this/to/begin/with"
+        }
+
+      }
+
+      service_account_name = var.service_account
+    }
+  }
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
+resource "google_cloud_run_service" "renderer_svc" {
+  for_each = local.environments
+  name     = var.name
+  location = var.location
+  template {
+    spec {
+      containers {
+
+        image = "${each.key}:v1.2.3"
+
+        env {
+          name  = "PORT"
+          value = "8080"
+        }
+
+      }
+
+      service_account_name = var.service_account
+    }
+  }
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
 }
 
 locals {
@@ -50,10 +93,6 @@ locals {
 
   security = {
     "service_accounts" : {
-      "cloudbuild" : {
-        "display_name" : "Cloud Build User.",
-        "service_account" : "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com"
-      },
       "renderer" : {
         "display_name" : "Service identity of the Renderer (Backend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
@@ -72,74 +111,36 @@ locals {
     "renderer_identity" : "renderer-identity@${local.project}.iam.gserviceaccount.com"
   }
 
-  cloud_run_services = {
-    "editor-dev" : {
-      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-      "location" : local.cloud_run_config.location,
-      "service_account" : local.cloud_run_config.editor_identity,
-      "env" : {
-        "EDITOR_UPSTREAM_RENDER_URL" : {
-          "value": "/put/these/configurations/in/data/files"
+  environments = {
+    # Development
+    "dev" : {
+      "cloud_run_services" : {
+        "editor" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
+          "location" : local.cloud_run_config.location,
+          "service_account" : local.cloud_run_config.editor_identity,
+          "env" : {
+            "EDITOR_UPSTREAM_RENDER_URL" : "/put/these/configurations/in/data/files",
+            "PORT" : "8080"
+          }
         },
-        "PORT" : {
-          "value": "8080"
+        "renderer" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
+          "location" : local.cloud_run_config.location,
+          "service_account" : local.cloud_run_config.renderer_identity,
+          "env" : {
+            "PORT" : "8080"
+          }
         }
       }
     },
-    "editor-qa" : {
-      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-      "location" : local.cloud_run_config.location,
-      "service_account" : local.cloud_run_config.editor_identity,
-      "env" : {
-        "EDITOR_UPSTREAM_RENDER_URL" : {
-          "value": "/put/these/configurations/in/data/files"
-        },
-        "PORT" : {
-          "value": "8080"
-        }
-      }
+    # Quality Assurance
+    "qa" : {
+      "cloud_run_services" : {}
     },
-    "editor-prod" : {
-      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1",
-      "location" : local.cloud_run_config.location,
-      "service_account" : local.cloud_run_config.editor_identity,
-      "env" : {
-        "EDITOR_UPSTREAM_RENDER_URL" : {
-          "value": "/put/these/configurations/in/data/files"
-        },
-        "PORT" : {
-          "value": "8080"
-        }
-      }
-    },
-    "renderer-dev" : {
-      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-      "location" : local.cloud_run_config.location,
-      "service_account" : local.cloud_run_config.renderer_identity,
-      "env" : {
-        "PORT" : {
-          "value": "8080"
-        }
-      }
-    },"renderer-qa" : {
-      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-      "location" : local.cloud_run_config.location,
-      "service_account" : local.cloud_run_config.renderer_identity,
-      "env" : {
-        "PORT" : {
-          "value": "8080"
-        }
-      }
-    },
-    "renderer-prod" : {
-      "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1",
-      "location" : local.cloud_run_config.location,
-      "service_account" : local.cloud_run_config.renderer_identity,
-      "env" : {
-        "PORT" : {
-          "value": "8080"
-        }
-      }
+    # Production
+    "prod" : {
+      "cloud_run_services" : {}
     }
   }
 
