@@ -119,9 +119,10 @@ data "google_iam_policy" "noauth" {
 }
 
 // poc-editor
+//=====================
 resource "google_cloud_run_service" "editor" {
   for_each = local.environments
-  name     = "editor-svc-${each.key}"
+  name     = "editor-ui-${each.key}"
   location = local.cloud_run_config.location
 
   template {
@@ -159,7 +160,16 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
   policy_data = data.google_iam_policy.noauth.policy_data
 }
 
+resource "google_cloud_run_service_iam_member" "editor_invokes_renderer" {
+  for_each = local.environments
+  location = google_cloud_run_service.renderer[each.key].location
+  service  = google_cloud_run_service.renderer[each.key].name
+  role     = "roles/run.invoker"
+  member   = "serviceAccount:${module.security.service_accounts["editor-identity"]}"
+}
+
 // poc-renderer
+//=====================
 resource "google_cloud_run_service" "renderer" {
   for_each = local.environments
   name     = "renderer-svc-${each.key}"
