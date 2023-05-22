@@ -121,7 +121,7 @@ resource "google_cloud_run_service" "editor" {
 
         env {
           name  = "EDITOR_UPSTREAM_RENDER_URL"
-          value = google_cloud_run_service.renderer.status[0].url
+          value = google_cloud_run_service.renderer[each.key].status[0].url
         }
 
       }
