@@ -161,6 +161,7 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
 }
 
 resource "google_cloud_run_service_iam_member" "editor_invokes_renderer" {
+  for_each = local.environments
   location = google_cloud_run_service.renderer[each.key].location
   service  = google_cloud_run_service.renderer[each.key].name
   role     = "roles/run.invoker"
