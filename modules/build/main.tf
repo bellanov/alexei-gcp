@@ -32,7 +32,6 @@ resource "google_cloudbuild_trigger" "build" {
     owner = "bellanov"
 
     push {
-      branch = ""
       invert_regex = false
       tag = ".*"
     }
