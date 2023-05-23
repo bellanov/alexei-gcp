@@ -22,19 +22,20 @@
 # }
 
 resource "google_cloudbuild_trigger" "build" {
-  name        = "manual-build"
+  name        = "svelte-template"
+  description = "Svelte development template."
+  filename    = "cloudbuild.yaml"
+  service_account = "projects/-/serviceAccounts/cloud-build@bellanov-1682390142.iam.gserviceaccount.com"
 
-  source_to_build {
-    uri       = "https://hashicorp/terraform-provider-google-beta"
-    ref       = "refs/heads/main"
-    repo_type = "GITHUB"
-  }
+  github {
+    name = "svelte-template"
+    owner = "bellanov"
 
-  git_file_source {
-    path      = "cloudbuild.yaml"
-    uri       = "https://hashicorp/terraform-provider-google-beta"
-    revision  = "refs/heads/main"
-    repo_type = "GITHUB"
+    push {
+      invert_regex = false
+      tag = ".*"
+    }
+
   }
 
 }
