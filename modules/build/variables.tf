@@ -1,3 +1,3 @@
 
-variable "builds" {}
-variable "cloudbuild_identity" {}
+# variable "builds" {}
+# variable "cloudbuild_identity" {}

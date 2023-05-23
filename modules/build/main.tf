@@ -21,7 +21,7 @@
 #   policy_data        = data.google_iam_policy.terraform.policy_data
 # }
 
-resource "google_cloudbuild_trigger" "manual-trigger" {
+resource "google_cloudbuild_trigger" "build" {
   name        = "manual-build"
 
   source_to_build {
@@ -36,13 +36,5 @@ resource "google_cloudbuild_trigger" "manual-trigger" {
     revision  = "refs/heads/main"
     repo_type = "GITHUB"
   }
-
-
-  // If this is set on a build, it will become pending when it is run, 
-  // and will need to be explicitly approved to start.
-  approval_config {
-     approval_required = true 
-  }
-
 
 }
