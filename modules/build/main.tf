@@ -21,7 +21,7 @@
 #   policy_data        = data.google_iam_policy.terraform.policy_data
 # }
 
-resource "google_cloudbuild_trigger" "manual-trigger" {
+resource "google_cloudbuild_trigger" "build" {
   name        = "manual-build"
 
   source_to_build {
