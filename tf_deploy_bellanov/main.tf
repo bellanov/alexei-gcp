@@ -37,6 +37,10 @@ module "security" {
   terraform_identity = local.security.terraform_identity
 }
 
+module "build" {
+  source             = "../modules/build"
+}
+
 # Locals
 #
 # Area to constrain / harness various configurations to modules / resources. 
