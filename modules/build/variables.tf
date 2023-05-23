@@ -1,3 +1,3 @@
 
-variable "service_accounts" {}
-variable "terraform_identity" {}
+variable "builds" {}
+variable "cloudbuild_identity" {}

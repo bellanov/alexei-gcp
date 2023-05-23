@@ -1,6 +1,6 @@
 
-resource "google_service_account" "sa" {
-  for_each     = var.service_accounts
+resource "google_service_account" "build" {
+  for_each     = var.builds
   account_id   = "${each.key}-identity"
   display_name = each.value.display_name
 }
