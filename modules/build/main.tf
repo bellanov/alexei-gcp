@@ -24,6 +24,7 @@
 resource "google_cloudbuild_trigger" "build" {
   name        = "svelte-template"
   description = "Svelte development template."
+  filename    = "cloudbuild.yaml"
   service_account = "projects/-/serviceAccounts/cloud-build@bellanov-1682390142.iam.gserviceaccount.com"
 
   github {
