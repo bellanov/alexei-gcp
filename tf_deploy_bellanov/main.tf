@@ -166,6 +166,10 @@ resource "google_cloud_run_service_iam_member" "editor_invokes_renderer" {
   service  = google_cloud_run_service.renderer[each.key].name
   role     = "roles/run.invoker"
   member   = "serviceAccount:${module.security.service_accounts["editor-identity"]}"
+
+  depends_on = [
+    module.security
+  ]
 }
 
 // poc-renderer

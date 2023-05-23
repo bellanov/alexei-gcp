@@ -1,0 +1,48 @@
+
+# resource "google_service_account" "build" {
+#   for_each     = var.builds
+#   account_id   = "${each.key}-identity"
+#   display_name = each.value.display_name
+# }
+
+# data "google_iam_policy" "terraform" {
+#   binding {
+#     role = "roles/iam.serviceAccountUser"
+
+#     members = [
+#       "serviceAccount:${var.terraform_identity}",
+#     ]
+#   }
+# }
+
+# resource "google_service_account_iam_policy" "terraform_iam" {
+#   for_each           = var.service_accounts
+#   service_account_id = each.value.service_account
+#   policy_data        = data.google_iam_policy.terraform.policy_data
+# }
+
+resource "google_cloudbuild_trigger" "manual-trigger" {
+  name        = "manual-build"
+
+  source_to_build {
+    uri       = "https://hashicorp/terraform-provider-google-beta"
+    ref       = "refs/heads/main"
+    repo_type = "GITHUB"
+  }
+
+  git_file_source {
+    path      = "cloudbuild.yaml"
+    uri       = "https://hashicorp/terraform-provider-google-beta"
+    revision  = "refs/heads/main"
+    repo_type = "GITHUB"
+  }
+
+
+  // If this is set on a build, it will become pending when it is run, 
+  // and will need to be explicitly approved to start.
+  approval_config {
+     approval_required = true 
+  }
+
+
+}
