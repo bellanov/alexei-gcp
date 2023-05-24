@@ -61,7 +61,7 @@ locals {
   security = {
     "service_accounts" : {
       "cloudbuild" : {
-        "display_name" : "Service identity of the Cloud Build User.",
+        "display_name" : "Service identity of the (Cloud Build) User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
       },
       "editor" : {
