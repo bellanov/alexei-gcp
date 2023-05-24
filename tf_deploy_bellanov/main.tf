@@ -93,22 +93,19 @@ locals {
           "filename": "build.yaml",
           "description": "Go development template.",
           "owner": local.build_config.owner,
-          "tag": ".*",
-          "service_account": local.build_config.service_account
+          "tag": ".*"
         },
         "python-template": {
           "filename": "build.yaml",
           "description": "Python development template.",
           "owner": local.build_config.owner,
-          "tag": ".*",
-          "service_account": local.build_config.service_account
+          "tag": ".*"
         },
         "svelte-template": {
           "filename": "build.yaml",
           "description": "Svelte development template.",
           "owner": local.build_config.owner,
-          "tag": ".*",
-          "service_account": local.build_config.service_account
+          "tag": ".*"
         }
       }
       "cloud_run_services" : {
