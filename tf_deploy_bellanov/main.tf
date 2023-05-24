@@ -38,7 +38,13 @@ module "security" {
 }
 
 module "build" {
+  for_each           = local.builds
   source             = "../modules/build"
+  cloudbuild_identity = module.security.service_accounts["cloudbuild-identity"]
+
+  depends_on = [
+    module.security
+  ]
 }
 
 # Locals
@@ -54,6 +60,10 @@ locals {
 
   security = {
     "service_accounts" : {
+      "cloudbuild" : {
+        "display_name" : "Cloud Build User.",
+        "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
+      },
       "renderer" : {
         "display_name" : "Service identity of the Renderer (Backend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
@@ -64,6 +74,35 @@ locals {
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
+  }
+
+  build_config = {
+    "owner": "bellanov",
+    "service_account": "cloud-build@${local.project}.iam.gserviceaccount.com"
+  }
+
+  builds = {
+    "go-template": {
+      "filename": "build.yaml",
+      "description": "Go development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*",
+      "service_account": local.build_config.service_account
+    },
+    "python-template": {
+      "filename": "build.yaml",
+      "description": "Python development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*",
+      "service_account": local.build_config.service_account
+    },
+    "svelte-template": {
+      "filename": "build.yaml",
+      "description": "Svelte development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*",
+      "service_account": local.build_config.service_account
+    },
   }
 
   cloud_run_config = {
