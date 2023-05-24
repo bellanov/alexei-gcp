@@ -22,9 +22,9 @@
 # }
 
 resource "google_cloudbuild_trigger" "build" {
-  name        = "svelte-template"
-  description = "Svelte development template."
-  filename    = "cloudbuild.yaml"
+  name        = var.name
+  description = var.description
+  filename    = var.filename
   service_account = var.service_account
 
   github {

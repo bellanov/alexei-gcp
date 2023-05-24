@@ -40,6 +40,9 @@ module "security" {
 module "build" {
   source             = "../modules/build"
   for_each           = local.builds
+  name = each.key
+  description = each.value.description
+  filename = each.value.filename
   service_account    = local.security.service_accounts.cloudbuild.service_account
 
   depends_on = [
