@@ -39,8 +39,7 @@ module "security" {
 
 module "build" {
   source             = "../modules/build"
-  for_each           = local.environments
-  builds              = each.value.builds
+  for_each           = local.builds
   cloudbuild_identity = local.security.cloudbuild_identity
 
   depends_on = [
@@ -82,29 +81,31 @@ locals {
     "location" : "us-central1"
   }
 
+  
+  builds = {
+    "go-template": {
+      "filename": "build.yaml",
+      "description": "Go development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*"
+    },
+    "python-template": {
+      "filename": "build.yaml",
+      "description": "Python development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*"
+    },
+    "svelte-template": {
+      "filename": "build.yaml",
+      "description": "Svelte development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*"
+    }
+  }
+
   environments = {
     # Development
     "dev" : {
-      "builds" : {
-        "go-template": {
-          "filename": "build.yaml",
-          "description": "Go development template.",
-          "owner": local.build_config.owner,
-          "tag": ".*"
-        },
-        "python-template": {
-          "filename": "build.yaml",
-          "description": "Python development template.",
-          "owner": local.build_config.owner,
-          "tag": ".*"
-        },
-        "svelte-template": {
-          "filename": "build.yaml",
-          "description": "Svelte development template.",
-          "owner": local.build_config.owner,
-          "tag": ".*"
-        }
-      }
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
@@ -116,7 +117,6 @@ locals {
     },
     # Quality Assurance
     "qa" : {
-      "builds" : {},
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
@@ -128,7 +128,6 @@ locals {
     },
     # Production
     "prod" : {
-      "builds" : {},
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
