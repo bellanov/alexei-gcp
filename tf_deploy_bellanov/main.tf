@@ -38,8 +38,9 @@ module "security" {
 }
 
 module "build" {
-  for_each           = local.builds
   source             = "../modules/build"
+  for_each           = local.environments
+  builds              = each.value.builds
   cloudbuild_identity = module.security.service_accounts["cloudbuild-identity"]
 
   depends_on = [
@@ -78,31 +79,6 @@ locals {
 
   build_config = {
     "owner": "bellanov",
-    "service_account": "cloud-build@${local.project}.iam.gserviceaccount.com"
-  }
-
-  builds = {
-    "go-template": {
-      "filename": "build.yaml",
-      "description": "Go development template.",
-      "owner": local.build_config.owner,
-      "tag": ".*",
-      "service_account": local.build_config.service_account
-    },
-    "python-template": {
-      "filename": "build.yaml",
-      "description": "Python development template.",
-      "owner": local.build_config.owner,
-      "tag": ".*",
-      "service_account": local.build_config.service_account
-    },
-    "svelte-template": {
-      "filename": "build.yaml",
-      "description": "Svelte development template.",
-      "owner": local.build_config.owner,
-      "tag": ".*",
-      "service_account": local.build_config.service_account
-    },
   }
 
   cloud_run_config = {
@@ -112,6 +88,29 @@ locals {
   environments = {
     # Development
     "dev" : {
+      "builds" : {
+        "go-template": {
+          "filename": "build.yaml",
+          "description": "Go development template.",
+          "owner": local.build_config.owner,
+          "tag": ".*",
+          "service_account": local.build_config.service_account
+        },
+        "python-template": {
+          "filename": "build.yaml",
+          "description": "Python development template.",
+          "owner": local.build_config.owner,
+          "tag": ".*",
+          "service_account": local.build_config.service_account
+        },
+        "svelte-template": {
+          "filename": "build.yaml",
+          "description": "Svelte development template.",
+          "owner": local.build_config.owner,
+          "tag": ".*",
+          "service_account": local.build_config.service_account
+        }
+      }
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
@@ -123,6 +122,7 @@ locals {
     },
     # Quality Assurance
     "qa" : {
+      "builds" : {},
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
@@ -134,6 +134,7 @@ locals {
     },
     # Production
     "prod" : {
+      "builds" : {},
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
