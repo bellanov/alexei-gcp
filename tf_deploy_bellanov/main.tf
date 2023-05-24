@@ -38,14 +38,15 @@ module "security" {
 }
 
 module "build" {
-  source             = "../modules/build"
-  for_each           = local.builds
+  source   = "../modules/build"
+  for_each = local.builds
 
-  name = each.key
-  description = each.value.description
-  project = local.project
-  filename = each.value.filename
-  service_account    = local.security.service_accounts.cloudbuild.service_account
+  description     = each.value.description
+  filename        = each.value.filename
+  name            = each.key
+  owner           = each.value.owner
+  project         = local.project
+  service_account = local.security.service_accounts.cloudbuild.service_account
 
   depends_on = [
     module.security
@@ -82,7 +83,7 @@ locals {
   }
 
   build_config = {
-    "owner": "bellanov",
+    "owner" : "bellanov",
   }
 
   cloud_run_config = {
@@ -90,23 +91,23 @@ locals {
   }
 
   builds = {
-    "go-template": {
-      "filename": "build.yaml",
-      "description": "Go development template.",
-      "owner": local.build_config.owner,
-      "tag": ".*"
+    "go-template" : {
+      "filename" : "build.yaml",
+      "description" : "Go development template.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
     },
-    "python-template": {
-      "filename": "build.yaml",
-      "description": "Python development template.",
-      "owner": local.build_config.owner,
-      "tag": ".*"
+    "python-template" : {
+      "filename" : "build.yaml",
+      "description" : "Python development template.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
     },
-    "svelte-template": {
-      "filename": "build.yaml",
-      "description": "Svelte development template.",
-      "owner": local.build_config.owner,
-      "tag": ".*"
+    "svelte-template" : {
+      "filename" : "build.yaml",
+      "description" : "Svelte development template.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
     }
   }
 
