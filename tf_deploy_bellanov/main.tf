@@ -81,7 +81,6 @@ locals {
     "location" : "us-central1"
   }
 
-  
   builds = {
     "go-template": {
       "filename": "build.yaml",
