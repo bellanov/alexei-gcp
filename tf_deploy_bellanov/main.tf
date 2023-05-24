@@ -91,19 +91,36 @@ locals {
   }
 
   builds = {
+    "cloudrun-poc-editor-2" : {
+      "name" : "cloudrun-poc-editor",
+      "filename" : "build.yaml",
+      "description" : "Go development template.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    },
+    "cloudrun-poc-renderer-2" : {
+      "name" : "cloudrun-poc-renderer",
+      "filename" : "build.yaml",
+      "description" : "Go development template.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    },
     "go-template" : {
+      "name" : "go-template",
       "filename" : "build.yaml",
       "description" : "Go development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "python-template" : {
+      "name" : "python-template"
       "filename" : "build.yaml",
       "description" : "Python development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "svelte-template" : {
+      "name" : "svelte-template"
       "filename" : "build.yaml",
       "description" : "Svelte development template.",
       "owner" : local.build_config.owner,
