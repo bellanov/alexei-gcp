@@ -40,7 +40,7 @@ module "security" {
 module "build" {
   source             = "../modules/build"
   for_each           = local.builds
-  cloudbuild_identity = local.security.cloudbuild_identity
+  cloudbuild_identity = module.security.service_accounts["cloudbuild-identity"]
 
   depends_on = [
     module.security
@@ -59,15 +59,18 @@ locals {
   location = "US"
 
   security = {
-    "cloudbuild_identity" : "cloud-build@${local.project}.iam.gserviceaccount.com",
     "service_accounts" : {
-      "renderer" : {
-        "display_name" : "Service identity of the Renderer (Backend) service.",
-        "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
+      "cloudbuild" : {
+        "display_name" : "Service identity of the Cloud Build User.",
+        "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
       },
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
+      },
+      "renderer" : {
+        "display_name" : "Service identity of the Renderer (Backend) service.",
+        "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
