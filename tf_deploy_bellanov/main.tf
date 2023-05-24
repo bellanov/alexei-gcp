@@ -40,7 +40,7 @@ module "security" {
 module "build" {
   source             = "../modules/build"
   for_each           = local.builds
-  cloudbuild_identity = module.security.service_accounts["cloudbuild-identity"]
+  service_account    = module.security.service_accounts["cloudbuild-identity"]
 
   depends_on = [
     module.security
@@ -61,7 +61,7 @@ locals {
   security = {
     "service_accounts" : {
       "cloudbuild" : {
-        "display_name" : "Service identity of the Cloud Build User.",
+        "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
       },
       "editor" : {
