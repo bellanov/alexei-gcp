@@ -39,6 +39,12 @@ module "security" {
 
 module "build" {
   source             = "../modules/build"
+  for_each           = local.builds
+  cloudbuild_identity = local.security.cloudbuild_identity
+
+  depends_on = [
+    module.security
+  ]
 }
 
 # Locals
@@ -53,6 +59,7 @@ locals {
   location = "US"
 
   security = {
+    "cloudbuild_identity" : "cloud-build@${local.project}.iam.gserviceaccount.com",
     "service_accounts" : {
       "renderer" : {
         "display_name" : "Service identity of the Renderer (Backend) service.",
@@ -66,8 +73,33 @@ locals {
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
   }
 
+  build_config = {
+    "owner": "bellanov",
+  }
+
   cloud_run_config = {
     "location" : "us-central1"
+  }
+
+  builds = {
+    "go-template": {
+      "filename": "build.yaml",
+      "description": "Go development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*"
+    },
+    "python-template": {
+      "filename": "build.yaml",
+      "description": "Python development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*"
+    },
+    "svelte-template": {
+      "filename": "build.yaml",
+      "description": "Svelte development template.",
+      "owner": local.build_config.owner,
+      "tag": ".*"
+    }
   }
 
   environments = {
