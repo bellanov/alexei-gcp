@@ -40,7 +40,7 @@ module "security" {
 module "build" {
   source             = "../modules/build"
   for_each           = local.builds
-  service_account    = module.security.service_accounts["cloudbuild-identity"]
+  service_account    = local.security.service_accounts.cloudbuild.service_account
 
   depends_on = [
     module.security
