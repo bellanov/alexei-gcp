@@ -41,7 +41,7 @@ module "build" {
   source             = "../modules/build"
   for_each           = local.environments
   builds              = each.value.builds
-  cloudbuild_identity = module.security.service_accounts["cloudbuild-identity"]
+  cloudbuild_identity = local.security.cloudbuild_identity
 
   depends_on = [
     module.security
@@ -60,11 +60,8 @@ locals {
   location = "US"
 
   security = {
+    "cloudbuild_identity" : "cloud-build@${local.project}.iam.gserviceaccount.com",
     "service_accounts" : {
-      "cloudbuild" : {
-        "display_name" : "Cloud Build User.",
-        "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
-      },
       "renderer" : {
         "display_name" : "Service identity of the Renderer (Backend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
