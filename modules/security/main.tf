@@ -21,7 +21,7 @@ resource "google_service_account_iam_policy" "terraform_iam" {
   policy_data        = data.google_iam_policy.terraform.policy_data
 }
 
-resource "google_service_account_iam_policy" "terraform_invokes_cloudbuild" {
+resource "google_service_account_iam_policy" "terraform_iam_cloudbuild" {
   service_account_id = var.cloudbuild_identity
   policy_data        = data.google_iam_policy.terraform.policy_data
 }
