@@ -41,8 +41,10 @@ module "security" {
 
 module "role" {
   source              = "../modules/role"
+  for_each            = local.security.service_accounts
   project             = local.project
-  service_accounts    = local.security.service_accounts
+  service_account     = each.key
+  roles               = each.value.roles 
 }
 
 module "build" {
