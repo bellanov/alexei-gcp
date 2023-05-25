@@ -95,14 +95,14 @@ locals {
     "cloudrun-poc-editor-2" : {
       "repository" : "cloudrun-poc-editor",
       "filename" : "build.yaml",
-      "description" : "Go development template.",
+      "description" : "Cloud Run Service PoC.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "cloudrun-poc-renderer-2" : {
       "repository" : "cloudrun-poc-renderer",
       "filename" : "build.yaml",
-      "description" : "Go development template.",
+      "description" : "Cloud Run Service PoC.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },

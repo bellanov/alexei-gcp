@@ -7,7 +7,7 @@ resource "google_cloudbuild_trigger" "build" {
   project         = var.project
 
   github {
-    name  = var.name
+    name  = var.repository
     owner = var.owner
 
     push {
