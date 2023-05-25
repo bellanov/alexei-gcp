@@ -33,8 +33,10 @@ module "storage" {
 
 module "security" {
   source             = "../modules/security"
+  project = local.project
   service_accounts   = local.security.service_accounts
   terraform_identity = local.security.terraform_identity
+  cloudbuild_identity = local.security.service_accounts.cloudbuild.email
 }
 
 module "build" {
@@ -69,7 +71,8 @@ locals {
     "service_accounts" : {
       "cloudbuild" : {
         "display_name" : "Cloud Build User.",
-        "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
+        "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
+        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
       },
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service.",
