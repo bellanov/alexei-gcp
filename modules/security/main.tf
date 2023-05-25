@@ -3,7 +3,7 @@ resource "google_service_account" "sa" {
   for_each     = var.service_accounts
   account_id   = "${each.key}-identity"
   display_name = each.value.display_name
-  project = var.project
+  project      = var.project
 }
 
 data "google_iam_policy" "terraform" {
@@ -29,7 +29,7 @@ resource "google_project_iam_member" "cloudbuild" {
     "roles/logging.logWriter",
     "roles/storage.admin",
   ])
-  role = each.key
-  member = "serviceAccount:${var.cloudbuild_identity}"
+  role    = each.key
+  member  = "serviceAccount:${var.cloudbuild_identity}"
   project = var.project
 }
