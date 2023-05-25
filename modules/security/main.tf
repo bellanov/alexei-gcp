@@ -3,6 +3,7 @@ resource "google_service_account" "sa" {
   for_each     = var.service_accounts
   account_id   = "${each.key}-identity"
   display_name = each.value.display_name
+  project = var.project
 }
 
 data "google_iam_policy" "terraform" {
@@ -21,14 +22,14 @@ resource "google_service_account_iam_policy" "terraform_iam" {
   policy_data        = data.google_iam_policy.terraform.policy_data
 }
 
-# resource "google_project_iam_member" "member-role" {
-#   for_each = toset([
-#     "roles/cloudsql.admin",
-#     "roles/secretmanager.secretAccessor",
-#     "roles/datastore.owner",
-#     "roles/storage.admin",
-#   ])
-#   role = each.key
-#   member = "serviceAccount:${google_service_account.service_account_1.email}"
-#   project = my_project_id
-# }
+resource "google_project_iam_member" "cloudbuild" {
+  for_each = toset([
+    "roles/artifactregistry.writer",
+    "roles/cloudbuild.builds.editor",
+    "roles/logging.logWriter",
+    "roles/storage.admin",
+  ])
+  role = each.key
+  member = "serviceAccount:${google_service_account.service_account_1.email}"
+  project = var.project
+}
