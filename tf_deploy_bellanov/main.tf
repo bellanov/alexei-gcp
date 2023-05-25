@@ -78,17 +78,20 @@ locals {
   security = {
     "service_accounts" : {
       "cloudbuild" : {
+        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
         "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
-        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
+        "roles": []
       },
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service.",
-        "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
+        "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com",
+        "roles": []
       },
       "renderer" : {
         "display_name" : "Service identity of the Renderer (Backend) service.",
-        "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
+        "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com",
+        "roles": []
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
