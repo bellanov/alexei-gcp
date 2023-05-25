@@ -33,7 +33,7 @@ module "storage" {
 
 module "security" {
   source             = "../modules/security"
-  project = var.project
+  project = local.project
   service_accounts   = local.security.service_accounts
   terraform_identity = local.security.terraform_identity
   cloudbuild_identity = local.security.service_accounts.cloudbuild.email
