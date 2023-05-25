@@ -77,7 +77,7 @@ locals {
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com",
-    "cloudbuild_identity" : "cloud-build@${local.project}.iam.gserviceaccount.com"
+    "cloudbuild_identity" : "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com"
   }
 
   build_config = {
