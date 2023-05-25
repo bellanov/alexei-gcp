@@ -47,7 +47,7 @@ module "build" {
   owner           = each.value.owner
   project         = local.project
   repository      = each.value.repository
-  service_account = local.security.service_accounts.cloudbuild.service_account
+  service_account = local.security.cloudbuild_identity
 
   depends_on = [
     module.security
@@ -67,10 +67,6 @@ locals {
 
   security = {
     "service_accounts" : {
-      "cloudbuild" : {
-        "display_name" : "Cloud Build User.",
-        "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
-      },
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
@@ -80,7 +76,8 @@ locals {
         "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
       }
     },
-    "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
+    "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com",
+    "cloudbuild_identity" : "cloud-build@${local.project}.iam.gserviceaccount.com"
   }
 
   build_config = {
