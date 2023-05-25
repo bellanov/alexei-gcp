@@ -80,7 +80,8 @@ locals {
         "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
       }
     },
-    "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
+    "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com",
+    "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
   }
 
   build_config = {
