@@ -46,7 +46,8 @@ module "build" {
   name            = each.key
   owner           = each.value.owner
   project         = local.project
-  service_account = local.security.service_accounts.cloudbuild.service_account
+  repository      = each.value.repository
+  service_account = local.security.cloudbuild_identity
 
   depends_on = [
     module.security
@@ -66,10 +67,6 @@ locals {
 
   security = {
     "service_accounts" : {
-      "cloudbuild" : {
-        "display_name" : "Cloud Build User.",
-        "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
-      },
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
@@ -79,7 +76,8 @@ locals {
         "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
       }
     },
-    "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
+    "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com",
+    "cloudbuild_identity" : "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com"
   }
 
   build_config = {
@@ -91,19 +89,36 @@ locals {
   }
 
   builds = {
+    "cloudrun-poc-editor-2" : {
+      "repository" : "cloudrun-poc-editor",
+      "filename" : "build.yaml",
+      "description" : "Cloud Run Service PoC.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    },
+    "cloudrun-poc-renderer-2" : {
+      "repository" : "cloudrun-poc-renderer",
+      "filename" : "build.yaml",
+      "description" : "Cloud Run Service PoC.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    },
     "go-template" : {
+      "repository" : "go-template",
       "filename" : "build.yaml",
       "description" : "Go development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "python-template" : {
+      "repository" : "python-template"
       "filename" : "build.yaml",
       "description" : "Python development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "svelte-template" : {
+      "repository" : "svelte-template"
       "filename" : "build.yaml",
       "description" : "Svelte development template.",
       "owner" : local.build_config.owner,
