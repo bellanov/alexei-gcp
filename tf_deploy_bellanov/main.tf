@@ -81,7 +81,12 @@ locals {
         "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
         "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
-        "roles": []
+        "roles": [
+          "roles/artifactregistry.writer",
+          "roles/cloudbuild.builds.editor",
+          "roles/logging.logWriter",
+          "roles/storage.admin",
+        ]
       },
       "editor" : {
         "display_name" : "Service identity of the Editor (Frontend) service.",
