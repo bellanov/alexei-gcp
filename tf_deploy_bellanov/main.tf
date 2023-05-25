@@ -35,6 +35,7 @@ module "security" {
   source             = "../modules/security"
   service_accounts   = local.security.service_accounts
   terraform_identity = local.security.terraform_identity
+  cloudbuild_identity = local.security.cloudbuild_identity.account_id
 }
 
 module "build" {
@@ -47,7 +48,7 @@ module "build" {
   owner           = each.value.owner
   project         = local.project
   repository      = each.value.repository
-  service_account = local.security.cloudbuild_identity
+  service_account = local.security.cloudbuild_identity.account_id
 
   depends_on = [
     module.security
@@ -77,7 +78,10 @@ locals {
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com",
-    "cloudbuild_identity" : "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com"
+    "cloudbuild_identity" : {
+      "account_id" : "projects/${local.project}/serviceAccounts/cloud-build@${local.project}.iam.gserviceaccount.com",
+      "email" : "cloud-build@${local.project}.iam.gserviceaccount.com"
+    }
   }
 
   build_config = {
