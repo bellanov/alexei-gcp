@@ -30,6 +30,6 @@ resource "google_project_iam_member" "cloudbuild" {
     "roles/storage.admin",
   ])
   role = each.key
-  member = "serviceAccount:${google_service_account.service_account_1.email}"
+  member = "serviceAccount:${var.cloudbuild_identity}"
   project = var.project
 }

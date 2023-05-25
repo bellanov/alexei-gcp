@@ -36,7 +36,7 @@ module "security" {
   project = var.project
   service_accounts   = local.security.service_accounts
   terraform_identity = local.security.terraform_identity
-  # cloudbuild_identity = local.security.terraform_identity
+  cloudbuild_identity = local.security.service_accounts.cloudbuild.email
 }
 
 module "build" {
