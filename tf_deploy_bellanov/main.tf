@@ -46,6 +46,7 @@ module "build" {
   name            = each.key
   owner           = each.value.owner
   project         = local.project
+  repository      = each.value.repository
   service_account = local.security.service_accounts.cloudbuild.service_account
 
   depends_on = [
@@ -92,35 +93,35 @@ locals {
 
   builds = {
     "cloudrun-poc-editor-2" : {
-      "name" : "cloudrun-poc-editor",
+      "repository" : "cloudrun-poc-editor",
       "filename" : "build.yaml",
       "description" : "Go development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "cloudrun-poc-renderer-2" : {
-      "name" : "cloudrun-poc-renderer",
+      "repository" : "cloudrun-poc-renderer",
       "filename" : "build.yaml",
       "description" : "Go development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "go-template" : {
-      "name" : "go-template",
+      "repository" : "go-template",
       "filename" : "build.yaml",
       "description" : "Go development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "python-template" : {
-      "name" : "python-template"
+      "repository" : "python-template"
       "filename" : "build.yaml",
       "description" : "Python development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "svelte-template" : {
-      "name" : "svelte-template"
+      "repository" : "svelte-template"
       "filename" : "build.yaml",
       "description" : "Svelte development template.",
       "owner" : local.build_config.owner,
