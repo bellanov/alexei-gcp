@@ -32,10 +32,10 @@ module "storage" {
 }
 
 module "security" {
-  source             = "../modules/security"
-  project = local.project
-  service_accounts   = local.security.service_accounts
-  terraform_identity = local.security.terraform_identity
+  source              = "../modules/security"
+  project             = local.project
+  service_accounts    = local.security.service_accounts
+  terraform_identity  = local.security.terraform_identity
   cloudbuild_identity = local.security.service_accounts.cloudbuild.email
 }
 
@@ -95,14 +95,14 @@ locals {
   }
 
   builds = {
-    "cloudrun-poc-editor-2" : {
+    "cloudrun-poc-editor" : {
       "repository" : "cloudrun-poc-editor",
       "filename" : "build.yaml",
       "description" : "Cloud Run Service PoC.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
-    "cloudrun-poc-renderer-2" : {
+    "cloudrun-poc-renderer" : {
       "repository" : "cloudrun-poc-renderer",
       "filename" : "build.yaml",
       "description" : "Cloud Run Service PoC.",
