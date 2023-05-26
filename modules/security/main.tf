@@ -21,15 +21,3 @@ resource "google_service_account_iam_policy" "terraform_iam" {
   service_account_id = each.value.service_account
   policy_data        = data.google_iam_policy.terraform.policy_data
 }
-
-resource "google_project_iam_member" "cloudbuild" {
-  for_each = toset([
-    "roles/artifactregistry.writer",
-    "roles/cloudbuild.builds.editor",
-    "roles/logging.logWriter",
-    "roles/storage.admin",
-  ])
-  role    = each.key
-  member  = "serviceAccount:${var.cloudbuild_identity}"
-  project = var.project
-}
