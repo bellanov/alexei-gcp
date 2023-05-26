@@ -38,9 +38,15 @@ locals {
   security = {
     "service_accounts" : {
       "cloudbuild" : {
+        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
         "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
-        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
+        "roles": [
+          "roles/artifactregistry.writer",
+          "roles/cloudbuild.builds.editor",
+          "roles/logging.logWriter",
+          "roles/storage.admin",
+        ]
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
