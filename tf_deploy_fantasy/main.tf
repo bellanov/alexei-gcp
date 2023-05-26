@@ -29,6 +29,14 @@ module "security" {
   cloudbuild_identity = local.security.service_accounts.cloudbuild.email
 }
 
+module "role" {
+  source              = "../modules/role"
+  for_each            = local.security.service_accounts
+  project             = local.project
+  service_account     = each.value.email
+  roles               = each.value.roles 
+}
+
 locals {
   region   = "us-east1"
   project  = "fantasyace-1682390017"
@@ -38,9 +46,15 @@ locals {
   security = {
     "service_accounts" : {
       "cloudbuild" : {
+        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
         "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
-        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
+        "roles": [
+          "roles/artifactregistry.writer",
+          "roles/cloudbuild.builds.editor",
+          "roles/logging.logWriter",
+          "roles/storage.admin",
+        ]
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
