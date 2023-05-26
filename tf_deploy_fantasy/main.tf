@@ -29,6 +29,14 @@ module "security" {
   cloudbuild_identity = local.security.service_accounts.cloudbuild.email
 }
 
+module "role" {
+  source              = "../modules/role"
+  for_each            = local.security.service_accounts
+  project             = local.project
+  service_account     = each.value.email
+  roles               = each.value.roles 
+}
+
 locals {
   region   = "us-east1"
   project  = "fantasyace-1682390017"
