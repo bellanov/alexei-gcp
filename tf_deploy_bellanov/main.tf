@@ -39,6 +39,14 @@ module "security" {
   cloudbuild_identity = local.security.service_accounts.cloudbuild.email
 }
 
+module "role" {
+  source              = "../modules/role"
+  for_each            = local.security.service_accounts
+  project             = local.project
+  service_account     = each.value.email
+  roles               = each.value.roles 
+}
+
 module "build" {
   source   = "../modules/build"
   for_each = local.builds
@@ -70,17 +78,27 @@ locals {
   security = {
     "service_accounts" : {
       "cloudbuild" : {
+        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
         "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
-        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
+        "roles": [
+          "roles/artifactregistry.writer",
+          "roles/cloudbuild.builds.editor",
+          "roles/logging.logWriter",
+          "roles/storage.admin",
+        ]
       },
       "editor" : {
+        "email" : "editor-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Service identity of the Editor (Frontend) service.",
-        "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com"
+        "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com",
+        "roles": []
       },
       "renderer" : {
+        "email" : "renderer-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Service identity of the Renderer (Backend) service.",
-        "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com"
+        "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com",
+        "roles": []
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
