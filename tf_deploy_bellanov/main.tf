@@ -226,7 +226,7 @@ resource "google_cloud_run_service" "editor" {
   template {
     spec {
       containers {
-        image = each.value.cloud_run_services.editor.image
+        image = each.value.cloud_run_services["editor"].image
 
         env {
           name  = "EDITOR_UPSTREAM_RENDER_URL"
@@ -280,7 +280,7 @@ resource "google_cloud_run_service" "renderer" {
   template {
     spec {
       containers {
-        image = each.value.cloud_run_services.renderer.image
+        image = each.value.cloud_run_services["renderer"].image
       }
       service_account_name = module.security.service_accounts["renderer-identity"]
     }
