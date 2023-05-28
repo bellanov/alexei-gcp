@@ -98,12 +98,6 @@ locals {
         "display_name" : "Service identity of the Renderer (Backend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com",
         "roles": []
-      },
-      "template" : {
-        "email" : "template-identity@${local.project}.iam.gserviceaccount.com",
-        "display_name" : "Service identity of the Template projects.",
-        "service_account" : "projects/${local.project}/serviceAccounts/template-identity@${local.project}.iam.gserviceaccount.com",
-        "roles": []
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
@@ -283,32 +277,6 @@ resource "google_cloud_run_service" "renderer" {
         image = each.value.cloud_run_services.renderer.image
       }
       service_account_name = module.security.service_accounts["renderer-identity"]
-    }
-  }
-
-  traffic {
-    percent         = 100
-    latest_revision = true
-  }
-
-  depends_on = [
-    module.security
-  ]
-}
-
-// go-template
-//=====================
-resource "google_cloud_run_service" "go_template" {
-  for_each = local.environments
-  name     = "go-template-${each.key}"
-  location = local.cloud_run_config.location
-
-  template {
-    spec {
-      containers {
-        image = each.value.cloud_run_services["go-template"].image
-      }
-      service_account_name = module.security.service_accounts["template-identity"]
     }
   }
 
