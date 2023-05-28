@@ -98,7 +98,7 @@ locals {
         "display_name" : "Service identity of the Template projects.",
         "service_account" : "projects/${local.project}/serviceAccounts/template-identity@${local.project}.iam.gserviceaccount.com",
         "roles": []
-      }
+      },
       "renderer" : {
         "email" : "renderer-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Service identity of the Renderer (Backend) service.",
@@ -308,7 +308,6 @@ resource "google_cloud_run_v2_job" "go_template" {
       containers {
         image = each.value.cloud_run_services["go-template"].image
       }
-      service_account_name = module.security.service_accounts["editor-identity"]
     }
   }
 
