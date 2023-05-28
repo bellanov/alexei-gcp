@@ -93,6 +93,12 @@ locals {
         "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com",
         "roles": []
       },
+      "template" : {
+        "email" : "template-identity@${local.project}.iam.gserviceaccount.com",
+        "display_name" : "Service identity of the Template projects.",
+        "service_account" : "projects/${local.project}/serviceAccounts/template-identity@${local.project}.iam.gserviceaccount.com",
+        "roles": []
+      },
       "renderer" : {
         "email" : "renderer-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Service identity of the Renderer (Backend) service.",
@@ -288,4 +294,26 @@ resource "google_cloud_run_service" "renderer" {
   depends_on = [
     module.security
   ]
+}
+
+// go-template
+//=====================
+resource "google_cloud_run_v2_job" "go_template" {
+  for_each = local.environments
+  name     = "go-template-${each.key}"
+  location = local.cloud_run_config.location
+
+  template {
+    template {
+      containers {
+        image = each.value.cloud_run_services["go-template"].image
+      }
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      launch_stage,
+    ]
+  }
 }
