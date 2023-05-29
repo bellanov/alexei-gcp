@@ -6,7 +6,7 @@ output "name" {
 
 output "desc" {
   description = "Build Description."
-  value       = google_cloudbuild_trigger.build.id
+  value       = google_cloudbuild_trigger.build.description
 }
 
 output "id" {
