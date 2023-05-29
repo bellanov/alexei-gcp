@@ -13,3 +13,8 @@ output "role" {
   description = "Role Module."
   value       = module.role
 }
+
+output "build" {
+  description = "Build Module."
+  value       = module.build
+}

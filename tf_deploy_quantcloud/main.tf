@@ -36,6 +36,23 @@ module "role" {
   roles               = each.value.roles 
 }
 
+module "build" {
+  source   = "../modules/build"
+  for_each = local.builds
+
+  description     = each.value.description
+  filename        = each.value.filename
+  name            = each.key
+  owner           = each.value.owner
+  project         = local.project
+  repository      = each.value.repository
+  service_account = local.security.service_accounts.cloudbuild.service_account
+
+  depends_on = [
+    module.security
+  ]
+}
+
 locals {
   region   = "us-east1"
   project  = "quantcloud-1684208465"
@@ -58,6 +75,16 @@ locals {
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
   }
+
+  build_config = {
+    "owner" : "bellanov",
+  }
+
+  cloud_run_config = {
+    "location" : "us-central1"
+  }
+
+  builds = {}
 
   environments = {
     # Development

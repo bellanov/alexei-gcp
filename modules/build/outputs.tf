@@ -1,6 +1,15 @@
 
+output "name" {
+  description = "Build Name."
+  value       = google_cloudbuild_trigger.build.name
+}
 
-# output "service_accounts" {
-#   description = "Service Accounts."
-#   value       = {for sa in google_service_account.sa : sa.account_id => sa.email}
-# }
+output "desc" {
+  description = "Build Description."
+  value       = google_cloudbuild_trigger.build.id
+}
+
+output "id" {
+  description = "Build Id."
+  value       = google_cloudbuild_trigger.build.id
+}
