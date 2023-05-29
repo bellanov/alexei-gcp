@@ -8,3 +8,8 @@ output "security" {
   description = "Security Module."
   value       = module.security
 }
+
+output "role" {
+  description = "Role Module."
+  value       = module.role
+}

@@ -1,6 +1,6 @@
 
 
-# output "roles" {
-#   description = "Service Accounts."
-#   value       = { for sa in google_service_account.sa : sa.account_id => sa.email }
-# }
+output "roles" {
+  description = "Role Membership."
+  value       = [ for member in google_project_iam_member.cloudbuild : member.role ]
+}
