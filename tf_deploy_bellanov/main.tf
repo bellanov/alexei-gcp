@@ -158,12 +158,14 @@ locals {
   environments = {
     # Development
     "dev" : {
+      "cloud_run_jobs": {
+        "go-template" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
+        }
+      },
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.3.0"
-        },
-        "go-template" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
         },
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:1.2.0"
@@ -172,12 +174,14 @@ locals {
     },
     # Quality Assurance
     "qa" : {
+      "cloud_run_jobs": {
+        "go-template" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
+        }
+      },
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
-        },
-        "go-template" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
         },
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
@@ -186,12 +190,14 @@ locals {
     },
     # Production
     "prod" : {
+      "cloud_run_jobs": {
+        "go-template" : {
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
+        }
+      },
       "cloud_run_services" : {
         "editor" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.1.1"
-        },
-        "go-template" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
         },
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:0.1.1"
@@ -226,7 +232,7 @@ resource "google_cloud_run_service" "editor" {
   template {
     spec {
       containers {
-        image = each.value.cloud_run_services.editor.image
+        image = each.value.cloud_run_services["editor"].image
 
         env {
           name  = "EDITOR_UPSTREAM_RENDER_URL"
@@ -280,7 +286,7 @@ resource "google_cloud_run_service" "renderer" {
   template {
     spec {
       containers {
-        image = each.value.cloud_run_services.renderer.image
+        image = each.value.cloud_run_services["renderer"].image
       }
       service_account_name = module.security.service_accounts["renderer-identity"]
     }
@@ -306,7 +312,7 @@ resource "google_cloud_run_v2_job" "go_template" {
   template {
     template {
       containers {
-        image = each.value.cloud_run_services["go-template"].image
+        image = each.value.cloud_run_jobs["go-template"].image
       }
     }
   }
