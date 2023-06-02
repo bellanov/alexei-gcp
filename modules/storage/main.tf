@@ -5,8 +5,8 @@ resource "random_string" "code" {
   special = false
 }
 
-resource "google_storage_bucket" "logs" {
-  name          = "logs-${random_string.code.result}"
+resource "google_storage_bucket" "tests" {
+  name          = "testing-${random_string.code.result}"
   project       = var.project
   location      = "US"
   force_destroy = true
