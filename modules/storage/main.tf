@@ -9,7 +9,7 @@ resource "google_storage_bucket" "logs" {
   name          = "logs-${random_string.code.result}"
   project       = var.project
   location      = "US"
-  force_destroy = false
+  force_destroy = true
 
   public_access_prevention = "enforced"
 }
