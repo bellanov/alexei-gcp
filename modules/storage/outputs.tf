@@ -1,7 +1,7 @@
 
-output "logs" {
+output "testing" {
   description = "Logs Bucket."
-  value       = google_storage_bucket.logs.id
+  value       = google_storage_bucket.testing.id
 }
 
 output "releases" {
