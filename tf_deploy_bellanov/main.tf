@@ -165,7 +165,7 @@ locals {
       },
       "cloud_run_services" : {
         "editor" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.5.0"
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-editor:0.6.3"
         },
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:1.3.1"
