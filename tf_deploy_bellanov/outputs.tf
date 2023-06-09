@@ -21,10 +21,10 @@ output "build" {
 
 output "editor_ui" {
   description = "Editor UI."
-  value       = { for svc in google_cloud_run_service.editor : svc.id => svc.status }
+  value       = { for svc in google_cloud_run_service.editor : svc.name => svc.status }
 }
 
 output "renderer_svc" {
   description = "Renderer Service."
-  value       = { for svc in google_cloud_run_service.renderer : svc.id => svc.status }
+  value       = { for svc in google_cloud_run_service.renderer : svc.name => svc.status }
 }
