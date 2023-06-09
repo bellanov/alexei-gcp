@@ -28,3 +28,8 @@ output "renderer" {
   description = "Renderer Service."
   value       = { for svc in google_cloud_run_service.renderer : svc.name => svc.status[0].url }
 }
+
+output "environments" {
+  description = "Environments Configuration."
+  value       = local.environments
+}
