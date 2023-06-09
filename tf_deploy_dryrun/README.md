@@ -1,3 +1,0 @@
-# QuantCloud
-
-Deploy organization infrastructure.
