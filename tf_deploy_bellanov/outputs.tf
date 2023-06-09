@@ -19,12 +19,12 @@ output "build" {
   value       = module.build
 }
 
-output "editor_ui" {
+output "editor" {
   description = "Editor UI."
-  value       = { for svc in google_cloud_run_service.editor : svc.name => svc.status }
+  value       = { for svc in google_cloud_run_service.editor : svc.name => svc.url }
 }
 
-output "renderer_svc" {
+output "renderer" {
   description = "Renderer Service."
-  value       = { for svc in google_cloud_run_service.renderer : svc.name => svc.status }
+  value       = { for svc in google_cloud_run_service.renderer : svc.name => svc.url }
 }
