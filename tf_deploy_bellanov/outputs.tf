@@ -29,12 +29,7 @@ output "renderer" {
   value       = { for svc in google_cloud_run_service.renderer : svc.name => svc.status[0].url }
 }
 
-output "cloud_run_jobs" {
-  description = "Cloud Run Jobs."
-  value       = { for env in local.environments : env => env.cloud_run_jobs }
-}
-
-output "cloud_run_services" {
-  description = "Cloud Run Services."
-  value       = { for env in local.environments : env => env.cloud_run_services }
+output "environments" {
+  description = "Environments Configuration."
+  value       = local.environments
 }
