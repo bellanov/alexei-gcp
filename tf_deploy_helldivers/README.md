@@ -1,3 +1,0 @@
-# HELLDIVERS
-
-Deploy organization infrastructure.
