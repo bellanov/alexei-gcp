@@ -85,10 +85,10 @@ locals {
   }
 
   builds = {
-    "fantasy-baseball-jobs" : {
-      "repository" : "fantasy-baseball-jobs",
+    "fantasy-data-farming" : {
+      "repository" : "fantasy-data-farming",
       "filename" : "build.yaml",
-      "description" : "FantasyAce Baseball Jobs.",
+      "description" : "FantasyAce Data Farming.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     }
