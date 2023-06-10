@@ -18,3 +18,8 @@ output "build" {
   description = "Build Module."
   value       = module.build
 }
+
+output "environments" {
+  description = "Environments Configuration."
+  value       = local.environments
+}
