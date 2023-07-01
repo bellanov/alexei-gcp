@@ -118,6 +118,13 @@ locals {
   }
 
   builds = {
+    "cloudcdn-poc" : {
+      "repository" : "cloudcdn-poc",
+      "filename" : "build.yaml",
+      "description" : "Cloud CDN PoC.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    },
     "cloudrun-poc-editor" : {
       "repository" : "cloudrun-poc-editor",
       "filename" : "build.yaml",
