@@ -132,6 +132,13 @@ locals {
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
+    "cloudcdn-poc-deploy" : {
+      "repository" : "cloudcdn-poc",
+      "filename" : "deploy.yaml",
+      "description" : "Cloud CDN PoC Deployment.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    },
     "cloudrun-poc-editor" : {
       "repository" : "cloudrun-poc-editor",
       "filename" : "build.yaml",
@@ -171,9 +178,9 @@ locals {
 
   static_websites = {
     "dev.bellanov.com": {
-      # "bucket": {},
-      # "ip_address": {},
-      # "load_balancer": {}
+      # "bucket": "static-website-<random_code>",
+      # "ip_address": "",
+      # "load_balancer": ""
     },
     "qa.bellanov.com": {},
     "www.bellanov.com": {}
