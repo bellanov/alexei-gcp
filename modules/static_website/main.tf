@@ -6,7 +6,7 @@ resource "random_string" "code" {
 }
 
 resource "google_storage_bucket" "static_website" {
-  name          = "static-website-${random_string.code}"
+  name          = "static-website-${random_string.code.result}"
   location      = "US"
   storage_class = "STANDARD"
   website {
