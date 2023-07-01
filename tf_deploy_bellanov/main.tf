@@ -63,6 +63,13 @@ module "build" {
   ]
 }
 
+module "static_website" {
+  source = "../modules/static_website"
+  for_each = local.static_websites
+
+  name = each.key
+}
+
 # Locals
 #
 # Area to constrain / harness various configurations to modules / resources. 
@@ -160,6 +167,16 @@ locals {
       "owner" : local.build_config.owner,
       "tag" : ".*"
     }
+  }
+
+  static_websites = {
+    "dev.bellanov.com": {
+      # "bucket": {},
+      # "ip_address": {},
+      # "load_balancer": {}
+    },
+    "qa.bellanov.com": {},
+    "www.bellanov.com": {}
   }
 
   environments = {
