@@ -1,15 +1,15 @@
 
 output "name" {
-  description = "Build Name."
-  value       = google_cloudbuild_trigger.build.name
+  description = "deployment Name."
+  value       = google_clouddeployment_trigger.deployment.name
 }
 
 output "desc" {
-  description = "Build Description."
-  value       = google_cloudbuild_trigger.build.description
+  description = "deployment Description."
+  value       = google_clouddeployment_trigger.deployment.description
 }
 
 output "id" {
-  description = "Build Id."
-  value       = google_cloudbuild_trigger.build.id
+  description = "deployment Id."
+  value       = google_clouddeployment_trigger.deployment.id
 }
