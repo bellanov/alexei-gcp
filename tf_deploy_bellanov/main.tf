@@ -74,6 +74,15 @@ module "static_website" {
 
 module "deployment" {
   source = "../modules/deployment"
+  for_each = local.deployments
+
+  description     = each.value.description
+  filename        = each.value.filename
+  name            = each.key
+  owner           = each.value.owner
+  project         = local.project
+  repository      = each.value.repository
+  service_account = local.security.service_accounts.cloudbuild.service_account
 }
 
 # Locals
