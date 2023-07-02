@@ -72,19 +72,6 @@ module "static_website" {
   load_balancer = each.value.load_balancer
 }
 
-module "deployment" {
-  source = "../modules/deployment"
-  for_each = local.deployments
-
-  description     = each.value.description
-  filename        = each.value.filename
-  name            = each.key
-  owner           = each.value.owner
-  project         = local.project
-  repository      = each.value.repository
-  service_account = local.security.service_accounts.cloudbuild.service_account
-}
-
 # Locals
 #
 # Area to constrain / harness various configurations to modules / resources. 
@@ -161,6 +148,13 @@ locals {
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
+    "deploy-static-website" : {
+      "repository" : "deploy-static-website",
+      "filename" : "deploy.yaml",
+      "description" : "Deploy a static HTML website.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    }
     "go-template" : {
       "repository" : "go-template",
       "filename" : "build.yaml",
@@ -179,16 +173,6 @@ locals {
       "repository" : "svelte-template"
       "filename" : "build.yaml",
       "description" : "Svelte development template.",
-      "owner" : local.build_config.owner,
-      "tag" : ".*"
-    }
-  }
-
-  deployments = {
-    "static-website" : {
-      "repository" : "deploy-static-website",
-      "filename" : "deploy.yaml",
-      "description" : "Deploy a static HTML website.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     }
