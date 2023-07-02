@@ -12,6 +12,24 @@ resource "google_storage_bucket" "testing" {
   force_destroy = true
 
   public_access_prevention = "enforced"
+
+  lifecycle_rule {
+    condition {
+      age = 30
+    }
+    action {
+      type = "Delete"
+    }
+  }
+
+  lifecycle_rule {
+    condition {
+      age = 1
+    }
+    action {
+      type = "AbortIncompleteMultipartUpload"
+    }
+  }
 }
 
 resource "google_storage_bucket" "releases" {
@@ -21,6 +39,24 @@ resource "google_storage_bucket" "releases" {
   force_destroy = false
 
   public_access_prevention = "enforced"
+
+  lifecycle_rule {
+    condition {
+      age = 30
+    }
+    action {
+      type = "Delete"
+    }
+  }
+
+  lifecycle_rule {
+    condition {
+      age = 1
+    }
+    action {
+      type = "AbortIncompleteMultipartUpload"
+    }
+  }
 }
 
 resource "google_artifact_registry_repository" "registry" {
