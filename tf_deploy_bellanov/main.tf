@@ -151,7 +151,7 @@ locals {
     "deploy-static-website" : {
       "repository" : "deploy-static-website",
       "filename" : "deploy.yaml",
-      "description" : "Deploy a static HTML website.",
+      "description" : "Deploy a Static HTML Website.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     }
