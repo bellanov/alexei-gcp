@@ -13,7 +13,8 @@ resource "google_cloudbuild_trigger" "deployment" {
   }
 
   substitutions = {
-    _BUILD_ARTIFACT = "bar"
-    _DEPLOYMENT_BUCKET = "qux"
+    _BUILD_ARTIFACT = "bellanov_dev_1.2.3"
+    _DEPLOYMENT_BUCKET = "static-website-1234"
+    _RELEASES_BUCKET = "releases-4567"
   }
 }

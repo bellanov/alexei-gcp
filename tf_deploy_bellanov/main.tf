@@ -72,6 +72,10 @@ module "static_website" {
   load_balancer = each.value.load_balancer
 }
 
+module "deployment" {
+  source = "../modules/deployment"
+}
+
 # Locals
 #
 # Area to constrain / harness various configurations to modules / resources. 
@@ -172,10 +176,10 @@ locals {
   }
 
   deployments = {
-    "cloudcdn-poc-deploy" : {
-      "repository" : "cloudcdn-poc",
+    "deploy-static-website" : {
+      "repository" : "deploy-static-website",
       "filename" : "deploy.yaml",
-      "description" : "Cloud CDN PoC Deployment.",
+      "description" : "Deploy a static HTML website.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     }
