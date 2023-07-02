@@ -68,6 +68,8 @@ module "static_website" {
   for_each = local.static_websites
 
   name = each.key
+  ip_address = each.value.ip_address
+  load_balancer = each.value.load_balancer
 }
 
 # Locals
@@ -177,13 +179,19 @@ locals {
   }
 
   static_websites = {
+    # Resources requiring manual steps will simply be referenced by ID as to maintain IaC.
     "dev.bellanov.com": {
-      # "bucket": "static-website-<random_code>",
-      # "ip_address": "",
-      # "load_balancer": ""
+      "ip_address": "bellanov-dev-ip",
+      "load_balancer": "bellanov-dev-lb"
     },
-    "qa.bellanov.com": {},
-    "www.bellanov.com": {}
+    "qa.bellanov.com": {
+      "ip_address": "bellanov-qa-ip",
+      "load_balancer": "bellanov-qa-lb"
+    },
+    "www.bellanov.com": {
+      "ip_address": "bellanov-prod-ip",
+      "load_balancer": "bellanov-prod-lb"
+    }
   }
 
   environments = {
