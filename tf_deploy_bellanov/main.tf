@@ -134,13 +134,6 @@ locals {
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
-    "cloudcdn-poc-deploy" : {
-      "repository" : "cloudcdn-poc",
-      "filename" : "deploy.yaml",
-      "description" : "Cloud CDN PoC Deployment.",
-      "owner" : local.build_config.owner,
-      "tag" : ".*"
-    },
     "cloudrun-poc-editor" : {
       "repository" : "cloudrun-poc-editor",
       "filename" : "build.yaml",
@@ -173,6 +166,16 @@ locals {
       "repository" : "svelte-template"
       "filename" : "build.yaml",
       "description" : "Svelte development template.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    }
+  }
+
+  deployments = {
+    "cloudcdn-poc-deploy" : {
+      "repository" : "cloudcdn-poc",
+      "filename" : "deploy.yaml",
+      "description" : "Cloud CDN PoC Deployment.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     }
