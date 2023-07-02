@@ -185,7 +185,7 @@ locals {
   }
 
   deployments = {
-    "deploy-static-website" : {
+    "static-website" : {
       "repository" : "deploy-static-website",
       "filename" : "deploy.yaml",
       "description" : "Deploy a static HTML website.",
