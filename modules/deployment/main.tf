@@ -10,11 +10,11 @@ resource "google_cloudbuild_trigger" "deployment" {
   github {
     name  = var.repository
     owner = var.owner
+
+    push {
+      invert_regex = false
+      tag          = ".*"
+    }
   }
 
-  substitutions = {
-    _BUILD_ARTIFACT = "bellanov_dev_1.2.3"
-    _DEPLOYMENT_BUCKET = "static-website-1234"
-    _RELEASES_BUCKET = "releases-4567"
-  }
 }
