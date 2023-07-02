@@ -134,13 +134,6 @@ locals {
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
-    "cloudcdn-poc-deploy" : {
-      "repository" : "cloudcdn-poc",
-      "filename" : "deploy.yaml",
-      "description" : "Cloud CDN PoC Deployment.",
-      "owner" : local.build_config.owner,
-      "tag" : ".*"
-    },
     "cloudrun-poc-editor" : {
       "repository" : "cloudrun-poc-editor",
       "filename" : "build.yaml",
@@ -155,6 +148,13 @@ locals {
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
+    "deploy-static-website" : {
+      "repository" : "deploy-static-website",
+      "filename" : "deploy.yaml",
+      "description" : "Deploy a Static HTML Website.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
+    }
     "go-template" : {
       "repository" : "go-template",
       "filename" : "build.yaml",
