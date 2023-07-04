@@ -11,7 +11,7 @@ output "bucket_name" {
 
 output "ip_address" {
   description = "IP Address."
-  value = var.ip_address
+  value = google_compute_global_address.ip_addr.address
 }
 
 output "load_balancer" {
