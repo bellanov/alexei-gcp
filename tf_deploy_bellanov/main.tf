@@ -73,8 +73,7 @@ module "static_website" {
 
 module "network" {
   source   = "../modules/network"
-  for_each = local.environments
-  dns_managed_zones = each.value.dns_managed_zones
+  dns_managed_zones = local.dns_managed_zones
 }
 
 # Locals
@@ -199,6 +198,12 @@ locals {
     }
   }
 
+  dns_managed_zones = {
+    "bellanov": {
+      "dns_name": "bellanov.com",
+    }
+  }
+
   environments = {
     # Development
     "dev" : {
@@ -213,11 +218,6 @@ locals {
         },
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:1.3.1"
-        }
-      },
-      "dns_managed_zones" : {
-        "bellanov": {
-          "dns_name": "bellanov.com",
         }
       }
     },
@@ -235,8 +235,7 @@ locals {
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:1.3.1"
         }
-      },
-      "dns_managed_zones" : {}
+      }
     },
     # Production
     "prod" : {
@@ -252,8 +251,7 @@ locals {
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:1.3.1"
         }
-      },
-      "dns_managed_zones" : {}
+      }
     }
   }
 }
