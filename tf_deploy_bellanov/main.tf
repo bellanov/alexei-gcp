@@ -199,7 +199,9 @@ locals {
   }
 
   dns_managed_zones = {
-    "bellanov.com": {}
+    "bellanov": {
+      "dns_name": "bellanov.com"
+    }
   }
 
   environments = {
