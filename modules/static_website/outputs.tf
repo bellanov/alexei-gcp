@@ -18,3 +18,8 @@ output "load_balancer" {
   description = "Load Balancer."
   value = var.load_balancer
 }
+
+output "dns_record_set" {
+  description = "DNS Record Set."
+  value = google_dns_record_setstatic_website.name
+}
