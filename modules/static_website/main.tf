@@ -34,3 +34,13 @@ data "google_dns_managed_zone" "zone" {
   provider = google
   name     = var.dns_managed_zone
 }
+
+// Add
+resource "google_dns_record_set" "static_website" {
+  provider     = google
+  name         = "website.${data.google_dns_managed_zone.zone.dns_name}"
+  type         = "A"
+  ttl          = 300
+  managed_zone = data.google_dns_managed_zone.zone.name
+  rrdatas      = [google_compute_global_address.ip_addr.address]
+}
