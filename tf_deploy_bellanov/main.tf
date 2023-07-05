@@ -74,7 +74,7 @@ module "static_website" {
 
   name = each.key
   load_balancer = each.value.load_balancer
-  dns_managed_zone = "bellanov"
+  dns_managed_zone = each.value.dns_managed_zone
 }
 
 # Locals
