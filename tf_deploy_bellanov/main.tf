@@ -38,6 +38,11 @@ module "security" {
   terraform_identity  = local.security.terraform_identity
 }
 
+module "network" {
+  source   = "../modules/network"
+  dns_managed_zones = local.dns_managed_zones
+}
+
 module "role" {
   source              = "../modules/role"
   for_each            = local.security.service_accounts
@@ -69,11 +74,8 @@ module "static_website" {
 
   name = each.key
   load_balancer = each.value.load_balancer
-}
-
-module "network" {
-  source   = "../modules/network"
-  dns_managed_zones = local.dns_managed_zones
+  dns_managed_zone = each.value.dns_managed_zone
+  dns_name = each.key
 }
 
 # Locals
@@ -182,27 +184,28 @@ locals {
     }
   }
 
-  static_websites = {
-    # Resources requiring manual steps will simply be referenced by ID as to maintain IaC.
-    "dev.bellanov.com": {
-      "ip_address": "bellanov-dev-ip",
-      "load_balancer": "bellanov-dev-lb"
-    },
-    "qa.bellanov.com": {
-      "ip_address": "bellanov-qa-ip",
-      "load_balancer": "bellanov-qa-lb"
-    },
-    "www.bellanov.com": {
-      "ip_address": "bellanov-prod-ip",
-      "load_balancer": "bellanov-prod-lb"
-    }
-  }
-
   dns_managed_zones = {
     "bellanov": {
       "dns_name": "bellanov.com."
     }
   }
+
+  static_websites = {
+    "dev.bellanov.com": {
+      "dns_managed_zone": "bellanov",
+      "load_balancer": "bellanov-dev-lb"
+    },
+    "qa.bellanov.com": {
+      "dns_managed_zone": "bellanov",
+      "load_balancer": "bellanov-qa-lb"
+    },
+    "www.bellanov.com": {
+      "dns_managed_zone": "bellanov",
+      "load_balancer": "bellanov-prod-lb"
+    }
+  }
+
+  
 
   environments = {
     # Development
