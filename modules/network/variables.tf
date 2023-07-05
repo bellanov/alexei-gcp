@@ -1,3 +1,2 @@
 
-variable "dns_name" {}
-variable "name" {}
+variable "dns_managed_zones" { type = any }

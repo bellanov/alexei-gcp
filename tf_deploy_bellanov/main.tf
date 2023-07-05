@@ -46,10 +46,6 @@ module "role" {
   roles               = each.value.roles 
 }
 
-module "network" {
-  source   = "../modules/network"
-}
-
 module "build" {
   source   = "../modules/build"
   for_each = local.builds
@@ -73,6 +69,12 @@ module "static_website" {
 
   name = each.key
   load_balancer = each.value.load_balancer
+}
+
+module "network" {
+  source   = "../modules/network"
+  for_each = local.environments
+  dns_managed_zones = each.value.dns_managed_zones
 }
 
 # Locals
@@ -212,6 +214,11 @@ locals {
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:1.3.1"
         }
+      },
+      "dns_managed_zones" : {
+        "bellanov": {
+          "dns_name": "bellanov.com",
+        }
       }
     },
     # Quality Assurance
@@ -228,7 +235,8 @@ locals {
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:1.3.1"
         }
-      }
+      },
+      "dns_managed_zones" : {}
     },
     # Production
     "prod" : {
@@ -244,7 +252,8 @@ locals {
         "renderer" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/poc-renderer:1.3.1"
         }
-      }
+      },
+      "dns_managed_zones" : {}
     }
   }
 }
