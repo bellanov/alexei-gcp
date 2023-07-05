@@ -38,6 +38,11 @@ module "security" {
   terraform_identity  = local.security.terraform_identity
 }
 
+module "network" {
+  source   = "../modules/network"
+  dns_managed_zones = local.dns_managed_zones
+}
+
 module "role" {
   source              = "../modules/role"
   for_each            = local.security.service_accounts
@@ -69,11 +74,7 @@ module "static_website" {
 
   name = each.key
   load_balancer = each.value.load_balancer
-}
-
-module "network" {
-  source   = "../modules/network"
-  dns_managed_zones = local.dns_managed_zones
+  dns_managed_zone = "test"
 }
 
 # Locals

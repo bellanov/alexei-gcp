@@ -28,3 +28,9 @@ resource "google_storage_bucket_access_control" "public_rule" {
 resource "google_compute_global_address" "ip_addr" {
   name     = "static-website-${random_string.code.result}-ip"
 }
+
+// Retrieve Managed DNS Zone
+data "google_dns_managed_zone" "zone" {
+  provider = google
+  name     = var.dns_managed_zone
+}
