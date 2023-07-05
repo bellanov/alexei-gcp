@@ -14,6 +14,11 @@ output "role" {
   value       = module.role
 }
 
+output "network" {
+  description = "Network Module."
+  value       = module.network
+}
+
 output "build" {
   description = "Build Module."
   value       = module.build
