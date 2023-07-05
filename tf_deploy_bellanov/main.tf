@@ -46,6 +46,10 @@ module "role" {
   roles               = each.value.roles 
 }
 
+module "network" {
+  source   = "../modules/network"
+}
+
 module "build" {
   source   = "../modules/build"
   for_each = local.builds
