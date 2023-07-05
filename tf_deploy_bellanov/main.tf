@@ -200,7 +200,7 @@ locals {
 
   dns_managed_zones = {
     "bellanov": {
-      "dns_name": "bellanov.com"
+      "dns_name": "bellanov.com."
     }
   }
 
