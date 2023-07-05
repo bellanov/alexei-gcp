@@ -68,8 +68,12 @@ module "static_website" {
   for_each = local.static_websites
 
   name = each.key
-  ip_address = each.value.ip_address
   load_balancer = each.value.load_balancer
+}
+
+module "network" {
+  source   = "../modules/network"
+  dns_managed_zones = local.dns_managed_zones
 }
 
 # Locals
@@ -192,6 +196,10 @@ locals {
       "ip_address": "bellanov-prod-ip",
       "load_balancer": "bellanov-prod-lb"
     }
+  }
+
+  dns_managed_zones = {
+    "bellanov.com": {}
   }
 
   environments = {
