@@ -183,27 +183,28 @@ locals {
     }
   }
 
-  static_websites = {
-    # Resources requiring manual steps will simply be referenced by ID as to maintain IaC.
-    "dev.bellanov.com": {
-      "ip_address": "bellanov-dev-ip",
-      "load_balancer": "bellanov-dev-lb"
-    },
-    "qa.bellanov.com": {
-      "ip_address": "bellanov-qa-ip",
-      "load_balancer": "bellanov-qa-lb"
-    },
-    "www.bellanov.com": {
-      "ip_address": "bellanov-prod-ip",
-      "load_balancer": "bellanov-prod-lb"
-    }
-  }
-
   dns_managed_zones = {
     "bellanov": {
       "dns_name": "bellanov.com."
     }
   }
+
+  static_websites = {
+    "dev.bellanov.com": {
+      "dns_managed_zone": "bellanov",
+      "load_balancer": "bellanov-dev-lb"
+    },
+    "qa.bellanov.com": {
+      "dns_managed_zone": "bellanov",
+      "load_balancer": "bellanov-qa-lb"
+    },
+    "www.bellanov.com": {
+      "dns_managed_zone": "bellanov",
+      "load_balancer": "bellanov-prod-lb"
+    }
+  }
+
+  
 
   environments = {
     # Development
