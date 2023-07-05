@@ -1,6 +1,6 @@
 
 resource "google_dns_managed_zone" "zone" {
-  name        = "bellanov"
-  dns_name    = "bellanov.com"
+  name        = var.name
+  dns_name    = var.dns_name
   description = "Organization DNS Zone."
 }
