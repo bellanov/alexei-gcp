@@ -21,5 +21,5 @@ output "load_balancer" {
 
 output "dns_record_set" {
   description = "DNS Record Set."
-  value = google_dns_record_setstatic_website.name
+  value = google_dns_record_set.static_website.name
 }
