@@ -72,10 +72,10 @@ module "static_website" {
   source = "../modules/static_website"
   for_each = local.static_websites
 
-  name = each.key
-  load_balancer = each.value.load_balancer
   dns_managed_zone = each.value.dns_managed_zone
   dns_name = each.key
+  load_balancer = each.value.load_balancer
+
 }
 
 # Locals
