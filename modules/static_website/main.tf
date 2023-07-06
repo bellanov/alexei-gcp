@@ -34,7 +34,7 @@ data "google_dns_managed_zone" "zone" {
   name     = var.dns_managed_zone
 }
 
-// Add
+// Add IP Address to DNS
 resource "google_dns_record_set" "static_website" {
   name         = "${var.dns_name}."
   type         = "A"
