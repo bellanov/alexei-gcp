@@ -9,10 +9,10 @@ output "ip_address" {
   value = google_compute_global_address.ip_addr.address
 }
 
-output "load_balancer" {
-  description = "Load Balancer."
-  value = var.load_balancer
-}
+# output "load_balancer" {
+#   description = "Load Balancer."
+#   value = var.load_balancer
+# }
 
 output "dns_record_set" {
   description = "DNS Record Set."
