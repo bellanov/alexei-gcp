@@ -40,7 +40,6 @@ module "security" {
 
 module "network" {
   source   = "../modules/network"
-  dns_managed_zones = local.dns_managed_zones
 }
 
 module "role" {
