@@ -40,7 +40,6 @@ module "security" {
 
 module "network" {
   source   = "../modules/network"
-  dns_managed_zones = local.dns_managed_zones
 }
 
 module "role" {
@@ -66,16 +65,6 @@ module "build" {
   depends_on = [
     module.security
   ]
-}
-
-module "static_website" {
-  source = "../modules/static_website"
-  for_each = local.static_websites
-
-  dns_managed_zone = each.value.dns_managed_zone
-  dns_name = each.key
-  load_balancer = each.value.load_balancer
-
 }
 
 # Locals
@@ -183,29 +172,6 @@ locals {
       "tag" : ".*"
     }
   }
-
-  dns_managed_zones = {
-    "bellanov": {
-      "dns_name": "bellanov.com."
-    }
-  }
-
-  static_websites = {
-    "dev.bellanov.com": {
-      "dns_managed_zone": "bellanov",
-      "load_balancer": "bellanov-dev-lb"
-    },
-    "qa.bellanov.com": {
-      "dns_managed_zone": "bellanov",
-      "load_balancer": "bellanov-qa-lb"
-    },
-    "www.bellanov.com": {
-      "dns_managed_zone": "bellanov",
-      "load_balancer": "bellanov-prod-lb"
-    }
-  }
-
-  
 
   environments = {
     # Development
