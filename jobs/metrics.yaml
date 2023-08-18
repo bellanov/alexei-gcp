@@ -1,0 +1,29 @@
+steps:
+
+  - id: Diagnostics
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:alpine
+    entrypoint: bash
+    args:
+    - '-c'
+    - |
+        echo "Retrieve build artifact..."
+        gsutil cp gs://${_RELEASES_BUCKET}/${_ARTIFACT_NAME}.zip .
+
+        echo "Unpack artifact..."
+        mkdir build
+        unzip ${_ARTIFACT_NAME}.zip -d build
+
+        echo "Cleaning up existing deployment..."
+        gsutil rm gs://${_DEPLOYMENT_BUCKET}/**
+
+        echo "Deploy artifact contents..."
+        gsutil cp -r build/** gs://${_DEPLOYMENT_BUCKET}/
+        
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+
+  _DEPLOYMENT_BUCKET: static-website-gco3fete
+  _RELEASES_BUCKET: releases-hoxuf0ka
+  _ARTIFACT_NAME:  cloudcdn_poc_0.5.0
