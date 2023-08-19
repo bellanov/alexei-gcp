@@ -38,3 +38,8 @@ output "environments" {
   description = "Environments Configuration."
   value       = local.environments
 }
+
+output "static_website" {
+  description = "Static Websites."
+  value       = module.static_website
+}
