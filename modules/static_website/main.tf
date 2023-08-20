@@ -32,29 +32,36 @@ resource "google_storage_bucket" "frontend" {
   }
 }
 
-resource "google_storage_bucket" "backend" {
-  name          = "backend-${random_string.code.result}"
-  project       = var.project
-  location      = "US"
-  force_destroy = false
+# resource "google_compute_backend_bucket" "backend" {
+#   name        = "backend-bucket-${random_string.code.result}"
+#   bucket_name = google_storage_bucket.image_bucket.name
+#   enable_cdn  = true
+# }
 
-  public_access_prevention = "enforced"
+# resource "google_storage_bucket" "backend" {
+#   name          = "backend-${random_string.code.result}"
+#   project       = var.project
+#   location      = "US"
+#   force_destroy = false
 
-  lifecycle_rule {
-    condition {
-      age = 30
-    }
-    action {
-      type = "Delete"
-    }
-  }
+#   public_access_prevention = "enforced"
 
-  lifecycle_rule {
-    condition {
-      age = 1
-    }
-    action {
-      type = "AbortIncompleteMultipartUpload"
-    }
-  }
-}
+#   lifecycle_rule {
+#     condition {
+#       age = 30
+#     }
+#     action {
+#       type = "Delete"
+#     }
+#   }
+
+#   lifecycle_rule {
+#     condition {
+#       age = 1
+#     }
+#     action {
+#       type = "AbortIncompleteMultipartUpload"
+#     }
+#   }
+# }
+
