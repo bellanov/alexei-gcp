@@ -11,7 +11,7 @@ resource "google_storage_bucket" "frontend" {
   location      = "US"
   force_destroy = true
 
-  public_access_prevention = "enforced"
+  public_access_prevention = "inherited"
 
   lifecycle_rule {
     condition {
