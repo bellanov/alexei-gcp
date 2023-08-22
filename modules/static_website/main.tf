@@ -10,8 +10,12 @@ resource "google_storage_bucket" "frontend" {
   project       = var.project
   location      = "US"
   force_destroy = true
-
   public_access_prevention = "inherited"
+
+  website {
+    main_page_suffix = "index.html"
+    not_found_page   = "404.html"
+  }
 
   lifecycle_rule {
     condition {
