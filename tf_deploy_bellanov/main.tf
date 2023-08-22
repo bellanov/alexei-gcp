@@ -25,6 +25,8 @@ provider "google" {
   region      = local.region
   zone        = local.zone
   credentials = var.gcp_creds
+  # TODO: Add to README
+  # export GOOGLE_CREDENTIALS="$(cat ~/keys/terraform-bellanov-1682390142.key | jq -c)"
 }
 
 # Modules

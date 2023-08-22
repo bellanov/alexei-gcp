@@ -26,3 +26,23 @@ Overview on how to create a new **secret variable** and **integrate** it with Te
 1. Create a corresponding variable in Terraform Cloud. For instance, using a *Workspace Variable* or creating a *Variable Set*.
 1. Assign the variable to the project via the **Workspace** / **Variable Set** methods.
 1. *Plan* & *Apply*!!!
+
+## Importing Existing Resources
+
+In certain circumstances, resources can be created within the console then imported into Terraform. This helps amateurs with Terraform in that they don't have to code their way to procuring resources.
+
+To do so, credentials will have to be supplied locally, as they are saved remotely in Terraform Cloud.
+
+```sh
+# Disable the existing, remote credentials
+# credentials = var.gcp_creds
+
+# Export the crendentials locally
+export GOOGLE_CREDENTIALS="$(cat ~/keys/terraform-bellanov-1682390142.key | jq -c)"
+
+# Import existing resource
+terraform import "module.static_website[\"dev.bellanov.com\"].google_compute_backend_bucket.backend" "backend-6ubd0j0o"
+
+# Enable the remote credentials
+credentials = var.gcp_creds
+```
