@@ -11,6 +11,13 @@ terraform {
       version = "4.50.0"
     }
   }
+
+  cloud {
+    organization = "bellanov"
+    workspaces {
+      name = "gcp_deploy_bellanov"
+    }
+  }
 }
 
 provider "google" {
