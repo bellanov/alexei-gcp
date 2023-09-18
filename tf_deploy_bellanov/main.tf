@@ -74,12 +74,6 @@ module "build" {
   ]
 }
 
-module "static_website" {
-  source   = "../modules/static_website"
-  for_each = local.static_websites
-  project         = local.project
-}
-
 # Locals
 #
 # Area to constrain / harness various configurations to modules / resources. 
@@ -184,15 +178,6 @@ locals {
       "owner" : local.build_config.owner,
       "tag" : ".*"
     }
-  }
-
-  static_websites = {
-    "dev.bellanov.com": {
-      "short_name": "bellanov-llc-dev"
-    },
-    "qa.bellanov.com": {
-      "short_name": "bellanov-llc-qa"
-    },
   }
 
   environments = {
