@@ -1,4 +1,5 @@
 
+// Use Service Accounts to assign various identities to infrastructure.
 resource "google_service_account" "sa" {
   for_each     = var.service_accounts
   account_id   = "${each.key}-identity"
@@ -6,6 +7,7 @@ resource "google_service_account" "sa" {
   project      = var.project
 }
 
+// Assign the Terraform identity as a Service Account user.
 data "google_iam_policy" "terraform" {
   binding {
     role = "roles/iam.serviceAccountUser"
@@ -16,6 +18,7 @@ data "google_iam_policy" "terraform" {
   }
 }
 
+// Enable the Terraform identity to assume the role of any user while applying changes.
 resource "google_service_account_iam_policy" "terraform_iam" {
   for_each           = var.service_accounts
   service_account_id = each.value.service_account
