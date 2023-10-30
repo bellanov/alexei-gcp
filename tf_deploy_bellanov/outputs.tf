@@ -38,3 +38,12 @@ output "environments" {
   description = "Environments Configuration."
   value       = local.environments
 }
+
+
+# Plan
+
+#   Firebase Hosting
+# 
+#   Cloud Run Services (UI) / Jobs (Data Farming)
+#   Cloud Functions
+#   Custom Domain Mapping (UI)
