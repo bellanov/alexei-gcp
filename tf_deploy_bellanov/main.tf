@@ -177,6 +177,13 @@ locals {
       "description" : "Svelte development template.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
+    },
+    "typescript-template" : {
+      "repository" : "typescript-template"
+      "filename" : "build.yaml",
+      "description" : "Template for general **NodeJS** development.",
+      "owner" : local.build_config.owner,
+      "tag" : ".*"
     }
   }
 
