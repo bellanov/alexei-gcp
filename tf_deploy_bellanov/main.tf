@@ -150,13 +150,6 @@ locals {
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
-    "deploy-static-website" : {
-      "repository" : "deploy-static-website",
-      "filename" : "deploy.yaml",
-      "description" : "Deploy a Static HTML Website.",
-      "owner" : local.build_config.owner,
-      "tag" : ".*"
-    }
     "go-template" : {
       "repository" : "go-template",
       "filename" : "build.yaml",
