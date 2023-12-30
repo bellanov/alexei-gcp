@@ -49,10 +49,6 @@ module "network" {
   source   = "../modules/network"
 }
 
-module "application" {
-  source   = "../modules/application"
-}
-
 module "role" {
   source              = "../modules/role"
   for_each            = local.security.service_accounts
