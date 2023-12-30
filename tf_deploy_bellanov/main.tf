@@ -49,8 +49,8 @@ module "network" {
   source   = "../modules/network"
 }
 
-module "services" {
-  source   = "../modules/services"
+module "application" {
+  source   = "../modules/application"
 }
 
 module "role" {
