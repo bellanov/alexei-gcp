@@ -259,7 +259,7 @@ resource "google_cloud_run_service" "editor" {
         }
 
       }
-      service_account_name = module.security.service_accounts["editor-identity"]
+      service_account_name = module.security.service_accounts["editor-identity"]["email"]
     }
   }
 
@@ -288,7 +288,7 @@ resource "google_cloud_run_service_iam_member" "editor_invokes_renderer" {
   location = google_cloud_run_service.renderer[each.key].location
   service  = google_cloud_run_service.renderer[each.key].name
   role     = "roles/run.invoker"
-  member   = "serviceAccount:${module.security.service_accounts["editor-identity"]}"
+  member   = "serviceAccount:${module.security.service_accounts["editor-identity"]["email"]}"
 
   depends_on = [
     module.security
@@ -307,7 +307,7 @@ resource "google_cloud_run_service" "renderer" {
       containers {
         image = each.value.cloud_run_services["renderer"].image
       }
-      service_account_name = module.security.service_accounts["renderer-identity"]
+      service_account_name = module.security.service_accounts["renderer-identity"]["email"]
     }
   }
 
