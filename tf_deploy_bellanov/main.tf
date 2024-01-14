@@ -59,15 +59,9 @@ module "role" {
 
 module "build" {
   source   = "../modules/build"
-  for_each = local.builds
-
-  description     = each.value.description
-  filename        = each.value.filename
-  name            = each.key
-  owner           = each.value.owner
-  project         = local.project
-  repository      = each.value.repository
+  project = local.project
   service_account = local.security.service_accounts.cloudbuild.service_account
+  builds = local.builds
 
   depends_on = [
     module.security
@@ -88,7 +82,7 @@ locals {
   security = {
     "service_accounts" : {
       "cloudbuild" : {
-        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
+        "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
         "roles": [
@@ -139,14 +133,14 @@ locals {
     "cloudrun-poc-editor" : {
       "repository" : "cloudrun-poc-editor",
       "filename" : "build.yaml",
-      "description" : "Cloud Run Service PoC.",
+      "description" : "Cloud Run Service PoC - editor.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
     "cloudrun-poc-renderer" : {
       "repository" : "cloudrun-poc-renderer",
       "filename" : "build.yaml",
-      "description" : "Cloud Run Service PoC.",
+      "description" : "Cloud Run Service PoC - renderer.",
       "owner" : local.build_config.owner,
       "tag" : ".*"
     },
