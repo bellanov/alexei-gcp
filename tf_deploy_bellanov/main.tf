@@ -172,7 +172,7 @@ locals {
     "dev" : {
       "cloud_run_jobs": {
         "go-template" : {
-          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
+          "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.2.2"
         }
       },
       "cloud_run_services" : {
