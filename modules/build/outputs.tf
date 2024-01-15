@@ -1,15 +1,5 @@
 
-output "name" {
-  description = "Build Name."
-  value       = google_cloudbuild_trigger.build.name
-}
-
-output "desc" {
-  description = "Build Description."
-  value       = google_cloudbuild_trigger.build.description
-}
-
-output "id" {
-  description = "Build Id."
-  value       = google_cloudbuild_trigger.build.id
+output "builds" {
+  description = "Cloud Build Triggers."
+  value       = { for build in google_cloudbuild_trigger.build : build.name => tomap({"name" = build.name, "description" = build.description}) }
 }

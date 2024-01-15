@@ -6,6 +6,13 @@ terraform {
       version = "4.50.0"
     }
   }
+
+  cloud {
+    organization = "bellanov"
+    workspaces {
+      name = "gcp_deploy_quantcloud"
+    }
+  }
 }
 
 provider "google" {
@@ -38,14 +45,8 @@ module "role" {
 
 module "build" {
   source   = "../modules/build"
-  for_each = local.builds
-
-  description     = each.value.description
-  filename        = each.value.filename
-  name            = each.key
-  owner           = each.value.owner
+  builds = local.builds
   project         = local.project
-  repository      = each.value.repository
   service_account = local.security.service_accounts.cloudbuild.service_account
 
   depends_on = [
