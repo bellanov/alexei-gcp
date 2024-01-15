@@ -29,23 +29,23 @@ module "storage" {
 }
 
 module "security" {
-  source              = "../modules/security"
-  project             = local.project
-  service_accounts    = local.security.service_accounts
-  terraform_identity  = local.security.terraform_identity
+  source             = "../modules/security"
+  project            = local.project
+  service_accounts   = local.security.service_accounts
+  terraform_identity = local.security.terraform_identity
 }
 
 module "role" {
-  source              = "../modules/role"
-  for_each            = local.security.service_accounts
-  project             = local.project
-  service_account     = each.value.email
-  roles               = each.value.roles 
+  source          = "../modules/role"
+  for_each        = local.security.service_accounts
+  project         = local.project
+  service_account = each.value.email
+  roles           = each.value.roles
 }
 
 module "build" {
-  source   = "../modules/build"
-  builds = local.builds
+  source          = "../modules/build"
+  builds          = local.builds
   project         = local.project
   service_account = local.security.service_accounts.cloudbuild.service_account
 
@@ -66,7 +66,7 @@ locals {
         "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com"
         "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
-        "roles": [
+        "roles" : [
           "roles/artifactregistry.writer",
           "roles/cloudbuild.builds.editor",
           "roles/logging.logWriter",
