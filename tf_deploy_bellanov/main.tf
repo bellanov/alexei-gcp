@@ -39,29 +39,29 @@ module "storage" {
 }
 
 module "security" {
-  source              = "../modules/security"
-  project             = local.project
-  service_accounts    = local.security.service_accounts
-  terraform_identity  = local.security.terraform_identity
+  source             = "../modules/security"
+  project            = local.project
+  service_accounts   = local.security.service_accounts
+  terraform_identity = local.security.terraform_identity
 }
 
 module "network" {
-  source   = "../modules/network"
+  source = "../modules/network"
 }
 
 module "role" {
-  source              = "../modules/role"
-  for_each            = local.security.service_accounts
-  project             = local.project
-  service_account     = each.value.email
-  roles               = each.value.roles 
+  source          = "../modules/role"
+  for_each        = local.security.service_accounts
+  project         = local.project
+  service_account = each.value.email
+  roles           = each.value.roles
 }
 
 module "build" {
-  source   = "../modules/build"
-  project = local.project
+  source          = "../modules/build"
+  project         = local.project
   service_account = local.security.service_accounts.cloudbuild.service_account
-  builds = local.builds
+  builds          = local.builds
 
   depends_on = [
     module.security
@@ -85,7 +85,7 @@ locals {
         "email" : "cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Cloud Build User.",
         "service_account" : "projects/${local.project}/serviceAccounts/cloudbuild-identity@${local.project}.iam.gserviceaccount.com",
-        "roles": [
+        "roles" : [
           "roles/artifactregistry.writer",
           "roles/cloudbuild.builds.editor",
           "roles/logging.logWriter",
@@ -96,19 +96,19 @@ locals {
         "email" : "editor-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Service identity of the Editor (Frontend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/editor-identity@${local.project}.iam.gserviceaccount.com",
-        "roles": []
+        "roles" : []
       },
       "template" : {
         "email" : "template-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Service identity of the Template projects.",
         "service_account" : "projects/${local.project}/serviceAccounts/template-identity@${local.project}.iam.gserviceaccount.com",
-        "roles": []
+        "roles" : []
       },
       "renderer" : {
         "email" : "renderer-identity@${local.project}.iam.gserviceaccount.com",
         "display_name" : "Service identity of the Renderer (Backend) service.",
         "service_account" : "projects/${local.project}/serviceAccounts/renderer-identity@${local.project}.iam.gserviceaccount.com",
-        "roles": []
+        "roles" : []
       }
     },
     "terraform_identity" : "terraform@${local.project}.iam.gserviceaccount.com"
@@ -170,7 +170,7 @@ locals {
   environments = {
     # Development
     "dev" : {
-      "cloud_run_jobs": {
+      "cloud_run_jobs" : {
         "go-template" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.2.2"
         }
@@ -186,7 +186,7 @@ locals {
     },
     # Quality Assurance
     "qa" : {
-      "cloud_run_jobs": {
+      "cloud_run_jobs" : {
         "go-template" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
         }
@@ -202,7 +202,7 @@ locals {
     },
     # Production
     "prod" : {
-      "cloud_run_jobs": {
+      "cloud_run_jobs" : {
         "go-template" : {
           "image" : "us-central1-docker.pkg.dev/${local.project}/docker-releases/go-template:0.1.0"
         }
